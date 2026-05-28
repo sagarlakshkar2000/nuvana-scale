@@ -61,6 +61,11 @@ Route::prefix('blog')->name('blog.')->group(function () {
   Route::get('/{slug}', [BlogController::class, 'show'])->name('detail');
 });
 
+
+// 7. Company Route
+Route::get('/search', [CompanyController::class, 'index'])->name('search');
+
+
 // Fallback route for 404 (optional - catches all undefined routes)
 // Route::fallback(function () {
 //     return view('errors.404');
