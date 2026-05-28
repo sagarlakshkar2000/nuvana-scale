@@ -15,12 +15,15 @@
   <link rel="shortcut icon" type="image/x-icon" href="assets/media/favicon.png">
 
   <!-- All CSS files -->
-  <link rel="stylesheet" href="assets/css/vendor/font-awesome.css">
-  <link rel="stylesheet" href="assets/css/vendor/slick-theme.css">
-  <link rel="stylesheet" href="assets/css/vendor/slick-slider.css">
-  <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/vendor/slick-animation.css">
-  <link rel="stylesheet" href="assets/css/app.css">
+  <link rel="stylesheet" href="{{ asset('assets/css/vendor/font-awesome.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/vendor/slick-theme.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/vendor/slick-slider.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/vendor/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/vendor/slick-animation.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+
+  <!-- Additional CSS for specific pages -->
+  @stack('styles')
 </head>
 
 <body class="tt-smooth-scroll">
@@ -306,13 +309,14 @@
 
 
   <!-- Jquery Js -->
-  <script src="assets/js/vendor/bootstrap.min.js"></script>
-  <script src="assets/js/vendor/jquery-3.6.3.min.js"></script>
-  <script src="assets/js/vendor/slick.min.js"></script>
-  <script src="assets/js/vendor/jquery.countdown.min.js"></script>
-  <script src="assets/js/vendor/slickAnimation.js"></script>
+  <script src="{{ asset('assets/js/vendor/jquery-3.6.3.min.js') }}"></script>
+  <script src="{{ asset('assets/js/vendor/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('assets/js/vendor/slick.min.js') }}"></script>
+  <script src="{{ asset('assets/js/vendor/jquery.countdown.min.js') }}"></script>
+  <script src="{{ asset('assets/js/vendor/slickAnimation.js') }}"></script>
+  <script src="{{ asset('assets/js/app.js') }}"></script>
 
-  <script src="assets/js/app.js"></script>
+  @stack('scripts')
 
 </body>
 
