@@ -20,13 +20,13 @@ function isActive($item, $currentRoute, $currentUrl)
 
 <header>
   <!-- Main Header Start -->
-  <div class="header-section bg-white dark-black main-menu">
-    <div class="header-bottom-area bg-light-black">
+  <div class="header-section bg-white main-menu ">
+    <div class="header-bottom-area bg-white">
       <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col-xl-3 col-md-6 col-4">
-            <a href="{{ route('home') }}" class="header-logo">
-              <img src="{{ asset('assets/media/logo.png') }}" alt="Nuvana - Weighing Solutions">
+            <a href="{{ route('home') }}" class="header-logo" >
+              <img src="{{ asset('assets/media/logo/nuvana-logo.jpeg') }}" alt="Nuvana - Weighing Solutions">
             </a>
           </div>
 
