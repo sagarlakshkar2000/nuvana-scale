@@ -285,6 +285,41 @@
     ];
   @endphp
 
+  @php
+    $certificates = [
+      [
+        'image' => 'https://cdn.shopaccino.com/equalscale/images/1-422235406662748_l.png?v=717',
+        'title' => 'ISO 9001:2015',
+        'description' => 'Quality Management System Certification',
+        'alt_text' => 'ISO 9001:2015 Certificate'
+      ],
+      [
+        'image' => 'https://cdn.shopaccino.com/equalscale/images/2-422245092501671_l.png?v=717',
+        'title' => 'ISO 14001:2015',
+        'description' => 'Environmental Management System Certification',
+        'alt_text' => 'ISO 14001:2015 Certificate'
+      ],
+      [
+        'image' => 'https://cdn.shopaccino.com/equalscale/images/3-422258528427637_l.png?v=717',
+        'title' => 'ISO 45001:2018',
+        'description' => 'Occupational Health & Safety Management',
+        'alt_text' => 'ISO 45001:2018 Certificate'
+      ],
+      [
+        'image' => 'https://cdn.shopaccino.com/equalscale/images/4-422267263125871_l.png?v=717',
+        'title' => 'CE Certified',
+        'description' => 'European Conformity Certification',
+        'alt_text' => 'CE Certificate'
+      ]
+    ];
+
+    $certificate_config = [
+      'title' => 'Our Certifications',
+      'subtitle' => 'Committed to quality, safety, and international standards',
+      'bg_color' => 'bg-light'
+    ];
+  @endphp
+
   <!-- BLOGS SECTION START -->
   @php
     // Blog posts data array - This can be moved to Controller and passed as variable
@@ -304,7 +339,7 @@
     $regular_blogs = [
       [
         'id' => 2,
-        'image' => 'https://cdn.shopaccino.com/equalscale/articles/here-you-find-all-products-108738261342594_s.png?v=717',
+        'image' => 'https://cdn.shopaccino.com/equalscale/articles/weighing-scale-103726148074981_l.png?v=717',
         'date' => '10 Mar, 2026',
         'author' => 'Priya Sharma',
         'author_role' => 'Quality Manager',
@@ -328,7 +363,7 @@
       ],
       [
         'id' => 4,
-        'image' => 'https://cdn.shopaccino.com/equalscale/articles/here-you-find-all-products-108738261342594_s.png?v=717',
+        'image' => 'https://cdn.shopaccino.com/equalscale/articles/weighing-scale-isnt-telling-you-92553477978759_l.png?v=717',
         'date' => '28 Feb, 2026',
         'author' => 'Sanjay Mehta',
         'author_role' => 'Product Specialist',
@@ -340,7 +375,7 @@
       ],
       [
         'id' => 5,
-        'image' => 'https://cdn.shopaccino.com/equalscale/articles/here-you-find-all-products-108738261342594_s.png?v=717',
+        'image' => 'https://cdn.shopaccino.com/equalscale/articles/untitled-design-3-508585_s.png?v=717',
         'date' => '20 Feb, 2026',
         'author' => 'Neha Gupta',
         'author_role' => 'Calibration Expert',
@@ -399,6 +434,29 @@
   <!-- HERO BANNER END -->
 
 
+  <!-- BENEFITS SECTION START -->
+  <section class="benefit-section py-40 bg-light-gray">
+    <div class="container-fluid">
+      <div class="row row-gap-3">
+        @foreach($benefits as $benefit)
+          <div class="col-xl-3 col-lg-4 col-sm-6">
+            <div class="benefit-block d-flex flex-column gap-24 p-24 h-100">
+              <div class="benefit-icon">
+                <img src="{{ $benefit['icon'] }}" alt="{{ $benefit['alt_text'] }}" loading="lazy">
+              </div>
+              <div class="d-flex flex-column gap-12 black">
+                <h6>{{ $benefit['title'] }}</h6>
+                <p>{{ $benefit['description'] }}</p>
+              </div>
+            </div>
+          </div>
+        @endforeach
+      </div>
+    </div>
+  </section>
+  <!-- BENEFITS SECTION END -->
+
+
   <!-- TRENDING PRODUCTS START -->
   <section class="newest-section py-40">
     <div class="container-fluid">
@@ -444,19 +502,24 @@
   <!-- TRENDING PRODUCTS END -->
 
 
-  <!-- BENEFITS SECTION START -->
-  <section class="benefit-section py-40 bg-light-gray">
+  <!-- CERTIFICATE SECTION START -->
+  <section class="certificate-section py-40 bg-white-f1">
     <div class="container-fluid">
-      <div class="row row-gap-3">
-        @foreach($benefits as $benefit)
-          <div class="col-xl-3 col-lg-4 col-sm-6">
-            <div class="benefit-block d-flex flex-column gap-24 p-24 h-100">
-              <div class="benefit-icon">
-                <img src="{{ $benefit['icon'] }}" alt="{{ $benefit['alt_text'] }}" loading="lazy">
+      <div class="text-left mb-48">
+        <h2 class="fw-600 black mb-12">{{ $certificate_config['title'] }}</h2>
+        <p>{{ $certificate_config['subtitle'] }}</p>
+      </div>
+
+      <div class="row justify-content-center row-gap-4">
+        @foreach($certificates as $certificate)
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="certificate-card text-center">
+              <div class="certificate-image">
+                <img src="{{ $certificate['image'] }}" alt="{{ $certificate['alt_text'] }}" loading="lazy">
               </div>
-              <div class="d-flex flex-column gap-12 black">
-                <h6>{{ $benefit['title'] }}</h6>
-                <p>{{ $benefit['description'] }}</p>
+              <div class="certificate-content mt-24">
+                <h5 class="fw-600 black mb-8">{{ $certificate['title'] }}</h5>
+                <p class="caption dark-gray">{{ $certificate['description'] }}</p>
               </div>
             </div>
           </div>
@@ -464,125 +527,7 @@
       </div>
     </div>
   </section>
-  <!-- BENEFITS SECTION END -->
-
-
-  <!-- TESTIMONIALS START -->
-  <section class="testimonial-section py-40">
-    <div class="container-fluid">
-      <div class="d-flex align-content-end justify-content-between flex-sm-row flex-column gap-sm-0 gap-24 mb-48">
-        <div>
-          <h2 class="fw-600 black mb-12">Testimonials</h2>
-          <p>Hear from our satisfied customers who’ve transformed their journey with us.</p>
-        </div>
-      </div>
-      <div class="slider-container">
-        <div class="testimonials-slider">
-          <div class="testimonials-block d-flex flex-column gap-32 bg-lightest-gray p-24 br-12">
-            <div class="d-flex flex-column gap-16">
-              <div class="d-flex align-items-center ">
-                <i class="fa-solid fa-star-sharp color-quant"></i>
-                <i class="fa-solid fa-star-sharp color-quant"></i>
-                <i class="fa-solid fa-star-sharp color-quant"></i>
-                <i class="fa-solid fa-star-sharp color-quant"></i>
-                <i class="fa-solid fa-star-sharp color-quant"></i>
-              </div>
-              <p class="dark-gray">“Amazing products! I’ve seen incredible results since
-                using Tangine supplements. I’ve gained muscle, and my energy levels are through
-                the roof. Highly recommend to anyone serious about fitness.”</p>
-            </div>
-            <div class="d-flex align-items-center justify-content-between">
-              <div class="d-flex align-items-center gap-16">
-                <img src="assets/media/users/user-1.png" alt="user" class="user-image">
-                <div class="d-flex flex-column black">
-                  <h6 class=" mb-8">Stephen Robert</h6>
-                  <p>Customer</p>
-                </div>
-              </div>
-              <img src="assets/media/icons/quote.png" alt="quote">
-            </div>
-          </div>
-
-          <div class="testimonials-block d-flex flex-column gap-32 bg-lightest-gray p-24 br-12">
-            <div class="d-flex flex-column gap-16">
-              <div class="d-flex align-items-center ">
-                <i class="fa-solid fa-star-sharp color-quant"></i>
-                <i class="fa-solid fa-star-sharp color-quant"></i>
-                <i class="fa-solid fa-star-sharp color-quant"></i>
-                <i class="fa-solid fa-star-sharp color-quant"></i>
-                <i class="fa-solid fa-star-sharp color-quant"></i>
-              </div>
-              <p class="dark-gray">“Great value for the price! The customer service is
-                outstanding. I appreciate the hassle-free returns policy. It makes the shopping
-                experience stress-free and enjoyable.”</p>
-            </div>
-            <div class="d-flex align-items-center justify-content-between">
-              <div class="d-flex align-items-center gap-16">
-                <img src="assets/media/users/user-2.png" alt="user" class="user-image">
-                <div class="d-flex flex-column black">
-                  <h6 class=" mb-8">Bella Alison</h6>
-                  <p>Customer</p>
-                </div>
-              </div>
-              <img src="assets/media/icons/quote.png" alt="quote">
-            </div>
-          </div>
-          <div class="testimonials-block d-flex flex-column gap-32 bg-lightest-gray p-24 br-12">
-            <div class="d-flex flex-column gap-16">
-              <div class="d-flex align-items-center ">
-                <i class="fa-solid fa-star-sharp color-quant"></i>
-                <i class="fa-solid fa-star-sharp color-quant"></i>
-                <i class="fa-solid fa-star-sharp color-quant"></i>
-                <i class="fa-solid fa-star-sharp color-quant"></i>
-                <i class="fa-solid fa-star-sharp color-quant"></i>
-              </div>
-              <p class="dark-gray">“Top-quality supplements with fast delivery. I’m super
-                satisfied! Tangine always exceeds my expectations, and their products really
-                work. I’ll definitely be a returning customer.”</p>
-            </div>
-            <div class="d-flex align-items-center justify-content-between">
-              <div class="d-flex align-items-center gap-16">
-                <img src="assets/media/users/user-3.png" alt="user" class="user-image">
-                <div class="d-flex flex-column black">
-                  <h6 class=" mb-8">Leslie Heaney</h6>
-                  <p>Customer</p>
-                </div>
-              </div>
-              <img src="assets/media/icons/quote.png" alt="quote">
-            </div>
-          </div>
-          <div class="testimonials-block d-flex flex-column gap-32 bg-lightest-gray p-24 br-12">
-            <div class="d-flex flex-column gap-16">
-              <div class="d-flex align-items-center ">
-                <i class="fa-solid fa-star-sharp color-quant"></i>
-                <i class="fa-solid fa-star-sharp color-quant"></i>
-                <i class="fa-solid fa-star-sharp color-quant"></i>
-                <i class="fa-solid fa-star-sharp color-quant"></i>
-                <i class="fa-solid fa-star-sharp color-quant"></i>
-              </div>
-              <p class="dark-gray">“Amazing products! I’ve seen incredible results since
-                using Tangine supplements. I’ve gained muscle, and my energy levels are through
-                the roof. Highly recommend to anyone serious about fitness.”</p>
-            </div>
-            <div class="d-flex align-items-center justify-content-between">
-              <div class="d-flex align-items-center gap-16">
-                <img src="assets/media/users/user-1.png" alt="user" class="user-image">
-                <div class="d-flex flex-column black">
-                  <h6 class=" mb-8">Stephen Robert</h6>
-                  <p>Customer</p>
-                </div>
-              </div>
-              <img src="assets/media/icons/quote.png" alt="quote">
-            </div>
-          </div>
-        </div>
-        <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-          <span class="slider__label sr-only"></span>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- TESTIMONIALS END -->
+  <!-- CERTIFICATE SECTION END -->
 
 
   <!-- BLOGS SECTION START -->
