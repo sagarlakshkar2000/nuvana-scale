@@ -31,13 +31,12 @@
   <!-- Preloader -->
   <div id="preloader">
     <div class="loading loading07">
-      <span data-text="P">P</span>
-      <span data-text="O">O</span>
-      <span data-text="W">W</span>
-      <span data-text="E">E</span>
-      <span data-text="R">R</span>
+      <span data-text="N">N</span>
       <span data-text="U">U</span>
-      <span data-text="P">P</span>
+      <span data-text="V">V</span>
+      <span data-text="A">A</span>
+      <span data-text="N">N</span>
+      <span data-text="A">A</span>
     </div>
   </div>
   <!-- Preloader -->
