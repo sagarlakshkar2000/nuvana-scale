@@ -3045,8 +3045,8 @@ header .header-buttons a:hover {
   transition: all 0.5s ease-in-out;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 1;
-  line-clamp: 1;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
 }
 .product-block .content-box .label-wrapper {
@@ -3441,7 +3441,7 @@ header .header-buttons a:hover {
 .benefit-section .benefit-block .benefit-icon {
   width: fit-content;
   border-radius: 50%;
-  background: #0C0C0D;
+  background: var(--bg-body);
   width: clamp(56px, 3.33vw, 166px);
   height: clamp(56px, 3.33vw, 166px);
   display: flex;
@@ -4718,3 +4718,111 @@ footer .footer-bottom-bar .payment-cards .card-block img {
 }
 
 /*# sourceMappingURL=app.css.map
+
+
+
+/* Product Design -  */
+    /* Additional styling for product cards */
+    .product-block {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: var(--color-white);
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .product-block:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-block .image-box {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    .product-block .image-box img {
+      transition: transform 0.5s ease;
+    }
+
+    .product-block:hover .image-box img {
+      transform: scale(1.05);
+    }
+
+    .product-block .shopping-btns {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      opacity: 0;
+      transform: translateX(20px);
+      transition: all 0.3s ease;
+    }
+
+    .product-block:hover .shopping-btns {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .product-block .shopping-btns a {
+      background: var(--color-white);
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-block .shopping-btns a:hover {
+      background: var(--color-primary);
+      color: var(--color-white);
+      transform: scale(1.1);
+    }
+
+    .product-block .sale-label {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--color-error);
+      color: var(--color-white);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      z-index: 1;
+    }
+
+    .product-block .product-title {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 50px;
+    }
+
+    .product-block .eyebrow {
+      font-size: 12px;
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+
+    .quick-add-cart:hover svg path {
+      fill: var(--color-white);
+    }
+
+    @media (max-width: 768px) {
+      .product-block .shopping-btns {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .product-block .shopping-btns a {
+        width: 30px;
+        height: 30px;
+      }
+    }
