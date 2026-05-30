@@ -2,9 +2,44 @@
 
 @section('content')
 
+
+  <!-- NEW  -->
   <!-- HERO BANNER START -->
+  <?php
+  // Backend PHP Variables - This data would typically come from a database
+  $hero_slides = [
+    [
+      'image' => 'https://cdn.shopaccino.com/equalscale/slideshows/01-3-177776490281745_l.jpg?v=717',
+      'title_line1' => 'Fuel Your Fitness',
+      'title_line2' => 'Premium Supplements!',
+      'description' => 'We are passionate about helping you achieve your fitness goals through the power of high-quality nutrition. Whether you\'re looking to build muscle, increase endurance, or enhance recovery...',
+      'button_text' => 'Shop Now',
+      'button_link' => 'shop-grid.html',
+      'alt_text' => 'Premium Supplements Banner'
+    ],
+    [
+      'image' => 'https://cdn.shopaccino.com/equalscale/slideshows/01-1-163976569293646_l.jpg?v=717',
+      'title_line1' => 'Be Fit with Fuel Our',
+      'title_line2' => 'Premium Supplements!',
+      'description' => 'Transform your body with our scientifically formulated supplements. Backed by research and trusted by athletes worldwide for optimal performance and results.',
+      'button_text' => 'View Collection',
+      'button_link' => 'shop-grid.html',
+      'alt_text' => 'Fitness Supplements Banner'
+    ],
+    [
+      'image' => 'https://cdn.shopaccino.com/equalscale/slideshows/01-5-163996401309225_l.jpg?v=717',
+      'title_line1' => 'Your Fitness is your Strength',
+      'title_line2' => 'Premium Supplements!',
+      'description' => 'Achieve your peak performance with our premium range of supplements. From protein powders to pre-workouts, we have everything you need for your fitness journey.',
+      'button_text' => 'Explore Products',
+      'button_link' => 'shop-grid.html',
+      'alt_text' => 'Workout Supplements Banner'
+    ]
+  ];
+                                                                                                              ?>
+
   <section class="hero-banner">
-    <div class="container-fluid">
+    <div class="container-fluid w-100 px-0">
       <div class="hero-wrapper">
         <div class="slider-arrows d-sm-flex d-none">
           <a href="javascript:;" class="sm-btn light arrow-btn btn-prev" data-slide="hero-banner-slider">
@@ -22,94 +57,16 @@
             </svg>
           </a>
         </div>
+
         <div class="hero-banner-slider">
+          <?php foreach ($hero_slides as $index => $slide): ?>
           <div class="hero-slide">
-            <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-between gap-64">
-              <h1 class="title white text-center" data-animation-in="fadeInUp" data-delay-in="0.3">Fuel Your Fitness
-                Journey with
-                <span class="d-block color-primary" data-animation-in="fadeInUp" data-delay-in="0.3">Premium
-                  Supplements!</span>
-              </h1>
-              <div class="row row-gap-4 align-items-end">
-                <div class="col-lg-3">
-                  <p class="mb-32 white text-lg-start text-center">We are passionate about
-                    helping you achieve your
-                    fitness goals through the power of high-quality nutrition. Whether
-                    you’re looking to build...
-                  </p>
-                  <div class=" mb-48">
-                    <a href="shop-grid.html" class="cus-btn-arrow">
-                      View Collection
-                      <div class="icon">
-                        <i class="fa-light fa-chevron-right"></i>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <img src="assets/media/banner/hero-image.png" class="hero-image" alt="hero image"
-                    data-animation-in="zoomIn" data-delay-in="0.4">
-                </div>
+            <div class="w-100 h-100">
+              <div class="hero-slide-content" style="background-image: url('<?php  echo $slide['image']; ?>');">
               </div>
             </div>
           </div>
-          <div class="hero-slide">
-            <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-between gap-64">
-              <h1 class="title white text-center" data-animation-in="fadeInUp" data-delay-in="0.3">Be Fit with Fuel Our
-                <span class="d-block color-primary" data-animation-in="fadeInUp" data-delay-in="0.3">Premium
-                  Supplements!</span>
-              </h1>
-              <div class="row row-gap-4 align-items-end">
-                <div class="col-lg-3">
-                  <p class="mb-32 white">We are passionate about helping you achieve your
-                    fitness goals through the power of high-quality nutrition. Whether
-                    you’re looking to build...
-                  </p>
-                  <div class=" mb-48">
-                    <a href="blog-grid.html" class="cus-btn-arrow">
-                      View Collection
-                      <div class="icon">
-                        <i class="fa-light fa-chevron-right"></i>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <img src="assets/media/banner/hero-image.png" class="hero-image" alt="hero image"
-                    data-animation-in="zoomIn" data-delay-in="0.3">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="hero-slide">
-            <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-between gap-64">
-              <h1 class="title white text-center" data-animation-in="fadeInUp" data-delay-in="0.3">Your Fitness is your
-                Strength
-                <span class="d-block color-primary" data-animation-in="fadeInUp" data-delay-in="0.3">Premium
-                  Supplements!</span>
-              </h1>
-              <div class="row row-gap-4 align-items-end">
-                <div class="col-lg-3">
-                  <p class="mb-32 white">We are passionate about helping you achieve your
-                    fitness goals through the power of high-quality nutrition. Whether
-                    you’re looking to build...
-                  </p>
-                  <div class=" mb-48">
-                    <a href="blog-grid.html" class="cus-btn-arrow">
-                      View Collection
-                      <div class="icon">
-                        <i class="fa-light fa-chevron-right"></i>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <img src="assets/media/banner/hero-image.png" class="hero-image" alt="hero image"
-                    data-animation-in="zoomIn" data-delay-in="0.3">
-                </div>
-              </div>
-            </div>
-          </div>
+          <?php endforeach; ?>
         </div>
       </div>
     </div>
@@ -2365,6 +2322,7 @@
       </div>
     </div>
   </div>
+
   <!-- BRAND SLIDER END -->
 
 @endsection

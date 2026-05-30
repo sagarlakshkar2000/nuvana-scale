@@ -2856,7 +2856,7 @@ header .header-buttons a:hover {
 .hero-banner {
   width: 100vw;
   height: auto;
-  padding: clamp(48px, 4.167vw, 180px) 0 0 0;
+  padding: 0px;
   background: url(../media/banner/home-bg.png);
   background-size: cover;
   background-repeat: no-repeat;
@@ -2864,12 +2864,17 @@ header .header-buttons a:hover {
 }
 .hero-banner .hero-wrapper {
   position: relative;
+  height: 100%  ;
 }
 .hero-banner .hero-wrapper .slider-arrows {
   position: absolute;
   bottom: 48px;
+  width: 100vw;
   right: 0;
   z-index: 99805;
+  justify-content: space-between;
+  padding: 0 5vw;
+  height: 80%;
 }
 .hero-banner .hero-wrapper .title {
   font-family: "NEARING";
@@ -2879,6 +2884,15 @@ header .header-buttons a:hover {
   letter-spacing: -2.88px;
   text-transform: capitalize;
 }
+.hero-slide-content {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 332px;
+    width: 100%;
+    position: relative;
+}
+
 @media (max-width: 576px) {
   .hero-banner .hero-wrapper .title {
     letter-spacing: -1.5px;
