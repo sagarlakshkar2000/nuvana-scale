@@ -44,7 +44,6 @@ var MyScroll = "";
       Init.filterSearch();
       Init.filterToggle();
       Init.priceRangeSlider();
-      Init.quantityHandle();
       Init.cartSidebar();
       Init.formValidation();
       Init.contactForm();
