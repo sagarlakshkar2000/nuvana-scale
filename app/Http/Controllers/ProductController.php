@@ -397,27 +397,6 @@ class ProductController extends Controller
   }
 
   /**
-   * Show single product details
-   */
-  public function show($slug)
-  {
-    $products = collect($this->getAllProducts());
-    $product = $products->firstWhere('slug', $slug);
-
-    if (!$product) {
-      abort(404, 'Product not found');
-    }
-
-    // Get related products from same category
-    $related_products = $products->where('category', $product['category'])
-      ->where('sku', '!=', $product['sku'])
-      ->take(4)
-      ->values();
-
-    return view('pages.products.show', compact('product', 'related_products'));
-  }
-
-  /**
    * AJAX endpoint for quick view
    */
   public function quickView($sku)
@@ -454,5 +433,51 @@ class ProductController extends Controller
       'count' => $filtered->count(),
       'products' => $filtered->values()
     ]);
+  }
+
+
+  public function productDetail($slug)
+  {
+    $products = collect($this->getAllProducts());
+    $product = $products->firstWhere('slug', $slug);
+
+    if (!$product) {
+      abort(404, 'Product not found');
+    }
+
+    // Add demo specifications if not exists
+    if (!isset($product['specifications'])) {
+      $product['specifications'] = [
+        'Material & Color' => 'ABS with White Color',
+        'Item Capacity' => rand(100, 1000) . ' ' . (rand(0, 1) ? 'g' : 'kg'),
+        'Resolution' => rand(1, 100) . 'mg',
+        'Platform Size' => rand(100, 500) . 'mm dia',
+        'Units' => 'g, kg, lb',
+        'Warranty' => rand(1, 5) . '-Year Warranty'
+      ];
+    }
+
+    // Add demo description if not exists
+    if (!isset($product['description'])) {
+      $product['description'] = 'Lorem ipsum dolor sit amet consectetur. Eget massa elementum sit massa tincidunt urna vulputate. Justo massa mattis consectetur ac. Massa ipsum cras est id. Fuel your workouts with premium quality products designed for muscle recovery and growth. Packed with essential amino acids, it\'s your perfect companion for achieving peak performance and fitness goals.';
+    }
+
+    // Add demo additional images if not exists
+    if (!isset($product['additional_images']) || empty($product['additional_images'])) {
+      $product['additional_images'] = [
+        $product['image'],
+        $product['image'],
+        $product['image'],
+        $product['image']
+      ];
+    }
+
+    // Get related products from same category
+    $related_products = $products->where('category', $product['category'])
+      ->where('sku', '!=', $product['sku'])
+      ->take(8)
+      ->values();
+
+    return view('pages.products.product-detail', compact('product', 'related_products'));
   }
 }

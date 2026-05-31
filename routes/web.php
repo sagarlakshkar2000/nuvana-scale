@@ -38,10 +38,10 @@ Route::prefix('products')->name('products.')->group(function () {
 
   // 3.5 Heavy Duty Scale
   Route::get('/heavy-duty-scale', [ProductController::class, 'heavyDutyScale'])->name('heavy-duty-scale');
-
-  // Optional: Dynamic product detail route
-  Route::get('/{slug}', [ProductController::class, 'show'])->name('show');
 });
+
+Route::get('/product-detail/{slug}', [ProductController::class, 'productDetail'])->name('product-detail');
+
 
 // 4. Contact Us Route
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');

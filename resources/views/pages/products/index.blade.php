@@ -207,7 +207,7 @@
                             </div>
                             <div class="content-box">
                                 <p class="eyebrow mb-12">{{ $product['category'] }}</p>
-                                <a href="{{ route('products.show', $product['slug']) }}" class="product-title h6 fw-500 mb-12">{{ $product['title'] }}</a>
+                                <a href="{{ route('product-detail', ['slug' => $product['slug']]) }}" class="product-title h6 fw-500 mb-12">{{ $product['title'] }}</a>
 
                                 @if(!empty($product['feature']))
                                     <p class="caption mb-8 dark-gray">{{ $product['feature'] }}</p>

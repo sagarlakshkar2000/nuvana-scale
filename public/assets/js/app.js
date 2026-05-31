@@ -417,8 +417,8 @@ var MyScroll = "";
         if (
           $(
             '.slider .slick-track div[data-slick-index="' +
-              progressBarIndex +
-              '"]'
+            progressBarIndex +
+            '"]'
           ).attr("aria-hidden") === "true"
         ) {
           progressBarIndex = $(
@@ -597,8 +597,8 @@ var MyScroll = "";
             $(".slider .progress-range").css(
               "right",
               100 -
-                (maxPrice / $(".range-input .range-max").attr("max")) * 100 +
-                "%"
+              (maxPrice / $(".range-input .range-max").attr("max")) * 100 +
+              "%"
             );
           }
         }
@@ -624,46 +624,13 @@ var MyScroll = "";
           $(".slider .progress-range").css(
             "right",
             100 -
-              (maxVal / $(".range-input .range-max").attr("max")) * 100 +
-              "%"
+            (maxVal / $(".range-input .range-max").attr("max")) * 100 +
+            "%"
           );
         }
       });
     },
 
-    // Quantity Controller
-    quantityHandle: function () {
-      $(".decrement").on("click", function () {
-        var qtyInput = $(this).closest(".quantity-wrap").children(".number");
-        var qtyVal = parseInt(qtyInput.val());
-        if (qtyVal > 0) {
-          qtyInput.val(qtyVal - 1);
-        }
-      });
-      $(".increment").on("click", function () {
-        var qtyInput = $(this).closest(".quantity-wrap").children(".number");
-        var qtyVal = parseInt(qtyInput.val());
-        qtyInput.val(parseInt(qtyVal + 1));
-      });
-    },
-
-    // Cart Sidebar
-    cartSidebar: function () {
-      $(".cart-button").on("click", function () {
-        $("#sidebar-cart").css("right", "0");
-        $("#sidebar-cart-curtain")
-          .fadeIn(0)
-          .css("display", "block")
-          .animate({ opacity: 1 }, 200); // Smooth fade in the curtain
-      });
-
-      $(".close-popup").on("click", function () {
-        $("#sidebar-cart").css("right", "-101%");
-        $("#sidebar-cart-curtain").animate({ opacity: 0 }, 200, function () {
-          $(this).css("display", "none");
-        });
-      });
-    },
 
     // Form Validation
     formValidation: function () {
@@ -687,7 +654,7 @@ var MyScroll = "";
             .attr("disabled", "disabled");
           var data = $(this).serialize();
           $.ajax({
-           url: "https://websitemakerz.com/mail/contact.php",
+            url: "https://websitemakerz.com/mail/contact.php",
             type: "post",
             dataType: "json",
             data: data,
