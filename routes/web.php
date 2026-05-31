@@ -71,3 +71,33 @@ Route::get('/search', [CompanyController::class, 'index'])->name('search');
 //     return view('errors.404');
 // })->name('fallback');
 
+/*
+|--------------------------------------------------------------------------
+| Admin Routes
+|--------------------------------------------------------------------------
+*/
+
+use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\TrendingProductController;
+use App\Http\Controllers\Admin\SeoController;
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    // Auth Routes
+    Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [AdminAuthController::class, 'login'])->name('login.submit');
+    Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
+
+    // Protected Routes
+    Route::middleware(['auth', 'is_admin'])->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        
+        // Resource Controllers for CRUD operations
+        Route::resource('banners', BannerController::class);
+        Route::resource('products', AdminProductController::class);
+        Route::resource('trending-products', TrendingProductController::class);
+        Route::resource('seo', SeoController::class);
+    });
+});
