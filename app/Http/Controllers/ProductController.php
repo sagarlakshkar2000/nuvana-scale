@@ -40,7 +40,7 @@ class ProductController extends Controller
       ],
       [
         'image' => 'https://cdn.shopaccino.com/equalscale/products/3-904378_m.jpg?v=717',
-        'badge' => 'Hot',
+        'badge' => null,
         'sku' => 'EQPF-04',
         'slug' => 'equal-digital-heavy-duty-weighing-scale-with-5mt-weight-capacity',
         'category' => 'Heavy Duty Scale',
@@ -85,75 +85,6 @@ class ProductController extends Controller
         'created_at' => '2025-01-10'
       ],
       [
-        'image' => 'https://cdn.shopaccino.com/equalscale/products/1-200783_m.jpg?v=717',
-        'badge' => '-10%',
-        'sku' => 'EDXP-10',
-        'slug' => 'equal-digital-platform-weighing-scale-with-500750kg-weight-capacity',
-        'category' => 'Platform Scale',
-        'title' => 'Equal Digital Platform Weighing Scale With 500/750kg Weight Capacity',
-        'rating' => 4,
-        'reviews' => 87,
-        'old_price' => 24389.00,
-        'price' => 21950.00,
-        'in_stock' => true,
-        'feature' => 'Medium Duty | 750kg Capacity',
-        'specifications' => [
-          'Material' => 'Mild Steel',
-          'Capacity' => '750 kg',
-          'Platform Size' => '1000x1000 mm',
-          'Display' => 'Digital LCD',
-          'Warranty' => '2-Year Warranty'
-        ],
-        'is_trending' => true,
-        'created_at' => '2025-02-05'
-      ],
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/products/img4558-349549_m.jpg?v=717',
-        'badge' => 'Trending',
-        'sku' => 'EDXP-09',
-        'slug' => 'equal-digital-platform-weighing-scale-with-200500kg-weight-capacity',
-        'category' => 'Platform Scale',
-        'title' => 'Equal Digital Platform Weighing Scale With 200/500kg Weight Capacity',
-        'rating' => 5,
-        'reviews' => 43,
-        'old_price' => 17118.00,
-        'price' => 14550.00,
-        'in_stock' => true,
-        'feature' => 'Industrial Platform | 500kg Capacity',
-        'specifications' => [
-          'Material' => 'Mild Steel',
-          'Capacity' => '500 kg',
-          'Platform Size' => '800x800 mm',
-          'Display' => 'Digital LCD',
-          'Warranty' => '2-Year Warranty'
-        ],
-        'is_trending' => true,
-        'created_at' => '2025-03-01'
-      ],
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/products/3-569173_m.jpg?v=717',
-        'badge' => '-15%',
-        'sku' => 'EQPF-05',
-        'slug' => 'equal-digital-heavy-duty-weighing-scale-with-10mt-weight-capacity',
-        'category' => 'Heavy Duty Scale',
-        'title' => 'Equal Digital Heavy Duty Weighing Scale With 10MT Weight Capacity',
-        'rating' => 5,
-        'reviews' => 64,
-        'old_price' => 126588.00,
-        'price' => 107600.00,
-        'in_stock' => true,
-        'feature' => 'Industrial Grade | 10 Metric Ton Capacity',
-        'specifications' => [
-          'Material' => 'Mild Steel',
-          'Capacity' => '10000 kg',
-          'Platform Size' => '2000x1500 mm',
-          'Display' => 'Digital LED',
-          'Warranty' => '2-Year Warranty'
-        ],
-        'is_trending' => true,
-        'created_at' => '2025-01-25'
-      ],
-      [
         'image' => 'https://cdn.shopaccino.com/equalscale/products/3-954630_m.jpg?v=717',
         'badge' => 'Trending',
         'sku' => 'EQPF-02',
@@ -178,7 +109,7 @@ class ProductController extends Controller
       ],
       [
         'image' => 'https://cdn.shopaccino.com/equalscale/products/3-331556_m.jpg?v=717',
-        'badge' => 'Sale',
+        'badge' => null,
         'sku' => 'EQPF-03',
         'slug' => 'equal-digital-heavy-duty-weighing-scale-with-2mt3mt-weight-capacity',
         'category' => 'Heavy Duty Scale',
@@ -198,51 +129,6 @@ class ProductController extends Controller
         ],
         'is_trending' => false,
         'created_at' => '2024-12-10'
-      ],
-      // Additional products for better pagination
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/products/weighbridge-1.jpg',
-        'badge' => 'New',
-        'sku' => 'WB-01',
-        'slug' => 'equal-weighbridge-solution-40ft',
-        'category' => 'Weighbridge Solution',
-        'title' => 'Equal Digital Weighbridge 40ft With 80MT Capacity',
-        'rating' => 5,
-        'reviews' => 34,
-        'old_price' => 350000.00,
-        'price' => 295000.00,
-        'in_stock' => true,
-        'feature' => '80 Metric Ton | 40ft Length',
-        'specifications' => [
-          'Capacity' => '80 MT',
-          'Platform Size' => '40ft x 10ft',
-          'Material' => 'Heavy Duty Steel',
-          'Display' => 'Digital Indicator'
-        ],
-        'is_trending' => true,
-        'created_at' => '2025-03-10'
-      ],
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/products/load-cell-1.jpg',
-        'badge' => 'Best Quality',
-        'sku' => 'LC-01',
-        'slug' => 'equal-load-cell-50ton',
-        'category' => 'Load Cell',
-        'title' => 'Equal Compression Load Cell 50 Ton Capacity',
-        'rating' => 5,
-        'reviews' => 28,
-        'old_price' => 25000.00,
-        'price' => 18500.00,
-        'in_stock' => true,
-        'feature' => '50 Ton | IP68 Protection',
-        'specifications' => [
-          'Capacity' => '50 Ton',
-          'Type' => 'Compression Load Cell',
-          'Material' => 'Stainless Steel',
-          'Protection' => 'IP68'
-        ],
-        'is_trending' => true,
-        'created_at' => '2025-02-28'
       ]
     ];
   }
@@ -259,8 +145,8 @@ class ProductController extends Controller
 
     $show_in_stock = filter_var($request->input('in_stock', false), FILTER_VALIDATE_BOOLEAN);
     $show_out_of_stock = filter_var($request->input('out_of_stock', false), FILTER_VALIDATE_BOOLEAN);
-    $min_price = $request->input('min_price', 0);
-    $max_price = $request->input('max_price', 350000);
+    $min_price = $request->filled('min_price') ? (float) $request->input('min_price') : 0;
+    $max_price = $request->filled('max_price') ? (float) $request->input('max_price') : 350000;
     $search_keyword = trim((string) $request->input('keyword', ''));
 
     return $products->filter(function ($product) use ($selected_categories, $show_in_stock, $show_out_of_stock, $min_price, $max_price, $search_keyword) {
@@ -333,8 +219,8 @@ class ProductController extends Controller
     }
     $in_stock_filter = filter_var($request->input('in_stock', false), FILTER_VALIDATE_BOOLEAN);
     $out_of_stock_filter = filter_var($request->input('out_of_stock', false), FILTER_VALIDATE_BOOLEAN);
-    $min_price = $request->input('min_price', 0);
-    $max_price = $request->input('max_price', 350000);
+    $min_price = $request->filled('min_price') ? (float) $request->input('min_price') : 0;
+    $max_price = $request->filled('max_price') ? (float) $request->input('max_price') : 350000;
     $sort_by = $request->input('sort_by', 'featured');
 
     // Apply filters and sorting
