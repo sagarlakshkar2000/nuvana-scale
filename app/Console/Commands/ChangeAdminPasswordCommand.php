@@ -5,7 +5,17 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-
+/**
+ * Usage:
+ * php artisan admin:password {identifier?}
+ *
+ * If you omit the identifier, the command will prompt you to enter the admin email or username.
+ * It will then ask for the new password (hidden input) and confirmation.
+ * The password will be hashed and saved for the admin user.
+ *
+ * Example:
+ * php artisan admin:password admin@example.com
+ */
 class ChangeAdminPasswordCommand extends Command
 {
     /**

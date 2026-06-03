@@ -50,7 +50,7 @@ Route::post('/contact', [ContactController::class, 'submit'])->name('contact.sub
 
 // 5. 404 Route (for testing - usually handled by exception handler)
 Route::get('/404', function () {
-  return view('errors.404');
+  return view('pages.404');
 })->name('404');
 
 // 6. Blog Routes
@@ -68,9 +68,9 @@ Route::get('/search', [CompanyController::class, 'index'])->name('search');
 
 
 // Fallback route for 404 (optional - catches all undefined routes)
-// Route::fallback(function () {
-//     return view('errors.404');
-// })->name('fallback');
+Route::fallback(function () {
+  return view('pages.404');
+})->name('fallback');
 
 /*
 |--------------------------------------------------------------------------
