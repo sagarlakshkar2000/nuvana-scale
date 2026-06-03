@@ -44,7 +44,6 @@ var MyScroll = "";
       Init.filterSearch();
       Init.filterToggle();
       Init.priceRangeSlider();
-      Init.cartSidebar();
       Init.formValidation();
       Init.contactForm();
     },

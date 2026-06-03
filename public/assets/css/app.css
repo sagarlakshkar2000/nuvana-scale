@@ -261,7 +261,7 @@ a {
 }
 
 a:hover {
-  color: var(--color-primary);
+  color: var(--text-white);
   transition: all 0.5s ease-in-out;
 }
 
@@ -2632,7 +2632,7 @@ header .main-menu .main-menu__nav .main-menu__list li ul li>a,
 header .main-menu .main-menu__nav .stricky-header .main-menu__list li ul li>a {
   font-size: clamp(14px, 0.854vw, 40px);
   line-height: 120%;
-  color: #0C0C0D;
+  color: var(--color-primary);
   font-weight: 500;
   font-family: "Plus Jakarta Sans", sans-serif;
   display: flex;
@@ -2645,6 +2645,7 @@ header .main-menu .main-menu__nav .main-menu__list li ul li.current>a,
 header .main-menu .main-menu__nav .main-menu__list li ul li:hover>a,
 header .main-menu .main-menu__nav .stricky-header .main-menu__list li ul li.current>a,
 header .main-menu .main-menu__nav .stricky-header .main-menu__list li ul li:hover>a {
+   color: var(--text-white);
   background-color: var(--color-primary);
 }
 

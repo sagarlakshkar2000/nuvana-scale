@@ -67,7 +67,8 @@
     <div class="mobile-nav__content">
       <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
       <div class="logo-box">
-        <a href="index.html" aria-label="logo image"><img src="assets/media/logo.png" alt=""></a>
+        <a href="index.html" aria-label="logo image"><img src="{{ asset('assets/media/logo/nuvana-logo.jpeg') }}"
+            alt=""></a>
       </div>
       <div class="mobile-nav__container"></div>
       <ul class="mobile-nav__contact list-unstyled">

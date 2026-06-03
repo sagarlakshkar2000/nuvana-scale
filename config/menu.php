@@ -9,11 +9,17 @@ return [
       'class' => '',
     ],
     [
-      'name' => 'Company',
-      'route' => 'company',
+      'name' => 'About',
+      'route' => 'about',
       'icon' => '',
       'class' => '',
     ],
+    // [
+    //   'name' => 'Company',
+    //   'route' => 'company',
+    //   'icon' => '',
+    //   'class' => '',
+    // ],
     [
       'name' => 'Products',
       'route' => 'products.index',

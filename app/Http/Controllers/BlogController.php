@@ -11,6 +11,11 @@ class BlogController extends Controller
     return view('pages.blog.index');
   }
 
+  public function show()
+  {
+    return view('pages.blog.detail');
+  }
+
   public function submit(Request $request)
   {
     // Validate and process contact form

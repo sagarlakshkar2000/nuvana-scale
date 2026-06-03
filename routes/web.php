@@ -15,6 +15,7 @@ use App\Http\Controllers\BlogController;
 
 // 1. Home Route
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about', [HomeController::class, 'about'])->name('about');
 
 // 2. Company Route
 Route::get('/company', [CompanyController::class, 'index'])->name('company');
@@ -85,19 +86,19 @@ use App\Http\Controllers\Admin\TrendingProductController;
 use App\Http\Controllers\Admin\SeoController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    // Auth Routes
-    Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
-    Route::post('/login', [AdminAuthController::class, 'login'])->name('login.submit');
-    Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
+  // Auth Routes
+  Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
+  Route::post('/login', [AdminAuthController::class, 'login'])->name('login.submit');
+  Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
-    // Protected Routes
-    Route::middleware(['auth', 'is_admin'])->group(function () {
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-        
-        // Resource Controllers for CRUD operations
-        Route::resource('banners', BannerController::class);
-        Route::resource('products', AdminProductController::class);
-        Route::resource('trending-products', TrendingProductController::class);
-        Route::resource('seo', SeoController::class);
-    });
+  // Protected Routes
+  Route::middleware(['auth', 'is_admin'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Resource Controllers for CRUD operations
+    Route::resource('banners', BannerController::class);
+    Route::resource('products', AdminProductController::class);
+    Route::resource('trending-products', TrendingProductController::class);
+    Route::resource('seo', SeoController::class);
+  });
 });
