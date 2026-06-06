@@ -1,6 +1,6 @@
 // =================== ****************** ================== //
-// Template Name: PowerUp
-// Description:  PowerUp Html Template
+// Template Name: Nuvana
+// Description:  Nuvana Html Template
 // Version: 1.0.0
 
 // =================== ****************** ================== //

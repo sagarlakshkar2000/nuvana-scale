@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from uiparadox.co.uk/templates/powerup/v3/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 27 May 2026 13:03:14 GMT -->
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="PowerUp">
+  <meta name="description" content="Nuvana">
 
   <title>{{ $title ?? 'Nuvana' }}</title>
 
@@ -101,8 +99,5 @@
   @stack('scripts')
 
 </body>
-
-
-<!-- Mirrored from uiparadox.co.uk/templates/powerup/v3/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 27 May 2026 13:03:34 GMT -->
 
 </html>

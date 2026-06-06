@@ -1,6 +1,6 @@
 /* ---------------------------------------------"
-// Template Name: PowerUp
-// Description: PowerUp Html Template
+// Template Name: Nuvana
+// Description: Nuvana Html Template
 // Version: 1.0.0
 
 ===============================================
@@ -5552,5 +5552,15 @@ footer .footer-bottom-bar .payment-cards .card-block img {
 
   .certificate-card {
     padding: 24px 16px;
+  }
+}
+
+/* Header Responsive Fixes */
+@media (max-width: 1199px) {
+  header, 
+  header .header-section,
+  header .header-bottom-area,
+  header .main-menu {
+    background-color: #ffffff !important;
   }
 }

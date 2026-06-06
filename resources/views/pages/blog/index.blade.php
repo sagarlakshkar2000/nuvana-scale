@@ -15,8 +15,7 @@
     <div class="container-fluid">
       <div class="row row-gap-3 align-items-center justify-content-between mb-24">
         <div class="col-xl-4 col-lg-6 col-md-12">
-          <form action="https://uiparadox.co.uk/templates/powerup/v3/blog-grid.html" method="post"
-            class="newsletter-form">
+          <form action="https://uiparadox.co.uk/templates/Nuvana/v3/blog-grid.html" method="post" class="newsletter-form">
             <input type="email" class="form-control search-input" placeholder="Search Here...">
             <button type="submit" class="search-btn">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">

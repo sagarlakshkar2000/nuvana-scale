@@ -30,7 +30,7 @@
             </a>
           </div>
 
-          <div class="col-xl-9 d-xl-block d-none">
+          <div class="col-xl-9 col-md-6 col-8">
             <nav class="navigation d-flex align-items-center justify-content-end">
               <div class="header-buttons">
                 <div class="logo-icon d-sm-block d-none">
@@ -45,13 +45,13 @@
                     </div>
                   </form>
                 </div>
-                <a href="#" class="main-menu__toggler mobile-nav__toggler">
+                <a href="#" class="main-menu__toggler mobile-nav__toggler d-xl-none">
                   Menu
                   <img src="{{ asset('assets/media/icons/menu-2.png') }}" alt="Menu Icon">
                 </a>
               </div>
 
-              <div class="menu-button-right">
+              <div class="menu-button-right d-none d-xl-flex">
                 <div class="main-menu__nav">
                   @if(!empty($items))
                     <ul class="main-menu__list">
