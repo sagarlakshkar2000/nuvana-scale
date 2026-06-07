@@ -5,82 +5,58 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class CreateAdminCommand extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'make:admin';
+  protected $signature = 'make:admin';
+  protected $description = 'Create a new admin user';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Create a new admin user';
+  public function handle()
+  {
+    $this->info('Creating a new admin user...');
 
-    /**
-     * Execute the console command.
-     */
-    public function handle()
-    {
-        $this->info('Creating a new admin user...');
+    // Collect input
+    $data = [
+      'name' => $this->ask('Name'),
+      'email' => $this->ask('Email'),
+      'username' => $this->ask('Username'),
+      'password' => $this->secret('Password'),
+      'password_confirmation' => $this->secret('Confirm Password'),
+    ];
 
-        $name = $this->ask('Name');
-        $email = $this->ask('Email');
-        $phone = $this->ask('Phone (optional)');
-        $username = $this->ask('Username');
-        $password = $this->secret('Password');
-        $passwordConfirm = $this->secret('Confirm Password');
+    // Validate input
+    $validator = Validator::make($data, [
+      'name' => 'required|string|max:255',
+      'email' => 'required|email|max:255|unique:users,email',
+      'username' => 'required|string|max:255|unique:users,username',
+      'password' => 'required|min:6|confirmed',
+    ]);
 
-        if ($password !== $passwordConfirm) {
-            $this->error('Passwords do not match.');
-            return;
-        }
-
-        // Basic validation
-        $errors = [];
-        if (empty($name)) $errors[] = 'Name is required.';
-        if (empty($email)) $errors[] = 'Email is required.';
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'Invalid email format.';
-        if (empty($username)) $errors[] = 'Username is required.';
-        if (empty($password)) $errors[] = 'Password is required.';
-
-        if (!empty($errors)) {
-            foreach ($errors as $error) {
-                $this->error($error);
-            }
-            return;
-        }
-
-        // Check for uniqueness
-        if (User::where('email', $email)->exists()) {
-            $this->error('Email already exists.');
-            return;
-        }
-
-        if (User::where('username', $username)->exists()) {
-            $this->error('Username already exists.');
-            return;
-        }
-
-        if (!empty($phone) && User::where('phone', $phone)->exists()) {
-            $this->error('Phone already exists.');
-            return;
-        }
-
-        $user = User::create([
-            'name' => $name,
-            'email' => $email,
-            'phone' => empty($phone) ? null : $phone,
-            'username' => $username,
-            'password' => Hash::make($password),
-            'role' => 'admin',
-        ]);
-
-        $this->info("Admin user {$user->username} created successfully!");
+    if ($validator->fails()) {
+      foreach ($validator->errors()->all() as $error) {
+        $this->error($error);
+      }
+      return Command::FAILURE;
     }
+
+    try {
+      // Create admin user
+      $user = User::create([
+        'name' => $data['name'],
+        'email' => $data['email'],
+        'username' => $data['username'],
+        'password' => Hash::make($data['password']), // safe if model not using 'hashed'
+        'role' => 'admin',
+      ]);
+
+      $this->info("✅ Admin '{$user->username}' created successfully!");
+      return Command::SUCCESS;
+
+    } catch (\Exception $e) {
+      $this->error('❌ Failed to create admin user.');
+      $this->error($e->getMessage());
+      return Command::FAILURE;
+    }
+  }
 }

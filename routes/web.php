@@ -85,6 +85,8 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\TrendingProductController;
 use App\Http\Controllers\Admin\SeoController;
 
+Route::get('/login', fn() => redirect()->route('admin.login'))->name('login');
+
 Route::prefix('admin')->name('admin.')->group(function () {
   // Auth Routes
   Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
@@ -95,9 +97,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
   Route::middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    Route::prefix('/products')->name('products.')->group(function () {
+      Route::get('/', [AdminProductController::class, 'index'])->name('index');
+      Route::get('/create', [AdminProductController::class, 'create'])->name('create');
+      Route::post('/store', [AdminProductController::class, 'store'])->name('store');
+      Route::get('/{id}/edit', [AdminProductController::class, 'edit'])->name('edit');
+      Route::post('/{id}', [AdminProductController::class, 'update'])->name('update');
+      Route::post('/{id}/delete', [AdminProductController::class, 'destroy'])->name('destroy');
+    });
+
     // Resource Controllers for CRUD operations
     Route::resource('banners', BannerController::class);
-    Route::resource('products', AdminProductController::class);
     Route::resource('trending-products', TrendingProductController::class);
     Route::resource('seo', SeoController::class);
   });

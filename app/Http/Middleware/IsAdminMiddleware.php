@@ -9,18 +9,18 @@ use Illuminate\Support\Facades\Auth;
 
 class IsAdminMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  Closure(Request): (Response)  $next
-     */
-    public function handle(Request $request, Closure $next): Response
-    {
-        if (Auth::check() && Auth::user()->role === 'admin') {
-            return $next($request);
-        }
-
-        // If not authenticated or not an admin, redirect to admin login
-        return redirect()->route('admin.login')->with('error', 'You must be an admin to access this page.');
+  /**
+   * Handle an incoming request.
+   *
+   * @param  Closure(Request): (Response)  $next
+   */
+  public function handle(Request $request, Closure $next): Response
+  {
+    if (Auth::check() && Auth::user()->role === 'admin') {
+      return $next($request);
     }
+
+    // If not authenticated or not an admin, redirect to admin login
+    return redirect()->route('login')->with('error', 'You must be an admin to access this page.');
+  }
 }

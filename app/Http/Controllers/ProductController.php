@@ -5,260 +5,93 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
-  /**
-   * Get all products data (simulating database)
-   */
   private function getAllProducts()
   {
-    return [
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/products/05-109436933755456_m.jpg?v=717',
-        'badge' => 'New',
-        'sku' => 'EJ-03',
-        'slug' => 'jewellery_01',
-        'category' => 'Jewellery Scale',
-        'title' => 'Nuvana Digital Jewellery Weighing Scale With 600g Weight Capacity',
-        'rating' => 5,
-        'reviews' => 128,
-        'old_price' => 8999.00,
-        'price' => 5999.00,
-        'in_stock' => true,
-        'feature' => 'Display Front & Back (With Windshield)',
-        'specifications' => [
-          'Material & Color' => 'ABS with White Color',
-          'Item Capacity' => '600 g',
-          'Resolution' => '10mg',
-          'Platform Size' => '130mm dia',
-          'Units' => 'g, ct, tola',
-          'Warranty' => '1-Year Warranty'
-        ],
-        'is_trending' => true,
-        'created_at' => '2025-01-15'
-      ],
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/products/3-904378_m.jpg?v=717',
-        'badge' => null,
-        'sku' => 'EQPF-04',
-        'slug' => 'equal-digital-heavy-duty-weighing-scale-with-5mt-weight-capacity',
-        'category' => 'Heavy Duty Scale',
-        'title' => 'Nuvana Digital Heavy Duty Weighing Scale With 5MT Weight Capacity',
-        'rating' => 5,
-        'reviews' => 92,
-        'old_price' => 93059.00,
-        'price' => 79100.00,
-        'in_stock' => true,
-        'feature' => '5 Metric Ton | Heavy Industrial Use',
-        'specifications' => [
-          'Material' => 'Mild Steel',
-          'Capacity' => '5000 kg',
-          'Platform Size' => '1500x1500 mm',
-          'Display' => 'Digital LED',
-          'Warranty' => '2-Year Warranty'
-        ],
-        'is_trending' => true,
-        'created_at' => '2025-02-20'
-      ],
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/products/1-922844_m.jpg?v=717',
-        'badge' => 'Best Seller',
-        'sku' => 'EDXP-11',
-        'slug' => 'equal-digital-platform-weighing-scale-with-10001250kg-weight-capacity',
-        'category' => 'Platform Scale',
-        'title' => 'Nuvana Digital Platform Weighing Scale With 1000/1250kg Weight Capacity',
-        'rating' => 5,
-        'reviews' => 156,
-        'old_price' => 47824.00,
-        'price' => 40650.00,
-        'in_stock' => true,
-        'feature' => 'Heavy Duty Platform | 1250kg Capacity',
-        'specifications' => [
-          'Material' => 'Mild Steel',
-          'Capacity' => '1250 kg',
-          'Platform Size' => '1200x1200 mm',
-          'Display' => 'Digital LCD',
-          'Warranty' => '2-Year Warranty'
-        ],
-        'is_trending' => true,
-        'created_at' => '2025-01-10'
-      ],
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/products/3-954630_m.jpg?v=717',
-        'badge' => 'Trending',
-        'sku' => 'EQPF-02',
-        'slug' => 'equal-digital-heavy-duty-weighing-scale-with-1mt2mt-weight-capacity',
-        'category' => 'Heavy Duty Scale',
-        'title' => 'Nuvana Digital Heavy Duty Weighing Scale With 1MT/2MT Weight Capacity',
-        'rating' => 4,
-        'reviews' => 112,
-        'old_price' => 63294.00,
-        'price' => 53800.00,
-        'in_stock' => true,
-        'feature' => '2 Metric Ton | Commercial Use',
-        'specifications' => [
-          'Material' => 'Mild Steel',
-          'Capacity' => '2000 kg',
-          'Platform Size' => '1200x1200 mm',
-          'Display' => 'Digital LED',
-          'Warranty' => '2-Year Warranty'
-        ],
-        'is_trending' => true,
-        'created_at' => '2025-02-15'
-      ],
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/products/3-331556_m.jpg?v=717',
-        'badge' => null,
-        'sku' => 'EQPF-03',
-        'slug' => 'equal-digital-heavy-duty-weighing-scale-with-2mt3mt-weight-capacity',
-        'category' => 'Heavy Duty Scale',
-        'title' => 'Nuvana Digital Heavy Duty Weighing Scale With 2MT/3MT Weight Capacity',
-        'rating' => 5,
-        'reviews' => 71,
-        'old_price' => 81529.00,
-        'price' => 69300.00,
-        'in_stock' => false,
-        'feature' => '3 Metric Ton | Industrial Grade',
-        'specifications' => [
-          'Material' => 'Mild Steel',
-          'Capacity' => '3000 kg',
-          'Platform Size' => '1500x1500 mm',
-          'Display' => 'Digital LED',
-          'Warranty' => '2-Year Warranty'
-        ],
-        'is_trending' => false,
-        'created_at' => '2024-12-10'
-      ]
-    ];
+    return Product::with(['category', 'images', 'specifications'])->get();
   }
 
-  /**
-   * Apply product filters to a collection.
-   */
-  private function applyFilters(Collection $products, Request $request): Collection
+  private function applyFilters($products, Request $request)
   {
-    $selected_categories = $request->input('category', []);
-    if (!is_array($selected_categories)) {
-      $selected_categories = [$selected_categories];
+    $query = Product::query()->with(['category', 'images']);
+
+    if ($request->filled('category')) {
+      $categories = (array) $request->input('category');
+      $query->whereHas('category', function ($q) use ($categories) {
+        $q->whereIn('name', $categories);
+      });
     }
 
-    $show_in_stock = filter_var($request->input('in_stock', false), FILTER_VALIDATE_BOOLEAN);
-    $show_out_of_stock = filter_var($request->input('out_of_stock', false), FILTER_VALIDATE_BOOLEAN);
-    $min_price = $request->filled('min_price') ? (float) $request->input('min_price') : 0;
-    $max_price = $request->filled('max_price') ? (float) $request->input('max_price') : 350000;
-    $search_keyword = trim((string) $request->input('keyword', ''));
-
-    return $products->filter(function ($product) use ($selected_categories, $show_in_stock, $show_out_of_stock, $min_price, $max_price, $search_keyword) {
-      if (!empty($selected_categories) && !in_array($product['category'], $selected_categories)) {
-        return false;
-      }
-
-      if ($show_in_stock && !$show_out_of_stock && !$product['in_stock']) {
-        return false;
-      }
-
-      if ($show_out_of_stock && !$show_in_stock && $product['in_stock']) {
-        return false;
-      }
-
-      if ($product['price'] < $min_price || $product['price'] > $max_price) {
-        return false;
-      }
-
-      if ($search_keyword !== '') {
-        $keyword_lower = strtolower($search_keyword);
-        if (
-          strpos(strtolower($product['title']), $keyword_lower) === false &&
-          strpos(strtolower($product['category']), $keyword_lower) === false &&
-          strpos(strtolower($product['sku']), $keyword_lower) === false
-        ) {
-          return false;
-        }
-      }
-
-      return true;
-    });
-  }
-
-  /**
-   * Apply product sorting to a collection.
-   */
-  private function applySorting(Collection $products, string $sort_by): Collection
-  {
-    switch ($sort_by) {
-      case 'price_asc':
-        return $products->sortBy('price');
-      case 'price_desc':
-        return $products->sortByDesc('price');
-      case 'name_asc':
-        return $products->sortBy('title');
-      case 'name_desc':
-        return $products->sortByDesc('title');
-      case 'rating_desc':
-        return $products->sortByDesc('rating');
-      case 'newest':
-        return $products->sortByDesc('created_at');
-      default:
-        return $products->sortByDesc('rating')->sortByDesc('is_trending');
+    if ($request->boolean('in_stock')) {
+      $query->where('stock_status', 'in_stock');
     }
+
+    if ($request->boolean('out_of_stock')) {
+      $query->where('stock_status', 'out_of_stock');
+    }
+
+    if ($request->filled('min_price')) {
+      $query->where('price', '>=', $request->min_price);
+    }
+
+    if ($request->filled('max_price')) {
+      $query->where('price', '<=', $request->max_price);
+    }
+
+    if ($request->filled('keyword')) {
+      $keyword = strtolower($request->keyword);
+
+      $query->where(function ($q) use ($keyword) {
+        $q->where('name', 'like', "%{$keyword}%")
+          ->orWhere('sku', 'like', "%{$keyword}%")
+          ->orWhereHas('category', function ($q2) use ($keyword) {
+            $q2->where('name', 'like', "%{$keyword}%");
+          });
+      });
+    }
+
+    return $query;
   }
 
-  /**
-   * Display products listing with filters
-   */
+  private function applySorting($query, string $sort_by)
+  {
+    return match ($sort_by) {
+      'price_asc' => $query->orderBy('price'),
+      'price_desc' => $query->orderByDesc('price'),
+      'name_asc' => $query->orderBy('name'),
+      'name_desc' => $query->orderByDesc('name'),
+      'rating_desc' => $query->orderByDesc('rating'),
+      'newest' => $query->orderByDesc('created_at'),
+      default => $query->orderByDesc('rating'),
+    };
+  }
+
   public function index(Request $request)
   {
-    $products = collect($this->getAllProducts());
+    $query = $this->applyFilters(null, $request);
+    $query = $this->applySorting($query, $request->input('sort_by', 'featured'));
 
-    // Get filter parameters
-    $search_keyword = $request->input('keyword', '');
-    $selected_categories = $request->input('category', []);
-    if (!is_array($selected_categories)) {
-      $selected_categories = [$selected_categories];
-    }
-    $in_stock_filter = filter_var($request->input('in_stock', false), FILTER_VALIDATE_BOOLEAN);
-    $out_of_stock_filter = filter_var($request->input('out_of_stock', false), FILTER_VALIDATE_BOOLEAN);
-    $min_price = $request->filled('min_price') ? (float) $request->input('min_price') : 0;
-    $max_price = $request->filled('max_price') ? (float) $request->input('max_price') : 350000;
-    $sort_by = $request->input('sort_by', 'featured');
+    $products = $query->paginate(9);
 
-    // Apply filters and sorting
-    $filtered_products = $this->applyFilters($products, $request);
-    $filtered_products = $this->applySorting($filtered_products, $sort_by);
+    // Categories with count
+    $categories = \App\Models\Category::withCount('products')->get()
+      ->map(fn($cat) => [
+        'name' => $cat->name,
+        'count' => $cat->products_count
+      ]);
 
-    // Calculate category counts based on actual products
-    $category_counts = $products->groupBy('category')->map(function ($items) {
-      return $items->count();
-    })->toArray();
+    // Stock counts
+    $in_stock_count = Product::where('stock_status', 'in_stock')->count();
+    $out_of_stock_count = Product::where('stock_status', 'out_of_stock')->count();
 
-    $categories = collect($category_counts)->map(function ($count, $name) {
-      return ['name' => $name, 'count' => $count];
-    })->values()->toArray();
+    // Price range
+    $min_price_range = Product::min('price');
+    $max_price_range = Product::max('price');
 
-    // Availability counts
-    $in_stock_count = $products->where('in_stock', true)->count();
-    $out_of_stock_count = $products->where('in_stock', false)->count();
 
-    // Price range from actual products
-    $all_prices = $products->pluck('price');
-    $min_price_range = $all_prices->min();
-    $max_price_range = $all_prices->max();
-
-    // Pagination
-    $per_page = 9;
-    $current_page = $request->input('page', 1);
-    $total_products = $filtered_products->count();
-    $total_pages = ceil($total_products / $per_page);
-
-    // Get current page items
-    $current_products = $filtered_products->slice(($current_page - 1) * $per_page, $per_page)->values();
-
-    // Calculate display range
-    $start_count = $total_products > 0 ? (($current_page - 1) * $per_page) + 1 : 0;
-    $end_count = min($current_page * $per_page, $total_products);
-
-    // Sort options
     $sort_options = [
       ['value' => 'featured', 'label' => 'Featured'],
       ['value' => 'newest', 'label' => 'Newest First'],
@@ -269,27 +102,21 @@ class ProductController extends Controller
       ['value' => 'rating_desc', 'label' => 'Top Rated']
     ];
 
-    return view('pages.products.index', compact(
-      'current_products',
-      'categories',
-      'in_stock_count',
-      'out_of_stock_count',
-      'min_price_range',
-      'max_price_range',
-      'sort_options',
-      'sort_by',
-      'start_count',
-      'end_count',
-      'total_products',
-      'current_page',
-      'total_pages',
-      'search_keyword',
-      'selected_categories',
-      'in_stock_filter',
-      'out_of_stock_filter',
-      'min_price',
-      'max_price'
-    ));
+    return view('pages.products.index', [
+      'current_products' => $products->items(),
+      'categories' => $categories,
+      'in_stock_count' => $in_stock_count,
+      'out_of_stock_count' => $out_of_stock_count,
+      'min_price_range' => $min_price_range,
+      'max_price_range' => $max_price_range,
+      'sort_by' => $request->sort_by,
+      'current_page' => $products->currentPage(),
+      'total_pages' => $products->lastPage(),
+      'total_products' => $products->total(),
+      'start_count' => $products->firstItem(),
+      'end_count' => $products->lastItem(),
+      'sort_options' => $sort_options,
+    ]);
   }
 
   /**
@@ -396,13 +223,11 @@ class ProductController extends Controller
     return $this->byCategory($request, 'Load Cell');
   }
 
-  /**
-   * AJAX endpoint for quick view
-   */
   public function quickView($sku)
   {
-    $products = collect($this->getAllProducts());
-    $product = $products->firstWhere('sku', $sku);
+    $product = Product::with(['images', 'specifications'])
+      ->where('sku', $sku)
+      ->first();
 
     if (!$product) {
       return response()->json(['error' => 'Product not found'], 404);
@@ -438,45 +263,14 @@ class ProductController extends Controller
 
   public function productDetail($slug)
   {
-    $products = collect($this->getAllProducts());
-    $product = $products->firstWhere('slug', $slug);
+    $product = Product::with(['images', 'specifications', 'category'])
+      ->where('slug', $slug)
+      ->firstOrFail();
 
-    if (!$product) {
-      abort(404, 'Product not found');
-    }
-
-    // Add demo specifications if not exists
-    if (!isset($product['specifications'])) {
-      $product['specifications'] = [
-        'Material & Color' => 'ABS with White Color',
-        'Item Capacity' => rand(100, 1000) . ' ' . (rand(0, 1) ? 'g' : 'kg'),
-        'Resolution' => rand(1, 100) . 'mg',
-        'Platform Size' => rand(100, 500) . 'mm dia',
-        'Units' => 'g, kg, lb',
-        'Warranty' => rand(1, 5) . '-Year Warranty'
-      ];
-    }
-
-    // Add demo description if not exists
-    if (!isset($product['description'])) {
-      $product['description'] = 'Lorem ipsum dolor sit amet consectetur. Eget massa elementum sit massa tincidunt urna vulputate. Justo massa mattis consectetur ac. Massa ipsum cras est id. Fuel your workouts with premium quality products designed for muscle recovery and growth. Packed with essential amino acids, it\'s your perfect companion for achieving peak performance and fitness goals.';
-    }
-
-    // Add demo additional images if not exists
-    if (!isset($product['additional_images']) || empty($product['additional_images'])) {
-      $product['additional_images'] = [
-        $product['image'],
-        $product['image'],
-        $product['image'],
-        $product['image']
-      ];
-    }
-
-    // Get related products from same category
-    $related_products = $products->where('category', $product['category'])
-      ->where('sku', '!=', $product['sku'])
+    $related_products = Product::where('category_id', $product->category_id)
+      ->where('id', '!=', $product->id)
       ->take(8)
-      ->values();
+      ->get();
 
     return view('pages.products.product-detail', compact('product', 'related_products'));
   }
