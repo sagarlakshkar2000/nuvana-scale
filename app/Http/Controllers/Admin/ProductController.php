@@ -54,67 +54,90 @@ class ProductController extends Controller
     DB::beginTransaction();
 
     try {
-      // ✅ Create Product
+      // Validate the request
+      $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'category_id' => 'required|exists:categories,id',
+        'sku' => 'nullable|string|unique:products,sku',
+        'description' => 'nullable|string',
+        'badge' => 'nullable|string',
+        'status' => 'required|in:active,inactive',
+        'predefined_specs' => 'nullable|array',
+        'specifications' => 'nullable|array',
+        'images' => 'nullable|array',
+        'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+      ]);
+
+      // Generate SKU if not provided
+      $sku = $request->sku;
+      if (empty($sku)) {
+        $sku = 'NUV-' . strtoupper(\Illuminate\Support\Str::random(6));
+      }
+
+      // Generate unique slug
+      $slug = \Illuminate\Support\Str::slug($request->name) . '-' . time();
+
+      // Merge predefined specs with custom specs
+      $allSpecifications = [];
+
+      // Add predefined specifications (only non-empty values)
+      if ($request->has('predefined_specs')) {
+        foreach ($request->predefined_specs as $key => $value) {
+          if (!empty($value)) {
+            $allSpecifications[$key] = $value;
+          }
+        }
+      }
+
+      // Add custom specifications
+      if ($request->has('specifications')) {
+        foreach ($request->specifications as $spec) {
+          if (!empty($spec['key']) && !empty($spec['value'])) {
+            $allSpecifications[$spec['key']] = $spec['value'];
+          }
+        }
+      }
+
+      // ✅ Create Product (matching your form fields)
       $product = Product::create([
         'category_id' => $request->category_id,
         'name' => $request->name,
-        'slug' => Str::slug($request->name) . '-' . time(),
-        'sku' => 'NUV-' . strtoupper(Str::random(6)),
-
-        'short_description' => $request->short_description,
+        'slug' => $slug,
+        'sku' => $sku,
         'description' => $request->description,
-
-        'price' => $request->price,
-        'old_price' => $request->old_price,
-
-        'rating' => $request->rating,
-        'reviews_count' => $request->reviews_count,
-
-        'stock_status' => $request->stock_status,
         'badge' => $request->badge,
+        'is_active' => $request->status === 'active' ? 1 : 0,
+        'specifications' => !empty($allSpecifications) ? json_encode($allSpecifications) : null,
       ]);
 
       // ✅ Handle Images (multiple upload)
       if ($request->hasFile('images')) {
         foreach ($request->file('images') as $index => $image) {
-
           $path = $image->store('products', 'public');
 
+          // If you have ProductImage model
           ProductImage::create([
             'product_id' => $product->id,
             'image_url' => $path,
-            'sort_order' => $index
+            'sort_order' => $index,
+            'is_primary' => $index === 0,
           ]);
-        }
-      }
-
-      // ✅ Handle Specifications (dynamic fields)
-      if ($request->spec_key && $request->spec_value) {
-
-        foreach ($request->spec_key as $index => $key) {
-
-          if (!empty($key) && !empty($request->spec_value[$index])) {
-
-            ProductSpecification::create([
-              'product_id' => $product->id,
-              'key' => $key,
-              'value' => $request->spec_value[$index],
-              'group_name' => $request->spec_group[$index] ?? 'General',
-              'is_predefined' => true,
-            ]);
-          }
         }
       }
 
       DB::commit();
 
-      return redirect()->back()->with('success', 'Product created successfully');
+      return redirect()
+        ->route('admin.products.index')
+        ->with('success', 'Product created successfully!');
 
     } catch (\Exception $e) {
-
       DB::rollBack();
 
-      return redirect()->back()->with('error', $e->getMessage());
+      return redirect()
+        ->back()
+        ->withInput()
+        ->with('error', 'Error: ' . $e->getMessage());
     }
   }
 
