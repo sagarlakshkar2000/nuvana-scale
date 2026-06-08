@@ -56,6 +56,9 @@
   <!-- Main Wrapper End -->
 
   <!-- Back To Top Start -->
+  <a href="#whatsapp-wrapper" id="whatsapp-wrapper" class="whatsapp-wrapper"><i class="fa-brands fa-whatsapp"></i></a>
+
+  <!-- Back To Top Start -->
   <a href="#main-wrapper" id="backto-top" class="back-to-top"><i class="fa-light fa-chevron-up"></i></a>
 
 

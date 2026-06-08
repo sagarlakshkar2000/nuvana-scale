@@ -35,6 +35,7 @@ var MyScroll = "";
     },
     methods: function (e) {
       Init.w();
+      Init.whatsappRedirect();
       Init.backToTop();
       Init.preloader();
       Init.dropdown();
@@ -52,6 +53,17 @@ var MyScroll = "";
       if (isMobile) {
         $("body").addClass("is-mobile");
       }
+    },
+
+    whatsappRedirect: function () {
+      const btn = $("#whatsapp-wrapper");
+      const whatsappNumber = "918058710932";
+      const whatsappUrl = `https://wa.me/${whatsappNumber}`;
+
+      btn.on("click", function (e) {
+        e.preventDefault();
+        window.open(whatsappUrl, "_blank");
+      });
     },
 
     backToTop: function () {

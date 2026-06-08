@@ -365,7 +365,7 @@
   <section class="hero-banner">
     <div class="container-fluid w-100 px-0">
       <div class="hero-wrapper">
-        <div class="slider-arrows d-sm-flex d-none">
+        <div class="slider-arrows d-flex z-1">
           <a href="javascript:;" class="sm-btn light arrow-btn btn-prev" data-slide="hero-banner-slider">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path
@@ -386,7 +386,8 @@
           <?php foreach ($hero_slides as $index => $slide): ?>
           <div class="hero-slide">
             <div class="w-100 h-100">
-              <div class="hero-slide-content" style="background-image: url('<?php  echo $slide['image']; ?>');">
+              <div class="hero-slide-content h-100 w-100">
+                <img src="{{ $slide['image'] }}" class="img-fluid" alt="" />
               </div>
             </div>
           </div>
@@ -407,7 +408,7 @@
           <h2 class="fw-600 black mb-12"><?php echo $section_config['title']; ?></h2>
           <p><?php echo $section_config['subtitle']; ?></p>
         </div>
-        <a href="<?php echo $section_config['button_link']; ?>" class="cus-btn-arrow">
+        <a href="<?php echo $section_config['button_link']; ?>" class="cus-btn-arrow d-none d-sm-block">
           <?php echo $section_config['button_text']; ?>
           <div class="icon">
             <i class="fa-light fa-chevron-right"></i>
@@ -417,7 +418,7 @@
 
       <div class="row row-gap-3">
         <?php foreach ($trending_products as $product): ?>
-        <div class="col-xl-3 col-lg-4 col-sm-6">
+        <div class="col-xl-3 col-lg-4 col-sm-6 col-6">
           <div class="product-block">
             <div class="image-box mb-16">
               <img src="<?php  echo $product['image']; ?>" alt="<?php  echo $product['title']; ?>">
@@ -453,7 +454,7 @@
           <h2 class="fw-600 black mb-12">{{ $blog_config['title'] }}</h2>
           <p>{{ $blog_config['subtitle'] }}</p>
         </div>
-        <a href="{{ $blog_config['button_link'] }}" class="cus-btn-arrow">
+        <a href="{{ $blog_config['button_link'] }}" class="cus-btn-arrow d-none d-sm-block">
           {{ $blog_config['button_text'] }}
           <div class="icon">
             <i class="fa-light fa-chevron-right"></i>
@@ -462,7 +463,7 @@
       </div>
 
       <div class="row row-gap-4">
-        <div class="col-xl-6">
+        <div class="col-xl-6 col-12">
           <div class="blog-card main d-flex flex-column gap-16 bg-lightest-gray br-16 h-100">
             <a href="{{ url('/blog/' . $featured_blog['slug']) }}" class="card-image">
               <img src="{{ $featured_blog['image'] }}" alt="{{ $featured_blog['title'] }}" loading="lazy"
@@ -483,17 +484,17 @@
           </div>
         </div>
 
-        <div class="col-xl-6">
+        <div class="col-xl-6 col-12">
           <div class="row row-gap-4">
             @foreach($regular_blogs as $blog)
-              <div class="col-lg-6">
+              <div class="col-lg-6 col-6">
                 <div class="blog-card main d-flex flex-column gap-16 bg-lightest-gray br-16">
                   <a href="{{ url('/blog/' . $blog['slug']) }}" class="card-image">
                     <img src="{{ $blog['image'] }}" alt="{{ $blog['title'] }}" loading="lazy" class="img-fluid">
                   </a>
                   <div class="d-flex flex-column gap-32 p-16">
                     <div class="d-flex flex-column gap-16 black">
-                      <div class="create-by">
+                      <div class="create-by d-none d-sm-block">
                         <p class="fw-500">{{ $blog['date'] }}</p>
                         <div class="dot"></div>
                         <p class="dark-gray">By {{ $blog['author'] }}</p>

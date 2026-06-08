@@ -39,7 +39,7 @@
   <div class="container-fluid">
     <div class="row row-gap-3">
       @foreach($benefits as $benefit)
-        <div class="col-xl-3 col-lg-4 col-sm-6">
+        <div class="col-xl-3 col-lg-4 col-sm-6 col-6">
           <div class="benefit-block d-flex flex-column gap-24 p-24 h-100">
             <div class="benefit-icon">
               <img src="{{ $benefit['icon'] }}" alt="{{ $benefit['alt_text'] }}" loading="lazy">

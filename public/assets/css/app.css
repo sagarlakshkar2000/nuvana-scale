@@ -29,6 +29,7 @@ STYLE SHEET INDEXING
   --color-secondary: #FF7F3F;
   --color-secondary-light: #FFF2E9;
   --color-accent: #5D3A1A;
+  --color-whatsapp: #21ce5b;
 
   /* ----- Neutrals (Light Mode) ----- */
   --color-white: #FFFFFF;
@@ -1259,6 +1260,28 @@ Helpers
 /*-------------------------
 Elements
 -------------------------*/
+.whatsapp-wrapper {
+  position: fixed;
+  bottom: 100px;
+  right: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(40px, 2.5vw, 96px);
+  height: clamp(40px, 2.5vw, 96px);
+  font-size: clamp(24px, 1.25vw, 64px);
+  border-radius: 50%;
+  background: #19d250;
+  color: #FAFAFA;
+  text-align: center;
+  text-decoration: none;
+  z-index: 999;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  opacity: 1;
+  transform: translateY(25%);
+}
+
 .back-to-top {
   position: fixed;
   bottom: 0px;
@@ -1292,8 +1315,13 @@ Elements
 }
 
 @media (max-width: 490px) {
+  .whatsapp-wrapper {
+    right: 15px;
+    bottom: 80px;
+  }
+
   .back-to-top {
-    right: -20px;
+    right: 15px;
     bottom: -20px;
   }
 }
@@ -3220,6 +3248,12 @@ header .header-buttons a:hover {
   height: 80%;
 }
 
+@media (min-width:0px) and (max-width: 600px) {
+.hero-banner .hero-wrapper .slider-arrows {
+  height: 65%;
+}
+}
+
 .hero-banner .hero-wrapper .title {
   font-family: "NEARING";
   font-style: normal;
@@ -3233,7 +3267,7 @@ header .header-buttons a:hover {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 332px;
+  min-height: 210px;
   width: 100%;
   position: relative;
 }
@@ -3242,6 +3276,12 @@ header .header-buttons a:hover {
   .hero-banner .hero-wrapper .title {
     letter-spacing: -1.5px;
   }
+}
+
+@media (min-width:0px) and (max-width: 600px) {
+.hero-slide-content img{
+  height: 210px;
+}
 }
 
 @media (max-width: 992px) {
@@ -5557,7 +5597,7 @@ footer .footer-bottom-bar .payment-cards .card-block img {
 
 /* Header Responsive Fixes */
 @media (max-width: 1199px) {
-  header, 
+  header,
   header .header-section,
   header .header-bottom-area,
   header .main-menu {

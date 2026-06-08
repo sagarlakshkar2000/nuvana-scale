@@ -45,7 +45,7 @@
 
     <div class="row justify-content-center row-gap-4">
       @foreach($certificates as $certificate)
-        <div class="col-xl-3 col-lg-4 col-md-6">
+        <div class="col-xl-3 col-lg-4 col-6">
           <div class="certificate-card text-center">
             <div class="certificate-image">
               <img src="{{ $certificate['image'] }}" alt="{{ $certificate['alt_text'] }}" loading="lazy">
