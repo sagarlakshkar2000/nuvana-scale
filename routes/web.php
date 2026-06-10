@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Http\Request;
 
 Route::post('/run-command', function (Request $request) {
-
   // 🚫 Block in production
   // if (!app()->environment('local')) {
   //   return response()->json(['error' => 'Not allowed'], 403);

@@ -444,8 +444,6 @@
   </section>
   <!-- TRENDING PRODUCTS END -->
 
-  <x-our-certificate />
-
   <!-- BLOGS SECTION START -->
   <section class="blog-section py-40">
     <div class="container-fluid">

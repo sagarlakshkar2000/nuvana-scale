@@ -91,8 +91,8 @@ STYLE SHEET INDEXING
   --radius-full: 9999px;
 
   /* ----- Typography ----- */
-  --font-family-heading: "NEARING", system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-family-body: "NEARING", system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-family-heading: "Plus Jakarta Sans", system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-family-body: "Plus Jakarta Sans", system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   /* ----- Transitions ----- */
   --transition-fast: 0.15s ease;
@@ -116,45 +116,45 @@ STYLE SHEET INDEXING
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap");
 
 @font-face {
-  font-family: "NEARING";
+  font-family: "Plus Jakarta Sans";
   font-style: normal;
   font-weight: 400;
-  src: url(fonts/nearing-font-family/nearing-thin.ttf) format("woff2");
+  src: url(fonts/nearing-font-family/PlusJakartaSans-thin.ttf) format("woff2");
 }
 
 @font-face {
-  font-family: "NEARING";
+  font-family: "Plus Jakarta Sans";
   font-style: normal;
   font-weight: 500;
-  src: url(fonts/nearing-font-family/nearing-regular.ttf) format("woff2");
+  src: url(fonts/nearing-font-family/PlusJakartaSans-regular.ttf) format("woff2");
 }
 
 @font-face {
-  font-family: "NEARING";
+  font-family: "Plus Jakarta Sans";
   font-style: normal;
   font-weight: 600;
-  src: url(fonts/nearing-font-family/nearing-medium.ttf) format("woff2");
+  src: url(fonts/nearing-font-family/PlusJakartaSans-medium.ttf) format("woff2");
 }
 
 @font-face {
-  font-family: "NEARING";
+  font-family: "Plus Jakarta Sans";
   font-style: normal;
   font-weight: 700;
-  src: url(fonts/nearing-font-family/nearing-bold.ttf) format("woff2");
+  src: url(fonts/nearing-font-family/PlusJakartaSans-bold.ttf) format("woff2");
 }
 
 @font-face {
-  font-family: "NEARING";
+  font-family: "Plus Jakarta Sans";
   font-style: normal;
   font-weight: 800;
-  src: url(fonts/nearing-font-family/nearing-black.ttf) format("woff2");
+  src: url(fonts/nearing-font-family/PlusJakartaSans-black.ttf) format("woff2");
 }
 
 @font-face {
-  font-family: "NEARING";
+  font-family: "Plus Jakarta Sans";
   font-style: normal;
   font-weight: 900;
-  src: url(fonts/nearing-font-family/nearing-extrabold.ttf) format("woff2");
+  src: url(fonts/nearing-font-family/PlusJakartaSans-extrabold.ttf) format("woff2");
 }
 
 /*-------------------------
@@ -307,7 +307,7 @@ h6,
 
 h1,
 .h1 {
-  font-family: "NEARING";
+  font-family: "Plus Jakarta Sans";
   text-transform: uppercase;
   font-size: clamp(73px, 5vw, 220px);
   /* 96px */
@@ -337,7 +337,7 @@ h1,
 
 h2,
 .h2 {
-  font-family: "NEARING";
+  font-family: "Plus Jakarta Sans";
   font-weight: 500;
   font-size: clamp(36px, 2.083vw, 160px);
   /*40*/
@@ -364,7 +364,7 @@ h2,
 
 h3,
 .h3 {
-  font-family: "NEARING";
+  font-family: "Plus Jakarta Sans";
   font-weight: 700;
   font-size: clamp(29px, 1.719vw, 130px);
   /*33*/
@@ -392,7 +392,7 @@ h3,
 
 h4,
 .h4 {
-  font-family: "NEARING";
+  font-family: "Plus Jakarta Sans";
   font-size: clamp(24px, 1.458vw, 105px);
   /* 28px */
   font-style: normal;
@@ -426,7 +426,7 @@ h4,
 
 h5,
 .h5 {
-  font-family: "NEARING";
+  font-family: "Plus Jakarta Sans";
   font-size: clamp(19px, 1.198vw, 90px);
   /* 23px */
   font-style: normal;
@@ -461,7 +461,7 @@ h5,
 
 h6,
 .h6 {
-  font-family: "NEARING";
+  font-family: "Plus Jakarta Sans";
   font-size: clamp(17px, 0.99vw, 72px);
   /*19*/
   font-weight: 600;
@@ -702,7 +702,7 @@ Helpers
 }
 
 .font-primary {
-  font-family: "NEARING";
+  font-family: "Plus Jakarta Sans";
 }
 
 .font-sec {
@@ -1822,7 +1822,7 @@ label.error {
   background: transparent;
   color: #FAFAFA;
   border: 0;
-  font-family: "NEARING";
+  font-family: "Plus Jakarta Sans";
   font-size: clamp(17px, 0.938vw, 22px);
   font-weight: 400;
   line-height: 140%;
@@ -2247,7 +2247,7 @@ label.error {
 
 .zui-wrapper .product-link {
   color: #0C0C0D;
-  font-family: "NEARING";
+  font-family: "Plus Jakarta Sans";
   text-decoration: none;
   font-weight: 600;
 }
@@ -2598,7 +2598,7 @@ header .main-menu .main-menu__nav .stricky-header .main-menu__list>li {
 header .main-menu .main-menu__nav .main-menu__list>li>a,
 header .main-menu .main-menu__nav .stricky-header .main-menu__list>li>a {
   font-size: clamp(17px, 0.99vw, 48px);
-  font-family: "NEARING";
+  font-family: "Plus Jakarta Sans";
   text-transform: capitalize;
   font-weight: 500;
   line-height: 150%;
@@ -2673,7 +2673,7 @@ header .main-menu .main-menu__nav .main-menu__list li ul li.current>a,
 header .main-menu .main-menu__nav .main-menu__list li ul li:hover>a,
 header .main-menu .main-menu__nav .stricky-header .main-menu__list li ul li.current>a,
 header .main-menu .main-menu__nav .stricky-header .main-menu__list li ul li:hover>a {
-   color: var(--text-white);
+  color: var(--text-white);
   background-color: var(--color-primary);
 }
 
@@ -3100,7 +3100,7 @@ header .header-buttons a:hover {
   line-height: 30px;
   color: #1E1F20;
   font-size: 18px;
-  font-family: "NEARING";
+  font-family: "Plus Jakarta Sans";
   text-transform: capitalize;
   font-weight: 500;
   height: 36px;
@@ -3249,13 +3249,13 @@ header .header-buttons a:hover {
 }
 
 @media (min-width:0px) and (max-width: 600px) {
-.hero-banner .hero-wrapper .slider-arrows {
-  height: 65%;
-}
+  .hero-banner .hero-wrapper .slider-arrows {
+    height: 65%;
+  }
 }
 
 .hero-banner .hero-wrapper .title {
-  font-family: "NEARING";
+  font-family: "Plus Jakarta Sans";
   font-style: normal;
   font-weight: 700;
   line-height: 120%;
@@ -3279,9 +3279,9 @@ header .header-buttons a:hover {
 }
 
 @media (min-width:0px) and (max-width: 600px) {
-.hero-slide-content img{
-  height: 210px;
-}
+  .hero-slide-content img {
+    height: 210px;
+  }
 }
 
 @media (max-width: 992px) {
@@ -3409,7 +3409,7 @@ header .header-buttons a:hover {
   color: #FAFAFA;
   padding: 6px 12px;
   border-radius: 24px;
-  font-family: "NEARING";
+  font-family: "Plus Jakarta Sans";
 }
 
 .product-block .image-box .shopping-btns {
@@ -3500,7 +3500,7 @@ header .header-buttons a:hover {
   background-color: var(--color-primary);
   border-radius: 24px;
   color: #0C0C0D;
-  font-family: "NEARING";
+  font-family: "Plus Jakarta Sans";
   font-size: clamp(15px, 0.833vw, 22px);
   font-weight: 500;
   line-height: 120%;
@@ -3741,7 +3741,7 @@ header .header-buttons a:hover {
   background-color: var(--color-primary);
   border-radius: 24px;
   color: #0C0C0D;
-  font-family: "NEARING";
+  font-family: "Plus Jakarta Sans";
   font-size: clamp(15px, 0.833vw, 32px);
   font-weight: 500;
   line-height: 120%;
@@ -5597,6 +5597,7 @@ footer .footer-bottom-bar .payment-cards .card-block img {
 
 /* Header Responsive Fixes */
 @media (max-width: 1199px) {
+
   header,
   header .header-section,
   header .header-bottom-area,
