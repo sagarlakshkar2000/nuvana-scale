@@ -102,45 +102,45 @@
 
           <!-- Specifications Card -->
           <!-- <div class="card shadow-sm mb-4 border-0 rounded-3">
-                                                                                          <div class="card-header bg-white border-0 py-3 px-4 d-flex justify-content-between align-items-center">
-                                                                                            <h5 class="mb-0 fw-semibold">
-                                                                                              <i class="fas fa-list-ul me-2 text-primary"></i>Specifications
-                                                                                            </h5>
-                                                                                            <button type="button" class="btn btn-primary btn-sm px-3" id="addSpecBtn">
-                                                                                              <i class="fas fa-plus me-1"></i> Add Specification
-                                                                                            </button>
-                                                                                          </div>
-                                                                                          <div class="card-body px-4 pb-4">
-                                                                                            <div id="specificationsContainer">
-                                                                                              @if(old('specifications'))
-                                                                                                @foreach(old('specifications') as $index => $spec)
-                                                                                                  <div class="spec-row row g-2 mb-3">
-                                                                                                    <div class="col-md-5">
-                                                                                                      <input type="text" class="form-control" name="specifications[{{ $index }}][key]"
-                                                                                                        value="{{ $spec['key'] }}" placeholder="Property name (e.g., Brand)">
-                                                                                                    </div>
-                                                                                                    <div class="col-md-6">
-                                                                                                      <input type="text" class="form-control" name="specifications[{{ $index }}][value]"
-                                                                                                        value="{{ $spec['value'] }}" placeholder="Value (e.g., Apple)">
-                                                                                                    </div>
-                                                                                                    <div class="col-md-1">
-                                                                                                      <button type="button" class="btn btn-danger btn-sm removeSpecBtn w-100">
-                                                                                                        <i class="fas fa-trash"></i>
-                                                                                                      </button>
-                                                                                                    </div>
-                                                                                                  </div>
-                                                                                                @endforeach
-                                                                                              @endif
-                                                                                            </div>
+                                                                                                                                              <div class="card-header bg-white border-0 py-3 px-4 d-flex justify-content-between align-items-center">
+                                                                                                                                                <h5 class="mb-0 fw-semibold">
+                                                                                                                                                  <i class="fas fa-list-ul me-2 text-primary"></i>Specifications
+                                                                                                                                                </h5>
+                                                                                                                                                <button type="button" class="btn btn-primary btn-sm px-3" id="addSpecBtn">
+                                                                                                                                                  <i class="fas fa-plus me-1"></i> Add Specification
+                                                                                                                                                </button>
+                                                                                                                                              </div>
+                                                                                                                                              <div class="card-body px-4 pb-4">
+                                                                                                                                                <div id="specificationsContainer">
+                                                                                                                                                  @if(old('specifications'))
+                                                                                                                                                    @foreach(old('specifications') as $index => $spec)
+                                                                                                                                                      <div class="spec-row row g-2 mb-3">
+                                                                                                                                                        <div class="col-md-5">
+                                                                                                                                                          <input type="text" class="form-control" name="specifications[{{ $index }}][key]"
+                                                                                                                                                            value="{{ $spec['key'] }}" placeholder="Property name (e.g., Brand)">
+                                                                                                                                                        </div>
+                                                                                                                                                        <div class="col-md-6">
+                                                                                                                                                          <input type="text" class="form-control" name="specifications[{{ $index }}][value]"
+                                                                                                                                                            value="{{ $spec['value'] }}" placeholder="Value (e.g., Apple)">
+                                                                                                                                                        </div>
+                                                                                                                                                        <div class="col-md-1">
+                                                                                                                                                          <button type="button" class="btn btn-danger btn-sm removeSpecBtn w-100">
+                                                                                                                                                            <i class="fas fa-trash"></i>
+                                                                                                                                                          </button>
+                                                                                                                                                        </div>
+                                                                                                                                                      </div>
+                                                                                                                                                    @endforeach
+                                                                                                                                                  @endif
+                                                                                                                                                </div>
 
-                                                                                            <div id="noSpecMsg" class="text-center py-5 text-muted"
-                                                                                              style="{{ old('specifications') ? 'display: none;' : '' }}">
-                                                                                              <i class="fas fa-cube fa-3x mb-3 opacity-25"></i>
-                                                                                              <p>No specifications added yet</p>
-                                                                                              <small>Click the "Add Specification" button to start</small>
-                                                                                            </div>
-                                                                                          </div>
-                                                                                        </div> -->
+                                                                                                                                                <div id="noSpecMsg" class="text-center py-5 text-muted"
+                                                                                                                                                  style="{{ old('specifications') ? 'display: none;' : '' }}">
+                                                                                                                                                  <i class="fas fa-cube fa-3x mb-3 opacity-25"></i>
+                                                                                                                                                  <p>No specifications added yet</p>
+                                                                                                                                                  <small>Click the "Add Specification" button to start</small>
+                                                                                                                                                </div>
+                                                                                                                                              </div>
+                                                                                                                                            </div> -->
 
           <div class="card shadow-sm mb-4 border-0 rounded-3">
             <div class="card-header bg-white border-0 py-3 px-4 d-flex justify-content-between align-items-center">
@@ -161,13 +161,13 @@
                   @php
                     $predefinedSpecs = [
                       'Brand' => '',
-                      'Model' => '',
-                      'Color' => '',
-                      'Size' => '',
-                      'Material' => '',
-                      'Weight' => '',
-                      'Warranty' => '',
-                      'Country of Origin' => '',
+                      'Capacity' => '',
+                      'Accuracy' => '',
+                      'Display' => '',
+                      'Multiple Units' => '',
+                      'Pan Size' => '',
+                      'Power Supply' => '',
+                      'Battery Backup' => '',
                     ];
                   @endphp
 
@@ -330,19 +330,19 @@
             const col = document.createElement('div');
             col.className = 'col-md-2 col-4 mb-3 image-preview-item';
             col.innerHTML = `
-                                                                          <div class="position-relative">
-                                                                              <img src="${e.target.result}" class="img-fluid rounded-3 border shadow-sm"
-                                                                                   style="height: 140px; width: 100%; object-fit: cover;">
-                                                                              <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2 rounded-circle"
-                                                                                      onclick="window.removeImage(${index})"
-                                                                                      style="width: 32px; height: 32px; padding: 0;">
-                                                                                  <i class="fas fa-times"></i>
-                                                                              </button>
-                                                                              ${index === 0 ?
+                                                                                                                              <div class="position-relative">
+                                                                                                                                  <img src="${e.target.result}" class="img-fluid rounded-3 border shadow-sm"
+                                                                                                                                       style="height: 140px; width: 100%; object-fit: cover;">
+                                                                                                                                  <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2 rounded-circle"
+                                                                                                                                          onclick="window.removeImage(${index})"
+                                                                                                                                          style="width: 32px; height: 32px; padding: 0;">
+                                                                                                                                      <i class="fas fa-times"></i>
+                                                                                                                                  </button>
+                                                                                                                                  ${index === 0 ?
                 '<span class="position-absolute bottom-0 start-0 bg-primary text-white px-3 py-1 small m-2 rounded-pill">' +
                 '<i class="fas fa-star me-1"></i>Main Image</span>' : ''}
-                                                                          </div>
-                                                                      `;
+                                                                                                                              </div>
+                                                                                                                          `;
             imagePreview.appendChild(col);
           };
           reader.readAsDataURL(file);
@@ -374,22 +374,22 @@
           const specRow = document.createElement('div');
           specRow.className = 'spec-row row g-2 mb-3';
           specRow.innerHTML = `
-                                                                      <div class="col-md-5">
-                                                                          <input type="text" class="form-control"
-                                                                                 name="specifications[${specCounter}][key]"
-                                                                                 placeholder="Property name (e.g., Battery Life)">
-                                                                      </div>
-                                                                      <div class="col-md-6">
-                                                                          <input type="text" class="form-control"
-                                                                                 name="specifications[${specCounter}][value]"
-                                                                                 placeholder="Value (e.g., 24 hours)">
-                                                                      </div>
-                                                                      <div class="col-md-1">
-                                                                          <button type="button" class="btn btn-danger btn-sm removeSpecBtn w-100">
-                                                                              <i class="fas fa-trash"></i>
-                                                                          </button>
-                                                                      </div>
-                                                                  `;
+                                                                                                                          <div class="col-md-5">
+                                                                                                                              <input type="text" class="form-control"
+                                                                                                                                     name="specifications[${specCounter}][key]"
+                                                                                                                                     placeholder="Property name (e.g., Battery Life)">
+                                                                                                                          </div>
+                                                                                                                          <div class="col-md-6">
+                                                                                                                              <input type="text" class="form-control"
+                                                                                                                                     name="specifications[${specCounter}][value]"
+                                                                                                                                     placeholder="Value (e.g., 24 hours)">
+                                                                                                                          </div>
+                                                                                                                          <div class="col-md-1">
+                                                                                                                              <button type="button" class="btn btn-danger btn-sm removeSpecBtn w-100">
+                                                                                                                                  <i class="fas fa-trash"></i>
+                                                                                                                              </button>
+                                                                                                                          </div>
+                                                                                                                      `;
           container.appendChild(specRow);
           if (noSpecMsg) noSpecMsg.style.display = 'none';
           specRow.style.animation = 'fadeIn 0.3s ease-in';
@@ -447,22 +447,22 @@
       // ========== ANIMATIONS ==========
       const style = document.createElement('style');
       style.textContent = `
-                                                              @keyframes fadeIn {
-                                                                  from { opacity: 0; transform: scale(0.95); }
-                                                                  to { opacity: 1; transform: scale(1); }
-                                                              }
-                                                              @keyframes fadeOut {
-                                                                  from { opacity: 1; transform: scale(1); }
-                                                                  to { opacity: 0; transform: scale(0.95); }
-                                                              }
-                                                              .spec-row {
-                                                                  animation: fadeIn 0.3s ease-in;
-                                                              }
-                                                              .upload-area.drag-over {
-                                                                  background-color: #cfe2ff !important;
-                                                                  border-color: #0d6efd !important;
-                                                              }
-                                                          `;
+                                                                                                                  @keyframes fadeIn {
+                                                                                                                      from { opacity: 0; transform: scale(0.95); }
+                                                                                                                      to { opacity: 1; transform: scale(1); }
+                                                                                                                  }
+                                                                                                                  @keyframes fadeOut {
+                                                                                                                      from { opacity: 1; transform: scale(1); }
+                                                                                                                      to { opacity: 0; transform: scale(0.95); }
+                                                                                                                  }
+                                                                                                                  .spec-row {
+                                                                                                                      animation: fadeIn 0.3s ease-in;
+                                                                                                                  }
+                                                                                                                  .upload-area.drag-over {
+                                                                                                                      background-color: #cfe2ff !important;
+                                                                                                                      border-color: #0d6efd !important;
+                                                                                                                  }
+                                                                                                              `;
       document.head.appendChild(style);
     });
   </script>

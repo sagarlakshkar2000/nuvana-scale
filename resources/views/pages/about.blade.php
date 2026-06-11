@@ -34,7 +34,7 @@
         </div>
         <div class="col-xl-6">
           <div class="about-image-container">
-            <img src="assets/media/about/about-image-1.png" alt="" class="w-100 br-10">
+            <img src="assets/media/about/about-image-1.jpeg" alt="" class="w-100 br-10">
           </div>
         </div>
       </div>
@@ -212,7 +212,7 @@
               industries, and households
               with precision and performance.</p>
             <div class="divider my-4"></div>
-            <h4 class="fw-bold mb-0">ccurate Weighing. Trusted Quality. Reliable Performance.</h4>
+            <h4 class="fw-bold mb-0">Accurate Weighing. Trusted Quality. Reliable Performance.</h4>
           </div>
         </div>
       </div>

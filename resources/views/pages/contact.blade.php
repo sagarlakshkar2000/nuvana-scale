@@ -79,7 +79,7 @@
                 </div>
                 <div>
                   <h5 class="fw-600 mb-2" style="color: #212529;">Working Hours</h5>
-                  <p class="mb-1 text-muted">Monday – Saturday: 9:00 AM – 7:00 PM</p>
+                  <p class="mb-1 text-muted">Monday – Saturday: 9:00 AM – 6:00 PM</p>
                   <p class="mb-0 text-danger fw-500">Sunday: Closed</p>
                 </div>
               </div>
