@@ -400,6 +400,8 @@
 
   <x-why-choose-us />
 
+  <h1 class="text-center py-40">Hello TEST</h1>
+
   <!-- TRENDING PRODUCTS START -->
   <section class="newest-section py-40">
     <div class="container-fluid">
