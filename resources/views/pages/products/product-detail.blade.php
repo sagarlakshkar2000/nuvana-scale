@@ -5,7 +5,7 @@
   <!-- TITLE BANNER START -->
   <section class="title-banner">
     <div class="container">
-      <h2 class="white fw-600 text-center">{{ $product['title'] }}</h2>
+      <h2 class="white fw-600 text-center">{{ $product['name'] }}</h2>
     </div>
   </section>
   <!-- TITLE BANNER END -->
@@ -19,18 +19,18 @@
             <div class="product-image-container">
               <!-- Thumbnail Navigation -->
               <div class="product-slider-asnav">
-                @foreach($product['additional_images'] as $index => $img)
+                @foreach($product->images as $index => $img)
                   <div class="nav-image" data-slide-index="{{ $index }}">
-                    <img src="{{ $img }}" alt="{{ $product['title'] }}" class="img-fluid rounded-3">
+                    <img src="{{ asset('storage/' . $img->image_url) }}" class="img-fluid rounded-3">
                   </div>
                 @endforeach
               </div>
 
               <!-- Main Slider -->
               <div class="product-detail-slider">
-                @foreach($product['additional_images'] as $img)
+                @foreach($product->images as $img)
                   <div class="detail-image p-2">
-                    <img src="{{ $img }}" alt="{{ $product['title'] }}" class="img-fluid w-100 rounded-3">
+                    <img src="{{ asset('storage/' . $img->image_url) }}" class="img-fluid w-100 rounded-3">
                   </div>
                 @endforeach
               </div>
@@ -39,14 +39,14 @@
 
           <div class="col-xl-6">
             <div class="product-text-container product-text-page">
-              <p class="eyebrow mb-12">{{ $product['category'] }}
+              <p class="eyebrow mb-12">
+                {{ $product->category->name ?? '' }}
 
-                <!-- Feature/Badge -->
-                @if(!empty($product['badge']))
-                  <span class="badge bg-primary text-white px-3 py-2">{{ $product['badge'] }}</span>
+                @if(!empty($product->badge))
+                  <span class="badge bg-primary">{{ $product->badge }}</span>
                 @endif
               </p>
-              <h3 class="black fw-700 mb-12">{{ $product['title'] }}</h3>
+              <h3 class="black fw-700 mb-12">{{ $product['name'] }}</h3>
 
               <!-- SKU -->
               <div class="mb-12" style="display: flex; align-items: center; gap: 10px;">
@@ -58,12 +58,14 @@
               @if(!empty($product['specifications']))
                 <h6 class="fw-600 black mb-12">Specifications :</h6>
                 <div class="specifications-table mb-24">
-                  <table class="table table-bordered">
+                  <table class="table table-bordered mb-3">
                     <tbody>
-                      @foreach($product['specifications'] as $key => $value)
+                      @foreach($groupedSpecs as $spec)
                         <tr>
-                          <td class="bg-lightest-gray fw-600" style="width: 40%;">{{ $key }}</td>
-                          <td>{{ $value }}</td>
+                          <td class="bg-lightest-gray fw-600" style="width: 40%;">
+                            {{ $spec->key }}
+                          </td>
+                          <td>{{ $spec->value }}</td>
                         </tr>
                       @endforeach
                     </tbody>
@@ -83,6 +85,9 @@
                     style="background: #25D366; border-color: #25D366; color: #fff;">
                     <i class="fa-brands fa-whatsapp me-2"></i> Enquiry on WhatsApp
                   </a>
+
+
+
                 </div>
               </div>
             </div>

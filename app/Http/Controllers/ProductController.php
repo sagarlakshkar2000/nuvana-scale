@@ -267,11 +267,18 @@ class ProductController extends Controller
       ->where('slug', $slug)
       ->firstOrFail();
 
-    $related_products = Product::where('category_id', $product->category_id)
+    $related_products = Product::with(['images', 'category'])
+      ->where('category_id', $product->category_id)
       ->where('id', '!=', $product->id)
       ->take(8)
       ->get();
 
-    return view('pages.products.product-detail', compact('product', 'related_products'));
+    $groupedSpecs = $product->specifications;
+
+    return view('pages.products.product-detail', compact(
+      'product',
+      'related_products',
+      'groupedSpecs'
+    ));
   }
 }
