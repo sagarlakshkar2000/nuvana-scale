@@ -41,7 +41,6 @@
 @endpush
 
 @section('content')
-
   <!-- TITLE BANNER START -->
   <section class="title-banner">
     <div class="container">
@@ -217,13 +216,16 @@
               <div class="col-xl-4 col-lg-6 col-sm-6">
                 <div class="product-block">
                   <div class="image-box mb-16">
-                    <img src="{{ $product->images->first() ? asset('storage/' . $product->images->first()->image_url) : '' }}" alt="{{ $product->name }}" loading="lazy">
+                    <img
+                      src="{{ $product->images->first() ? asset('storage/' . $product->images->first()->image_url) : asset('images/default.jpg') }}"
+                      alt="{{ $product->name }}" loading="lazy">
+
                     @if(!empty($product['badge']))
                       <div class="sale-label subtitle">{{ $product['badge'] }}</div>
                     @endif
                   </div>
                   <div class="content-box">
-                    <p class="eyebrow mb-12">{{ $product['category'] }}</p>
+                    <p class="eyebrow mb-12">{{ $product->category->name ?? '' }}</p>
                     <a href="{{ route('product-detail', ['slug' => $product['slug']]) }}"
                       class="product-title h6 fw-500 mb-12">{{ $product->name }}</a>
 

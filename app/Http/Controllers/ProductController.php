@@ -14,7 +14,7 @@ class ProductController extends Controller
     return Product::with(['category', 'images', 'specifications'])->get();
   }
 
-  private function applyFilters($products, Request $request)
+  private function applyFilters(Request $request)
   {
     $query = Product::query()->with(['category', 'images']);
 
@@ -71,7 +71,7 @@ class ProductController extends Controller
 
   public function index(Request $request)
   {
-    $query = $this->applyFilters(null, $request);
+    $query = $this->applyFilters($request);
     $query = $this->applySorting($query, $request->input('sort_by', 'featured'));
 
     $products = $query->paginate(9);
@@ -116,6 +116,7 @@ class ProductController extends Controller
       'start_count' => $products->firstItem(),
       'end_count' => $products->lastItem(),
       'sort_options' => $sort_options,
+      'selected_categories' => (array) $request->category,
     ]);
   }
 
@@ -244,19 +245,18 @@ class ProductController extends Controller
    */
   public function filterProducts(Request $request)
   {
-    $products = collect($this->getAllProducts());
-
-    // Apply all filters and optional sorting
-    $filtered = $this->applyFilters($products, $request);
+    $query = $this->applyFilters($request);
 
     if ($request->has('sort_by')) {
-      $filtered = $this->applySorting($filtered, $request->sort_by);
+      $query = $this->applySorting($query, $request->sort_by);
     }
+
+    $products = $query->get();
 
     return response()->json([
       'success' => true,
-      'count' => $filtered->count(),
-      'products' => $filtered->values()
+      'count' => $products->count(),
+      'products' => $products
     ]);
   }
 

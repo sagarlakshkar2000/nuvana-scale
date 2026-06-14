@@ -58,6 +58,7 @@ class ProductController extends Controller
       $validated = $request->validate([
         'name' => 'required|string|max:255',
         'category_id' => 'required|exists:categories,id',
+        'slug' => 'required|string',
         'sku' => 'nullable|string|unique:products,sku',
         'description' => 'nullable|string',
         'badge' => 'nullable|string',
@@ -73,9 +74,6 @@ class ProductController extends Controller
       if (empty($sku)) {
         $sku = 'NUV-' . strtoupper(\Illuminate\Support\Str::random(6));
       }
-
-      // Generate unique slug
-      $slug = \Illuminate\Support\Str::slug($request->name) . '-' . time();
 
       // Merge predefined specs with custom specs
       $allSpecifications = [];
@@ -93,22 +91,36 @@ class ProductController extends Controller
       if ($request->has('specifications')) {
         foreach ($request->specifications as $spec) {
           if (!empty($spec['key']) && !empty($spec['value'])) {
-            $allSpecifications[$spec['key']] = $spec['value'];
+            $key = trim($spec['key']);
+            $value = trim($spec['value']);
+            $allSpecifications[$key] = $value;
           }
         }
       }
 
+
       // ✅ Create Product (matching your form fields)
       $product = Product::create([
-        'category_id' => $request->category_id,
-        'name' => $request->name,
-        'slug' => $slug,
+        'category_id' => $validated['category_id'],
+        'name' => $validated['name'],
+        'slug' => $validated['slug'],
         'sku' => $sku,
-        'description' => $request->description,
-        'badge' => $request->badge,
-        'is_active' => $request->status === 'active' ? 1 : 0,
-        'specifications' => !empty($allSpecifications) ? json_encode($allSpecifications) : null,
+        'description' => $validated['description'],
+        'badge' => $validated['badge'],
+        'is_active' => $validated['status'] === 'active' ? 1 : 0,
       ]);
+
+      if (!empty($allSpecifications)) {
+        foreach ($allSpecifications as $key => $value) {
+          ProductSpecification::create([
+            'product_id' => $product->id,
+            'key' => $key,
+            'value' => $value,
+            'group_name' => 'General', // optional
+            'is_predefined' => 1, // optional logic
+          ]);
+        }
+      }
 
       // ✅ Handle Images (multiple upload)
       if ($request->hasFile('images')) {
