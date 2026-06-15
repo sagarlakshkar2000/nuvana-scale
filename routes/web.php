@@ -6,6 +6,12 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\BlogController;
+use Illuminate\Support\Facades\Artisan;
+
+Route::get('/run-migrate', function () {
+  Artisan::call('migrate', ['--force' => true]);
+  return "Migration completed!";
+});
 
 /*
 |--------------------------------------------------------------------------
