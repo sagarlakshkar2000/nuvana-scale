@@ -122,8 +122,6 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\TrendingProductController;
 use App\Http\Controllers\Admin\SeoController;
 
-Route::get('/login', fn() => redirect()->route('admin.login'))->name('login');
-
 Route::prefix('admin')->name('admin.')->group(function () {
   // Auth Routes
   Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('login');

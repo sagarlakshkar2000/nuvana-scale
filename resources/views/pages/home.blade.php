@@ -38,249 +38,15 @@
   @endphp
 
   @php
-    $trending_products = [
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/products/3-904378_m.jpg?v=717',
-        'badge' => null,
-        'sku' => 'EQPF-04',
-        'slug' => 'equal-digital-heavy-duty-weighing-scale-with-5mt-weight-capacity',
-        'category' => 'Heavy Duty Scale',
-        'title' => 'Nuvana Digital Heavy Duty Weighing Scale With 5MT Weight Capacity',
-        'rating' => 5,
-        'reviews' => 92,
-        'old_price' => 93059.00,
-        'price' => 79100.00,
-        'in_stock' => true,
-        'feature' => '5 Metric Ton | Heavy Industrial Use',
-        'is_trending' => true
-      ],
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/products/1-922844_m.jpg?v=717',
-        'badge' => 'Best Seller',
-        'sku' => 'EDXP-11',
-        'slug' => 'equal-digital-platform-weighing-scale-with-10001250kg-weight-capacity',
-        'category' => 'Platform Scale',
-        'title' => 'Nuvana Digital Platform Weighing Scale With 1000/1250kg Weight Capacity',
-        'rating' => 5,
-        'reviews' => 156,
-        'old_price' => 47824.00,
-        'price' => 40650.00,
-        'in_stock' => true,
-        'feature' => 'Heavy Duty Platform | 1250kg Capacity',
-        'is_trending' => true
-      ],
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/products/1-200783_m.jpg?v=717',
-        'badge' => null,
-        'sku' => 'EDXP-10',
-        'slug' => 'equal-digital-platform-weighing-scale-with-500750kg-weight-capacity',
-        'category' => 'Platform Scale',
-        'title' => 'Nuvana Digital Platform Weighing Scale With 500/750kg Weight Capacity',
-        'rating' => 4,
-        'reviews' => 87,
-        'old_price' => 24389.00,
-        'price' => 21950.00,
-        'in_stock' => true,
-        'feature' => 'Medium Duty | 750kg Capacity',
-        'is_trending' => true
-      ],
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/products/img4558-349549_m.jpg?v=717',
-        'badge' => 'Trending',
-        'sku' => 'EDXP-09',
-        'slug' => 'equal-digital-platform-weighing-scale-with-200500kg-weight-capacity',
-        'category' => 'Platform Scale',
-        'title' => 'Nuvana Digital Platform Weighing Scale With 200/500kg Weight Capacity',
-        'rating' => 5,
-        'reviews' => 43,
-        'old_price' => 17118.00,
-        'price' => 14550.00,
-        'in_stock' => true,
-        'feature' => 'Industrial Platform | 500kg Capacity',
-        'is_trending' => true
-      ],
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/products/3-331556_m.jpg?v=717',
-        'badge' => 'Trending',
-        'sku' => 'EQPF-03',
-        'slug' => 'equal-digital-heavy-duty-weighing-scale-with-2mt3mt-weight-capacity',
-        'category' => 'Heavy Duty Scale',
-        'title' => 'Nuvana Digital Heavy Duty Weighing Scale With 2MT/3MT Weight Capacity',
-        'rating' => 5,
-        'reviews' => 71,
-        'old_price' => 81529.00,
-        'price' => 69300.00,
-        'in_stock' => true,
-        'feature' => '3 Metric Ton | Industrial Grade',
-        'is_trending' => false
-      ],
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/products/05-109436933755456_m.jpg?v=717',
-        'badge' => 'New',
-        'sku' => 'EJ-03',
-        'slug' => 'jewellery_01',
-        'category' => 'Jewellery Scale',
-        'title' => 'Nuvana Digital Jewellery Weighing Scale With 600g Weight Capacity',
-        'rating' => 5,
-        'reviews' => 128,
-        'old_price' => 8999.00,
-        'price' => 5999.00,
-        'in_stock' => true,
-        'feature' => 'Display Front & Back (With Windshield)',
-        'is_trending' => true
-      ],
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/products/3-569173_m.jpg?v=717',
-        'badge' => null,
-        'sku' => 'EQPF-05',
-        'slug' => 'equal-digital-heavy-duty-weighing-scale-with-10mt-weight-capacity',
-        'category' => 'Heavy Duty Scale',
-        'title' => 'Nuvana Digital Heavy Duty Weighing Scale With 10MT Weight Capacity',
-        'rating' => 5,
-        'reviews' => 64,
-        'old_price' => 126588.00,
-        'price' => 107600.00,
-        'in_stock' => true,
-        'feature' => 'Industrial Grade | 10 Metric Ton Capacity',
-        'is_trending' => true
-      ],
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/products/3-904378_m.jpg?v=717',
-        'badge' => null,
-        'sku' => 'EQPF-04',
-        'slug' => 'equal-digital-heavy-duty-weighing-scale-with-5mt-weight-capacity',
-        'category' => 'Heavy Duty Scale',
-        'title' => 'Nuvana Digital Heavy Duty Weighing Scale With 5MT Weight Capacity',
-        'rating' => 5,
-        'reviews' => 92,
-        'old_price' => 93059.00,
-        'price' => 79100.00,
-        'in_stock' => true,
-        'feature' => '5 Metric Ton | Heavy Industrial Use',
-        'is_trending' => true
-      ],
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/products/1-922844_m.jpg?v=717',
-        'badge' => 'Best Seller',
-        'sku' => 'EDXP-11',
-        'slug' => 'equal-digital-platform-weighing-scale-with-10001250kg-weight-capacity',
-        'category' => 'Platform Scale',
-        'title' => 'Nuvana Digital Platform Weighing Scale With 1000/1250kg Weight Capacity',
-        'rating' => 5,
-        'reviews' => 156,
-        'old_price' => 47824.00,
-        'price' => 40650.00,
-        'in_stock' => true,
-        'feature' => 'Heavy Duty Platform | 1250kg Capacity',
-        'is_trending' => true
-      ],
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/products/1-200783_m.jpg?v=717',
-        'badge' => null,
-        'sku' => 'EDXP-10',
-        'slug' => 'equal-digital-platform-weighing-scale-with-500750kg-weight-capacity',
-        'category' => 'Platform Scale',
-        'title' => 'Nuvana Digital Platform Weighing Scale With 500/750kg Weight Capacity',
-        'rating' => 4,
-        'reviews' => 87,
-        'old_price' => 24389.00,
-        'price' => 21950.00,
-        'in_stock' => true,
-        'feature' => 'Medium Duty | 750kg Capacity',
-        'is_trending' => true
-      ],
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/products/img4558-349549_m.jpg?v=717',
-        'badge' => 'Trending',
-        'sku' => 'EDXP-09',
-        'slug' => 'equal-digital-platform-weighing-scale-with-200500kg-weight-capacity',
-        'category' => 'Platform Scale',
-        'title' => 'Nuvana Digital Platform Weighing Scale With 200/500kg Weight Capacity',
-        'rating' => 5,
-        'reviews' => 43,
-        'old_price' => 17118.00,
-        'price' => 14550.00,
-        'in_stock' => true,
-        'feature' => 'Industrial Platform | 500kg Capacity',
-        'is_trending' => true
-      ],
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/products/3-331556_m.jpg?v=717',
-        'badge' => 'Trending',
-        'sku' => 'EQPF-03',
-        'slug' => 'equal-digital-heavy-duty-weighing-scale-with-2mt3mt-weight-capacity',
-        'category' => 'Heavy Duty Scale',
-        'title' => 'Nuvana Digital Heavy Duty Weighing Scale With 2MT/3MT Weight Capacity',
-        'rating' => 5,
-        'reviews' => 71,
-        'old_price' => 81529.00,
-        'price' => 69300.00,
-        'in_stock' => true,
-        'feature' => '3 Metric Ton | Industrial Grade',
-        'is_trending' => false
-      ],
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/products/3-954630_m.jpg?v=717',
-        'badge' => 'Trending',
-        'sku' => 'EQPF-02',
-        'slug' => 'equal-digital-heavy-duty-weighing-scale-with-1mt2mt-weight-capacity',
-        'category' => 'Heavy Duty Scale',
-        'title' => 'Nuvana Digital Heavy Duty Weighing Scale With 1MT/2MT Weight Capacity',
-        'rating' => 4,
-        'reviews' => 112,
-        'old_price' => 63294.00,
-        'price' => 53800.00,
-        'in_stock' => true,
-        'feature' => '2 Metric Ton | Commercial Use',
-        'is_trending' => true
-      ]
-    ];
-
-    // Filter only trending products
-    $trending_products = array_filter($trending_products, function ($product) {
-      return isset($product['is_trending']) && $product['is_trending'] === true;
-    });
-
     // Section configuration
     $section_config = [
       'title' => 'Trending Products',
       'subtitle' => 'Discover our most popular weighing solutions trusted by industries worldwide',
       'button_text' => 'View All Products',
-      'button_link' => '/categories/by-products',
+      'button_link' => '/products',
       'products_per_row' => 4,
       'show_rating' => true,
       'show_feature' => true
-    ];
-
-
-    $hero_slides = [
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/slideshows/01-1-163976569293646_l.jpg?v=717',
-        'title_line1' => 'Fuel Your Fitness',
-        'title_line2' => 'Premium Supplements!',
-        'description' => 'We are passionate about helping you achieve your fitness goals through the power of high-quality nutrition. Whether you\'re looking to build muscle, increase endurance, or enhance recovery...',
-        'button_text' => 'Shop Now',
-        'button_link' => 'shop-grid.html',
-        'alt_text' => 'Premium Supplements Banner'
-      ],
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/slideshows/01-1-163976569293646_l.jpg?v=717',
-        'title_line1' => 'Be Fit with Fuel Our',
-        'title_line2' => 'Premium Supplements!',
-        'description' => 'Transform your body with our scientifically formulated supplements. Backed by research and trusted by athletes worldwide for optimal performance and results.',
-        'button_text' => 'View Collection',
-        'button_link' => 'shop-grid.html',
-        'alt_text' => 'Fitness Supplements Banner'
-      ],
-      [
-        'image' => 'https://cdn.shopaccino.com/equalscale/slideshows/01-1-163976569293646_l.jpg?v=717',
-        'title_line1' => 'Your Fitness is your Strength',
-        'title_line2' => 'Premium Supplements!',
-        'description' => 'Achieve your peak performance with our premium range of supplements. From protein powders to pre-workouts, we have everything you need for your fitness journey.',
-        'button_text' => 'Explore Products',
-        'button_link' => 'shop-grid.html',
-        'alt_text' => 'Workout Supplements Banner'
-      ]
     ];
   @endphp
 
@@ -410,36 +176,51 @@
         </div>
         <a href="<?php echo $section_config['button_link']; ?>" class="cus-btn-arrow d-none d-sm-block">
           <?php echo $section_config['button_text']; ?>
-          <div class="icon">
+          <div class="icon d-inline-block">
             <i class="fa-light fa-chevron-right"></i>
           </div>
         </a>
       </div>
 
       <div class="row row-gap-3">
-        <?php foreach ($trending_products as $product): ?>
-        <div class="col-xl-3 col-lg-4 col-sm-6 col-6">
-          <div class="product-block">
-            <div class="image-box mb-16">
-              <img src="<?php  echo $product['image']; ?>" alt="<?php  echo $product['title']; ?>">
-              <?php  if (!empty($product['badge'])): ?>
-              <div class="sale-label subtitle"><?php    echo $product['badge']; ?></div>
-              <?php  endif; ?>
-            </div>
-            <div class="content-box">
-              <p class="eyebrow mb-12"><?php  echo $product['category']; ?></p>
-              <a href="/products/<?php  echo $product['slug']; ?>" class="product-title mb-12">
-                <?php  echo $product['title']; ?>
-              </a>
+        @forelse($trending_products as $product)
+          <div class="col-xl-3 col-lg-4 col-sm-6 col-6">
+            <div class="product-block">
+              <div class="image-box mb-16">
+                <img
+                  src="{{ $product->images->first() ? asset('storage/' . $product->images->first()->image_url) : asset('images/default.jpg') }}"
+                  alt="{{ $product->name }}" loading="lazy">
 
-              <?php  if ($section_config['show_feature'] && !empty($product['feature'])): ?>
-              <p class="caption mb-8 dark-gray"><?php    echo $product['feature']; ?></p>
-              <?php  endif; ?>
+                @if(!empty($product['badge']))
+                  <div class="sale-label subtitle">{{ $product['badge'] }}</div>
+                @endif
+              </div>
+              <div class="content-box">
+                <p class="eyebrow mb-12">{{ $product->category->name ?? '' }}</p>
+                <a href="{{ route('product-detail', ['slug' => $product['slug']]) }}"
+                  class="product-title h6 fw-500 mb-12">{{ $product->name }}</a>
+
+                @if(!empty($product['feature']))
+                  <p class="caption mb-8 dark-gray">{{ $product['feature'] }}</p>
+                @endif
+              </div>
             </div>
           </div>
-        </div>
-        <?php endforeach; ?>
+        @empty
+          <div class="col-12 text-center py-5">
+            <div class="empty-state">
+              <i class="fa-light fa-box-open fa-4x mb-3 color-gray-400"></i>
+              <h5>No products found</h5>
+              <p class="dark-gray">Please try different filters or search terms.</p>
+              <button type="button" class="cus-btn-arrow mt-3" id="resetFiltersEmpty">
+                Reset All Filters
+              </button>
+            </div>
+          </div>
+        @endforelse
       </div>
+
+
     </div>
   </section>
   <!-- TRENDING PRODUCTS END -->
