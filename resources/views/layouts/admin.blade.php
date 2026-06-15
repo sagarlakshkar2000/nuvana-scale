@@ -1,31 +1,33 @@
-@auth
-  @if(auth()->user()->role === 'admin')
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>{{ $title ?? 'Nuvana' }}</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ $title ?? 'Nuvana' }}</title>
 
-      <!-- Favicon -->
-      <link rel="shortcut icon" type="image/x-icon" href="assets/media/favicon.png">
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="assets/media/favicon.png">
 
-      <!-- All CSS files -->
-      <link rel="stylesheet" href="{{ asset('assets/css/vendor/font-awesome.css') }}">
-      <link rel="stylesheet" href="{{ asset('assets/css/vendor/slick-theme.css') }}">
-      <link rel="stylesheet" href="{{ asset('assets/css/vendor/slick-slider.css') }}">
-      <link rel="stylesheet" href="{{ asset('assets/css/vendor/bootstrap.min.css') }}">
-      <link rel="stylesheet" href="{{ asset('assets/css/vendor/slick-animation.css') }}">
-      <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
-      <link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}">
+  <!-- All CSS files -->
+  <link rel="stylesheet" href="{{ asset('assets/css/vendor/font-awesome.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/vendor/slick-theme.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/vendor/slick-slider.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/vendor/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/vendor/slick-animation.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}">
 
-      <!-- Additional CSS for specific pages -->
-      @stack('styles')
-    </head>
+  <!-- Additional CSS for specific pages -->
+  @stack('styles')
+</head>
 
-    <body>
-      <div class="admin-layout">
+<body>
+  <div class="admin-layout">
+
+    @auth
+      @if(auth()->user()->role === 'admin')
+
         <!-- Mobile menu button -->
         <button class="mobile-menu-toggle" id="mobileMenuToggle">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -114,67 +116,68 @@
             </form>
           </div>
         </aside>
+      @else
+        @yield('content')
+      @endif
+    @else
+      @yield('content')
+    @endauth
 
-        <!-- Overlay for mobile -->
-        <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-        <!-- Main Content -->
-        <main class="main-content">
-          <header class="header">
-            <div class="header-left">
-              <h4 class="welcome-text">
-                Welcome back, <span>{{ auth()->user()->name }}</span>
-              </h4>
+    <!-- Overlay for mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="header">
+        <div class="header-left">
+          <h4 class="welcome-text">
+            Welcome back, <span>{{ auth()->user()->name }}</span>
+          </h4>
+        </div>
+        <div class="header-right">
+          <div class="user-dropdown">
+            <div class="user-avatar small">
+              {{ substr(auth()->user()->name, 0, 2) }}
             </div>
-            <div class="header-right">
-              <div class="user-dropdown">
-                <div class="user-avatar small">
-                  {{ substr(auth()->user()->name, 0, 2) }}
-                </div>
-                <div class="user-info">
-                  <strong>{{ auth()->user()->name }}</strong>
-                  <small>{{ auth()->user()->email }}</small>
-                </div>
-              </div>
-            </div>
-          </header>
-
-          <div class="content-wrapper">
-            <div class="container">
-              @if(session('success'))
-                <div class="alert alert-success">
-                  {{ session('success') }}
-                </div>
-              @endif
-
-              @if(session('error'))
-                <div class="alert alert-error">
-                  {{ session('error') }}
-                </div>
-              @endif
-
-              @yield('content')
+            <div class="user-info">
+              <strong>{{ auth()->user()->name }}</strong>
+              <small>{{ auth()->user()->email }}</small>
             </div>
           </div>
-        </main>
+        </div>
+      </header>
+
+      <div class="content-wrapper">
+        <div class="container">
+          @if(session('success'))
+            <div class="alert alert-success">
+              {{ session('success') }}
+            </div>
+          @endif
+
+          @if(session('error'))
+            <div class="alert alert-error">
+              {{ session('error') }}
+            </div>
+          @endif
+
+          @yield('content')
+        </div>
       </div>
+    </main>
+  </div>
 
-      <!-- Jquery Js -->
-      <script src="{{ asset('assets/js/vendor/jquery-3.6.3.min.js') }}"></script>
-      <script src="{{ asset('assets/js/vendor/bootstrap.min.js') }}"></script>
-      <script src="{{ asset('assets/js/vendor/slick.min.js') }}"></script>
-      <script src="{{ asset('assets/js/vendor/jquery.countdown.min.js') }}"></script>
-      <script src="{{ asset('assets/js/vendor/slickAnimation.js') }}"></script>
-      <script src="{{ asset('assets/js/app.js') }}"></script>
-      <script src="{{ asset('assets/js/admin.js') }}"></script>
+  <!-- Jquery Js -->
+  <script src="{{ asset('assets/js/vendor/jquery-3.6.3.min.js') }}"></script>
+  <script src="{{ asset('assets/js/vendor/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('assets/js/vendor/slick.min.js') }}"></script>
+  <script src="{{ asset('assets/js/vendor/jquery.countdown.min.js') }}"></script>
+  <script src="{{ asset('assets/js/vendor/slickAnimation.js') }}"></script>
+  <script src="{{ asset('assets/js/app.js') }}"></script>
+  <script src="{{ asset('assets/js/admin.js') }}"></script>
 
-      @stack('scripts')
-    </body>
+  @stack('scripts')
+</body>
 
-    </html>
-  @else
-    @yield('content')
-  @endif
-@else
-  @yield('content')
-@endauth
+</html>

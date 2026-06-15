@@ -72,12 +72,6 @@ Route::prefix('blog')->name('blog.')->group(function () {
 // 7. Company Route
 Route::get('/search', [CompanyController::class, 'index'])->name('search');
 
-
-// Fallback route for 404 (optional - catches all undefined routes)
-Route::fallback(function () {
-  return view('pages.404');
-})->name('fallback');
-
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -90,8 +84,6 @@ use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\TrendingProductController;
 use App\Http\Controllers\Admin\SeoController;
-
-Route::get('/login', fn() => redirect()->route('admin.login'))->name('login');
 
 Route::prefix('admin')->name('admin.')->group(function () {
   // Auth Routes
@@ -118,3 +110,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('seo', SeoController::class);
   });
 });
+
+Route::get('/login', fn() => redirect()->route('admin.login'))->name('login');
+
+// Fallback route for 404 (optional - catches all undefined routes)
+Route::fallback(function () {
+  return view('pages.404');
+})->name('fallback');
