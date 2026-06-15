@@ -5011,7 +5011,8 @@ footer .footer-bottom-bar .payment-cards .card-block img {
   pointer-events: none;
   width: 80%;
   border-radius: clamp(10px, 1.042vw, 32px);
-  background: #EAEAEC;
+  background: transparent !important;
+
 }
 
 @media (max-width: 1099px) {

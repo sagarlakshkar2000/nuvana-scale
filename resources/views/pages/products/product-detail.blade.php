@@ -15,29 +15,35 @@
     <div class="container-fluid">
       <div class="detail-wrapper">
         <div class="row row-gap-3">
-          <div class="col-xl-6">
-            <div class="product-image-container">
-              <!-- Thumbnail Navigation -->
-              <div class="product-slider-asnav">
-                @foreach($product->images as $index => $img)
-                  <div class="nav-image" data-slide-index="{{ $index }}">
-                    <img src="{{ asset('storage/' . $img->image_url) }}" class="img-fluid rounded-3">
-                  </div>
-                @endforeach
-              </div>
+          <div class="col-xl-6 col-lg-6 col-md-12">
+            <div id="lens"></div>
 
-              <!-- Main Slider -->
-              <div class="product-detail-slider">
-                @foreach($product->images as $img)
-                  <div class="detail-image p-2">
-                    <img src="{{ asset('storage/' . $img->image_url) }}" class="img-fluid w-100 rounded-3">
-                  </div>
-                @endforeach
-              </div>
+            <div id="slideshow-items-container">
+              @foreach($product->images as $img)
+                <img class="slideshow-items {{ $loop->first ? 'active' : '' }}"
+                  src="{{ asset('storage/' . $img->image_url) }}" alt="Product Image">
+              @endforeach
+            </div>
+
+            <div id="result"></div>
+
+            <!-- <div class="d-flex flex-row justify-content-evenly py-2 px-1 mt-2 border rounded-3">
+                                                                                                                                                                                                                                                                          @foreach($product->images as $img)
+                                                                                                                                                                                                                                                                            <img class="slideshow-thumbnails {{ $loop->first ? 'active' : '' }}"
+                                                                                                                                                                                                                                                                              src="{{ asset('storage/' . $img->image_url) }}" alt="Product Thumbnail">
+                                                                                                                                                                                                                                                                          @endforeach
+                                                                                                                                                                                                                                                                        </div> -->
+
+            <div class="thumbnail-wrapper">
+              @foreach($product->images as $img)
+                <img class="slideshow-thumbnails {{ $loop->first ? 'active' : '' }}"
+                  src="{{ asset('storage/' . $img->image_url) }}" alt="Product Thumbnail">
+              @endforeach
             </div>
           </div>
 
-          <div class="col-xl-6">
+          <!-- Content -->
+          <div class="col-xl-6 col-lg-6 col-md-12">
             <div class="product-text-container product-text-page">
               <p class="eyebrow mb-12">
                 {{ $product->category->name ?? '' }}
@@ -155,43 +161,134 @@
 
 @endsection
 
+@push('styles')
+  <style>
+    /* FIX FOR IMAGE OVERLAPPING ISSUE */
+    #slideshow-items-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    /* Main Image - FIXED */
+    .slideshow-items {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: none;
+      transition: opacity 0.3s ease;
+      background: #fff;
+    }
+
+    .slideshow-items.active {
+      display: block !important;
+    }
+
+    /* Thumbnail Wrapper */
+    .thumbnail-wrapper {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+      padding: 8px;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+
+    .thumbnail-wrapper::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .thumbnail-wrapper::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 10px;
+    }
+
+    /* Thumbnails */
+    .slideshow-thumbnails {
+      min-width: 70px;
+      height: 70px;
+      object-fit: contain;
+      cursor: pointer;
+      border-radius: 8px;
+      opacity: 0.7;
+      border: 2px solid #f1f1f1;
+      background: #fff;
+      padding: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .slideshow-thumbnails:hover {
+      opacity: 1;
+      transform: scale(1.08);
+    }
+
+    .slideshow-thumbnails.active {
+      opacity: 1;
+      border-color: #000;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-text-container {
+      padding-left: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .product-text-container {
+        padding-left: 0;
+        margin-top: 20px;
+      }
+    }
+
+    /* MOBILE FIX */
+    @media (max-width: 768px) {
+      #result {
+        display: none !important;
+      }
+
+      .slideshow-items.active {
+        cursor: pointer;
+      }
+    }
+  </style>
+@endpush
+
 @push('scripts')
   <script>
-    // Product image slider
     $(document).ready(function () {
-      // Initialize main slider
-      $('.product-detail-slider').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: true,
-        fade: true,
-        asNavFor: '.product-slider-asnav',
-        prevArrow: '<button type="button" class="slick-prev"><i class="fa-light fa-chevron-left"></i></button>',
-        nextArrow: '<button type="button" class="slick-next"><i class="fa-light fa-chevron-right"></i></button>'
+      const $container = $('#slideshow-items-container');
+      const $images = $('.slideshow-items');
+      const $thumbnails = $('.slideshow-thumbnails');
+
+      /* THUMBNAIL CLICK - CHANGE SLIDE */
+      $thumbnails.on('click', function () {
+        changeSlide($(this));
       });
 
-      // Initialize thumbnail slider
-      $('.product-slider-asnav').slick({
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        asNavFor: '.product-detail-slider',
-        dots: false,
-        centerMode: false,
-        focusOnSelect: true,
-        vertical: true,
-        verticalSwiping: true,
-        prevArrow: '<button type="button" class="slick-prev"><i class="fa-light fa-chevron-up"></i></button>',
-        nextArrow: '<button type="button" class="slick-next"><i class="fa-light fa-chevron-down"></i></button>',
-        responsive: [
-          {
-            breakpoint: 768,
-            settings: {
-              vertical: false,
-              slidesToShow: 3
-            }
-          }
-        ]
-      });
+      function changeSlide(elm) {
+        let index = elm.index();
+
+        $images.removeClass('active').eq(index).addClass('active');
+        $thumbnails.removeClass('active').eq(index).addClass('active');
+
+        scrollToActiveThumbnail();
+      }
+
+      /* SCROLL TO ACTIVE THUMBNAIL */
+      function scrollToActiveThumbnail() {
+        const container = document.querySelector('.thumbnail-wrapper');
+        const active = document.querySelector('.slideshow-thumbnails.active');
+
+        if (active && container) {
+          container.scrollLeft = active.offsetLeft - container.offsetWidth / 2 + active.offsetWidth / 2;
+        }
+      }
     });
   </script>
 @endpush
