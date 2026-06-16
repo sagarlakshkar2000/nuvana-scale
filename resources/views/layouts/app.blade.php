@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="{{ asset('assets/css/vendor/slick-slider.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/vendor/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/vendor/slick-animation.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}?v={{ filemtime(public_path('assets/css/app.css')) }}">
 
   <!-- Additional CSS for specific pages -->
   @stack('styles')
