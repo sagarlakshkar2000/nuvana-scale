@@ -134,32 +134,35 @@ class ProductController extends Controller
    */
   public function trending(Request $request)
   {
-    $products = collect($this->getAllProducts());
-    $trending_products = $products->where('is_trending', true)->values();
+    $query = $this->applyFilters($request);
+    
+    // If the database has an is_trending column, we use it. Otherwise, we can fallback to latest.
+    if (\Illuminate\Support\Facades\Schema::hasColumn('products', 'is_trending')) {
+      $query->where('is_trending', true);
+    } else {
+      $query->latest();
+    }
 
-    $per_page = 9;
-    $current_page = $request->input('page', 1);
-    $total_products = $trending_products->count();
-    $total_pages = ceil($total_products / $per_page);
-    $current_products = $trending_products->slice(($current_page - 1) * $per_page, $per_page)->values();
+    if ($request->has('sort_by')) {
+      $query = $this->applySorting($query, $request->input('sort_by', 'featured'));
+    }
 
-    $start_count = $total_products > 0 ? (($current_page - 1) * $per_page) + 1 : 0;
-    $end_count = min($current_page * $per_page, $total_products);
+    $products = $query->paginate(9);
 
-    // Get all categories for sidebar
-    $category_counts = $products->groupBy('category')->map(function ($items) {
-      return $items->count();
-    })->toArray();
+    // Categories with count
+    $categories = \App\Models\Category::withCount('products')->get()
+      ->map(fn($cat) => [
+        'name' => $cat->name,
+        'count' => $cat->products_count
+      ]);
 
-    $categories = collect($category_counts)->map(function ($count, $name) {
-      return ['name' => $name, 'count' => $count];
-    })->values()->toArray();
+    // Stock counts
+    $in_stock_count = Product::where('stock_status', 'in_stock')->count();
+    $out_of_stock_count = Product::where('stock_status', 'out_of_stock')->count();
 
-    $in_stock_count = $products->where('in_stock', true)->count();
-    $out_of_stock_count = $products->where('in_stock', false)->count();
-    $all_prices = $products->pluck('price');
-    $min_price_range = $all_prices->min();
-    $max_price_range = $all_prices->max();
+    // Price range
+    $min_price_range = Product::min('price') ?? 0;
+    $max_price_range = Product::max('price') ?? 0;
 
     $sort_options = [
       ['value' => 'featured', 'label' => 'Featured'],
@@ -170,20 +173,22 @@ class ProductController extends Controller
       ['value' => 'rating_desc', 'label' => 'Top Rated']
     ];
 
-    return view('pages.products.index', compact(
-      'current_products',
-      'categories',
-      'in_stock_count',
-      'out_of_stock_count',
-      'min_price_range',
-      'max_price_range',
-      'sort_options',
-      'start_count',
-      'end_count',
-      'total_products',
-      'current_page',
-      'total_pages'
-    ));
+    return view('pages.products.index', [
+      'current_products' => $products->items(),
+      'categories' => $categories,
+      'in_stock_count' => $in_stock_count,
+      'out_of_stock_count' => $out_of_stock_count,
+      'min_price_range' => $min_price_range,
+      'max_price_range' => $max_price_range,
+      'sort_by' => $request->sort_by,
+      'current_page' => $products->currentPage(),
+      'total_pages' => $products->lastPage(),
+      'total_products' => $products->total(),
+      'start_count' => $products->firstItem() ?? 0,
+      'end_count' => $products->lastItem() ?? 0,
+      'sort_options' => $sort_options,
+      'selected_categories' => (array) $request->category,
+    ]);
   }
 
   /**

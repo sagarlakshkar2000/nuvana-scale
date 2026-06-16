@@ -8,9 +8,12 @@ class HomeController extends Controller
 {
   private function getTrendingProducts()
   {
-    $trending_products = Product::with(['category', 'images', 'specifications'])->get();
-
-    return $trending_products;
+    return \Illuminate\Support\Facades\Cache::remember('home_trending_products', 3600, function () {
+      return Product::with(['category', 'images', 'specifications'])
+        ->latest()
+        ->take(8)
+        ->get();
+    });
   }
 
   private function getSliders()
