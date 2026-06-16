@@ -46,7 +46,7 @@ class CreateAdminCommand extends Command
         'name' => $data['name'],
         'email' => $data['email'],
         'username' => $data['username'],
-        'password' => Hash::make($data['password']), // safe if model not using 'hashed'
+        'password' => Hash::make($data['password']),
         'role' => 'admin',
       ]);
 
