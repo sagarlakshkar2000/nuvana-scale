@@ -3339,6 +3339,8 @@ header .header-buttons a:hover {
   margin-left: auto;
   margin-right: auto;
   width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
 }
 
 .product-block .image-box .sale-label {
