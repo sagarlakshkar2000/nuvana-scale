@@ -13,12 +13,13 @@
   <!-- TITLE BANNER END -->
 
   <!-- ABOUT SECTION START -->
-  <section class="about-section py-40">
+  <section class="about-section py-40" data-aos="fade-in" data-aos-duration="1000">
     <div class="container-fluid">
       <div class="row align-items-center row-gap-4">
-        <div class="col-xl-6">
+        <div class="col-xl-6" data-aos="fade-right">
           <div class="about-content">
-            <h2 class="mb-16 fw-600 black">Trusted Digital Weighing Scale Manufacturer & Supplier</h2>
+            <h2 class="mb-16 fw-600 black">Trusted Digital Weighing Scale
+              Manufacturer & Supplier</h2>
             <p class="mb-12"><strong>Gargi Industries</strong> is a trusted name in the field of <strong>weighing
                 scale</strong> solutions,
               delivering
@@ -32,9 +33,10 @@
               essential.</p>
           </div>
         </div>
-        <div class="col-xl-6">
-          <div class="about-image-container">
-            <img src="assets/media/about/about-image-1.jpeg" alt="" class="w-100 br-10">
+        <div class="col-xl-6" data-aos="fade-left">
+          <div class="about-image-container position-relative">
+            <img src="{{ asset('assets/media/about/about-image-1.jpeg') }}" alt=""
+              class="w-100 br-10 position-relative z-1" style="box-shadow: 0 30px 60px rgba(0,0,0,0.15);">
           </div>
         </div>
       </div>
@@ -43,66 +45,74 @@
   <!-- ABOUT SECTION END -->
 
   <!-- Product Range Section -->
-  <section class="product-range-section py-5">
+  <section class="product-range-section py-5" data-aos="fade-up">
     <div class="container">
-      <div class="text-center mb-5">
-        <h2 class="display-6 fw-bold mb-3">Our Product Range</h2>
-        <p class="lead text-muted">We offer a complete range of digital weighing solutions, including</p>
+      <div class="text-center mb-5 position-relative">
+        <div class="d-inline-block position-relative mb-2">
+          <h2 class="display-6 fw-bold mb-0 position-relative z-1">Our Product Range</h2>
+          <svg class="position-absolute z-0"
+            style="bottom: 0px; left: 0; width: 100%; height: 12px; pointer-events: none;" viewBox="0 0 100 12"
+            preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 9.5C25 -1.83333 75 -3.1 98 9.5" stroke="var(--color-secondary)" stroke-width="4"
+              stroke-linecap="round" fill="none" opacity="0.5" />
+          </svg>
+        </div>
+        <p class="lead text-muted mt-3">We offer a complete range of digital weighing solutions, including</p>
       </div>
 
       <div class="row g-4">
-        <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="0">
           <div class="product-card text-center p-4 h-100">
             <div class="icon-box mb-3">
-              <i class="fas fa-utensils fa-2x text-dark"></i>
+              <i class="fas fa-utensils fa-2x" style="color: var(--color-primary);"></i>
             </div>
             <h5 class="fw-bold mb-0">Digital Kitchen Weighing Scales</h5>
           </div>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="100">
           <div class="product-card text-center p-4 h-100">
             <div class="icon-box mb-3">
-              <i class="fas fa-weight-hanging fa-2x text-dark"></i>
+              <i class="fas fa-weight-hanging fa-2x" style="color: var(--color-primary);"></i>
             </div>
             <h5 class="fw-bold mb-0">Platform Weighing Machines</h5>
           </div>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="200">
           <div class="product-card text-center p-4 h-100">
             <div class="icon-box mb-3">
-              <i class="fas fa-cash-register fa-2x text-dark"></i>
+              <i class="fas fa-cash-register fa-2x" style="color: var(--color-primary);"></i>
             </div>
             <h5 class="fw-bold mb-0"> Counter Weighing Scales</h5>
           </div>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="300">
           <div class="product-card text-center p-4 h-100">
             <div class="icon-box mb-3">
-              <i class="fas fa-chart-line fa-2x text-dark"></i>
+              <i class="fas fa-chart-line fa-2x" style="color: var(--color-primary);"></i>
             </div>
             <h5 class="fw-bold mb-0">Commercial Weighing Scales</h5>
           </div>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="400">
           <div class="product-card text-center p-4 h-100">
             <div class="icon-box mb-3">
-              <i class="fas fa-industry fa-2x text-dark"></i>
+              <i class="fas fa-industry fa-2x" style="color: var(--color-primary);"></i>
             </div>
             <h5 class="fw-bold mb-0">Industrial Weighing Machines</h5>
           </div>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="500">
           <div class="product-card text-center p-4 h-100">
             <div class="icon-box mb-3">
-              <i class="fas fa-table fa-2x text-dark"></i>
+              <i class="fas fa-table fa-2x" style="color: var(--color-primary);"></i>
             </div>
             <h5 class="fw-bold mb-0">Table Top Weighing Scales</h5>
           </div>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="600">
           <div class="product-card text-center p-4 h-100">
             <div class="icon-box mb-3">
-              <i class="fas fa-truck fa-2x text-dark"></i>
+              <i class="fas fa-truck fa-2x" style="color: var(--color-primary);"></i>
             </div>
             <h5 class="fw-bold mb-0"> Heavy Duty Weighing Systems</h5>
           </div>
@@ -119,12 +129,12 @@
   </section>
 
   <!-- Mission Section -->
-  <section class="mission-section py-5 bg-light">
+  <section class="mission-section py-5 bg-light" data-aos="fade-up">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-10 text-center">
-          <div class="mission-card p-5">
-            <i class="fas fa-bullseye fa-3x text-dark mb-4"></i>
+          <div class="mission-card p-5" style="border-left: 5px solid #000000; box-shadow: 0 10px 40px rgba(0,0,0,0.05);">
+            <i class="fas fa-bullseye fa-3x mb-4" style="color: #000000;"></i>
             <h2 class="display-6 fw-bold mb-4">Our Mission</h2>
             <p class="lead mb-0">Our mission is to provide innovative, durable, and high-performance weighing solutions
               that help businesses and customers achieve accurate measurements with confidence and efficiency.</p>
@@ -137,25 +147,33 @@
   <!-- Why Choose Us Section -->
   <section class="why-choose-section py-5">
     <div class="container">
-      <div class="text-center mb-5">
-        <h2 class="display-6 fw-bold mb-3">Why Choose Gargi Industries?</h2>
+      <div class="text-center mb-5 position-relative" data-aos="fade-up">
+        <div class="d-inline-block position-relative mb-2">
+          <h2 class="display-6 fw-bold mb-0 position-relative z-1">Why Choose Gargi Industries?</h2>
+          <svg class="position-absolute z-0"
+            style="bottom: 0px; left: 0; width: 100%; height: 12px; pointer-events: none;" viewBox="0 0 100 12"
+            preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 9.5C25 -1.83333 75 -3.1 98 9.5" stroke="var(--color-secondary)" stroke-width="4"
+              stroke-linecap="round" fill="none" opacity="0.5" />
+          </svg>
+        </div>
       </div>
 
       <div class="row g-4">
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="0">
           <div class="feature-card p-4 h-100">
             <div class="feature-icon mb-3">
-              <i class="fas fa-trophy fa-2x text-dark"></i>
+              <i class="fas fa-trophy fa-2x" style="color: var(--color-secondary);"></i>
             </div>
             <h4 class="fw-bold mb-3">High Quality Products</h4>
             <p class="text-muted mb-0">We use premium components and advanced manufacturing techniques to ensure every
               weighing machine meets high industry standards.</p>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
           <div class="feature-card p-4 h-100">
             <div class="feature-icon mb-3">
-              <i class="fas fa-chart-line fa-2x text-dark"></i>
+              <i class="fas fa-chart-line fa-2x" style="color: var(--color-secondary);"></i>
             </div>
             <h4 class="fw-bold mb-3">Precision & Accuracy</h4>
             <p class="text-muted mb-0">Our digital weighing scales are designed to provide precise and reliable
@@ -163,30 +181,30 @@
               industrial use.</p>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
           <div class="feature-card p-4 h-100">
             <div class="feature-icon mb-3">
-              <i class="fas fa-globe fa-2x text-dark"></i>
+              <i class="fas fa-globe fa-2x" style="color: var(--color-secondary);"></i>
             </div>
             <h4 class="fw-bold mb-3">Wide Market Reach</h4>
             <p class="text-muted mb-0">We proudly supply our products across India and also serve international clients
               with dependable weighing solutions.</p>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
           <div class="feature-card p-4 h-100">
             <div class="feature-icon mb-3">
-              <i class="fas fa-smile fa-2x text-dark"></i>
+              <i class="fas fa-smile fa-2x" style="color: var(--color-secondary);"></i>
             </div>
             <h4 class="fw-bold mb-3">Customer Satisfaction</h4>
             <p class="text-muted mb-0">Customer trust and satisfaction are the foundation of our business. We focus on
               delivering quality products, timely service, and long-term support.</p>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
           <div class="feature-card p-4 h-100">
             <div class="feature-icon mb-3">
-              <i class="fas fa-microchip fa-2x text-dark"></i>
+              <i class="fas fa-microchip fa-2x" style="color: var(--color-secondary);"></i>
             </div>
             <h4 class="fw-bold mb-3">Advanced Technology</h4>
             <p class="text-muted mb-0">We continuously upgrade our products with the latest technology to improve
@@ -198,12 +216,12 @@
   </section>
 
   <!-- Commitment Section -->
-  <section class="commitment-section py-5 bg-light">
+  <section class="commitment-section py-5 bg-light" data-aos="zoom-in" data-aos-duration="1000">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-10">
-          <div class="commitment-card p-5 text-center">
-            <i class="fas fa-handshake fa-3x text-dark mb-4"></i>
+          <div class="commitment-card p-5 text-center" style="border-top: 5px solid #000000; box-shadow: 0 10px 40px rgba(0,0,0,0.05);">
+            <i class="fas fa-handshake fa-3x mb-4" style="color: #000000;"></i>
             <h2 class="display-6 fw-bold mb-4">Our Commitment</h2>
             <p class="lead mb-4">At Gargi Industries, we believe in building long-term relationships through quality,
               honesty, and service excellence. Our goal is to become a preferred brand in the weighing scale industry by
@@ -212,7 +230,8 @@
               industries, and households
               with precision and performance.</p>
             <div class="divider my-4"></div>
-            <h4 class="fw-bold mb-0">Accurate Weighing. Trusted Quality. Reliable Performance.</h4>
+            <h4 class="fw-bold mb-0" style="color: #000000;">Accurate Weighing. Trusted Quality. Reliable
+              Performance.</h4>
           </div>
         </div>
       </div>
@@ -237,7 +256,7 @@
       border-color: transparent;
     }
 
-    .icon-box {
+    .product-card .icon-box {
       width: 60px;
       height: 60px;
       margin: 0 auto;
@@ -250,7 +269,7 @@
     }
 
     .product-card:hover .icon-box {
-      background: #212529;
+      background: var(--color-primary);
     }
 
     .product-card:hover .icon-box i {
@@ -268,7 +287,7 @@
     .feature-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      border-color: #212529;
+      border-color: var(--color-primary);
     }
 
     .feature-icon {
@@ -277,7 +296,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #f8f9fa;
+      background: var(--color-primary-light);
       border-radius: 10px;
     }
 
@@ -300,7 +319,7 @@
     .divider {
       width: 80px;
       height: 3px;
-      background: #212529;
+      background: var(--color-secondary);
       margin: 0 auto;
     }
 

@@ -70,32 +70,6 @@
                 </button>
               </div>
 
-              <!-- Availability Filter -->
-              <div class="category-block box-9 mb-32">
-                <div class="title" data-count="9">
-                  <h6 class="fw-600 black">Availability</h6>
-                  <span>
-                    <i class="fa-light fa-chevron-up"></i>
-                  </span>
-                </div>
-                <div class="content-block mt-24 mb-32">
-                  <div class="d-flex align-items-center justify-content-between mb-12">
-                    <div class="cus-checkBox">
-                      <input type="checkbox" id="stock" class="inp-cbx filter-checkbox" name="in_stock" value="1" {{ request('in_stock') ? 'checked' : '' }}>
-                      <label for="stock" class="cbx black">In stock</label>
-                    </div>
-                    <p>({{ $in_stock_count }})</p>
-                  </div>
-                  <div class="d-flex align-items-center justify-content-between mb-12">
-                    <div class="cus-checkBox">
-                      <input type="checkbox" id="out" class="inp-cbx filter-checkbox" name="out_of_stock" value="1" {{ request('out_of_stock') ? 'checked' : '' }}>
-                      <label for="out" class="cbx black">Out of Stock</label>
-                    </div>
-                    <p>({{ $out_of_stock_count }})</p>
-                  </div>
-                </div>
-              </div>
-
               <!-- Product Categories -->
               <div class="category-block box-1 mb-32">
                 <div class="title" data-count="1">
@@ -116,47 +90,6 @@
                       <p>({{ $category['count'] }})</p>
                     </div>
                   @endforeach
-                </div>
-              </div>
-
-              <!-- Filter By Price -->
-              <div class="category-block box-2 mb-32">
-                <div class="title" data-count="2">
-                  <h6 class="fw-600 black">Filter By Price</h6>
-                  <span>
-                    <i class="fa-light fa-chevron-up"></i>
-                  </span>
-                </div>
-                <div class="content-block mt-24">
-                  <div class="wrapper">
-                    <div class="price-input mb-24">
-                      <div class="field">
-                        <div class="fw-500 font-primary mb-4p">From</div>
-                        <div class="sidebar-price-block">
-                          <p class="price-sign">₹</p>
-                          <input type="number" class="input-min dark-gray price-input-min" name="min_price"
-                            value="{{ request('min_price', $min_price_range) }}">
-                        </div>
-                      </div>
-                      <div class="field">
-                        <div class="fw-500 font-primary mb-4p">To</div>
-                        <div class="sidebar-price-block">
-                          <p class="price-sign">₹</p>
-                          <input type="number" class="input-max dark-gray price-input-max" name="max_price"
-                            value="{{ request('max_price', $max_price_range) }}">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="slider">
-                      <div class="progress-range"></div>
-                    </div>
-                    <div class="range-input">
-                      <input type="range" class="range-min" min="{{ $min_price_range }}" max="{{ $max_price_range }}"
-                        value="{{ request('min_price', $min_price_range) }}" step="100">
-                      <input type="range" class="range-max" min="{{ $min_price_range }}" max="{{ $max_price_range }}"
-                        value="{{ request('max_price', $max_price_range) }}" step="100">
-                    </div>
-                  </div>
                 </div>
               </div>
 
@@ -181,33 +114,6 @@
             <div class="col-xl-4 col-lg-5 col-md-5 col-8">
               <p class="black fw-500">Showing {{ $start_count }} - {{ $end_count }} of {{ $total_products }} Results</p>
             </div>
-            <div class="col-xl-4 col-lg-7 col-md-7 d-sm-block d-none">
-              <div class="d-flex align-items-center gap-16 justify-content-end">
-                <div class="d-flex align-items-center gap-8">
-                  <p class="dark-gray font-primary black fw-600">Sort by:</p>
-                  <div class="drop-container shop-dropdown">
-                    <div class="wrapper-dropdown" id="dropdown8">
-                      <span class="selected-display" id="destination8">
-                        @foreach($sort_options as $opt)
-                          @if($opt['value'] == ($sort_by ?? 'featured')) {{ $opt['label'] }} @endif
-                        @endforeach
-                      </span>
-                      <svg id="drp-arrow8" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        xmlns="http://www.w3.org/2000/svg" class="arrow transition-all ml-auto rotate-180">
-                        <path d="M7 14.5l5-5 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                          stroke-linejoin="round"></path>
-                      </svg>
-                      <ul class="topbar-dropdown bg-lightest-gray">
-                        @foreach($sort_options as $option)
-                          <li class="item dark-black sort-option" data-sort="{{ $option['value'] }}">{{ $option['label'] }}
-                          </li>
-                        @endforeach
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
           <!-- Products List -->
@@ -230,8 +136,8 @@
                       class="product-title h6 fw-500 mb-12">{{ $product->name }}</a>
 
                     @php
-                      $capacity = $product->specifications->first(function($spec) {
-                          return strtolower($spec->key) === 'capacity';
+                      $capacity = $product->specifications->first(function ($spec) {
+                        return strtolower($spec->key) === 'capacity';
                       })->value ?? null;
                     @endphp
                     @if($capacity)

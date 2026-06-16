@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="{{ asset('assets/css/vendor/slick-slider.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/vendor/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/vendor/slick-animation.css') }}">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}?v={{ filemtime(public_path('assets/css/app.css')) }}">
 
   <!-- Additional CSS for specific pages -->
@@ -97,7 +98,18 @@
   <script src="{{ asset('assets/js/vendor/slick.min.js') }}"></script>
   <script src="{{ asset('assets/js/vendor/jquery.countdown.min.js') }}"></script>
   <script src="{{ asset('assets/js/vendor/slickAnimation.js') }}"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="{{ asset('assets/js/app.js') }}"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      AOS.init({
+        once: true,
+        duration: 800,
+        offset: 100,
+        easing: 'ease-out-cubic'
+      });
+    });
+  </script>
 
   @stack('scripts')
 

@@ -24,11 +24,11 @@
 :root {
   /* ----- Primary Brand Colors ----- */
   --color-primary: #000000;
-  --color-primary-rgb: 0, 168, 107;
-  --color-primary-dark: #008A56;
-  --color-primary-light: #E6F7F0;
-  --color-secondary: #FF7F3F;
-  --color-secondary-light: #FFF2E9;
+  --color-primary-rgb: 0, 0, 0;
+  --color-primary-dark: #0C0C0D;
+  --color-primary-light: #F5F5F5;
+  --color-secondary: #000000;
+  --color-secondary-light: #FAFAFA;
   --color-accent: #5D3A1A;
   --color-whatsapp: #21ce5b;
 
@@ -1319,7 +1319,7 @@ Elements
 }
 
 .cus-btn:hover {
-  color: #0C0C0D;
+  color: #FFFFFF;
 }
 
 .cus-btn:hover:before {
@@ -5368,8 +5368,8 @@ footer .footer-bottom-bar .payment-cards .card-block img {
 }
 
 .product-block:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.03);
 }
 
 .product-block .image-box {
@@ -5425,13 +5425,15 @@ footer .footer-bottom-bar .payment-cards .card-block img {
   position: absolute;
   top: 12px;
   left: 12px;
-  background: var(--color-error);
-  color: var(--color-white);
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  z-index: 1;
+  background: #000000;
+  color: #FFFFFF;
+  padding: 6px 16px;
+  border-radius: 0px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  z-index: 10;
 }
 
 .product-block .product-title {

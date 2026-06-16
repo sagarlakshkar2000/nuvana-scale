@@ -128,7 +128,7 @@
   @endphp
 
   <!-- HERO BANNER START -->
-  <section class="hero-banner">
+  <section class="hero-banner" data-aos="fade-in" data-aos-duration="1000">
     <div class="container-fluid w-100 px-0">
       <div class="hero-wrapper">
         <div class="slider-arrows d-flex z-1">
@@ -169,22 +169,32 @@
   <!-- TRENDING PRODUCTS START -->
   <section class="newest-section py-40">
     <div class="container-fluid">
-      <div class="d-flex align-items-center justify-content-between flex-sm-row flex-column gap-sm-0 gap-24 mb-48">
-        <div>
-          <h2 class="fw-600 black mb-12"><?php echo $section_config['title']; ?></h2>
-          <p><?php echo $section_config['subtitle']; ?></p>
-        </div>
-        <a href="<?php echo $section_config['button_link']; ?>" class="cus-btn-arrow d-none d-sm-block">
-          <?php echo $section_config['button_text']; ?>
-          <div class="icon d-inline-block">
-            <i class="fa-light fa-chevron-right"></i>
+      <div class="d-flex align-items-center justify-content-between flex-sm-row flex-column gap-sm-0 gap-24 mb-48" data-aos="fade-up">
+        <div class="text-center text-sm-start position-relative">
+          <div class="d-inline-block position-relative mb-2">
+            <h2 class="fw-700 black mb-0 position-relative z-1">
+              <?php echo $section_config['title']; ?>
+            </h2>
+            <svg class="position-absolute z-0"
+              style="bottom: -2px; left: 0; width: 100%; height: 10px; pointer-events: none;" viewBox="0 0 100 12"
+              preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 9.5C25 -1.83333 75 -3.1 98 9.5" stroke="var(--color-secondary)" stroke-width="4"
+                stroke-linecap="round" fill="none" opacity="0.5" />
+            </svg>
           </div>
+          <p class="mb-0 text-muted fs-6" style="letter-spacing: 0.5px;"><?php echo $section_config['subtitle']; ?></p>
+        </div>
+        <a href="<?php echo $section_config['button_link']; ?>"
+          class="cus-btn d-inline-flex align-items-center justify-content-center gap-2"
+          style="padding: 12px 28px !important; font-size: 15px !important; border-radius: 50px; text-decoration: none;">
+          <span class="fw-600"><?php echo $section_config['button_text']; ?></span>
+          <i class="fa-regular fa-arrow-right"></i>
         </a>
       </div>
 
       <div class="row row-gap-3">
-        @forelse($trending_products as $product)
-          <div class="col-xl-3 col-lg-4 col-sm-6 col-6">
+        @forelse($trending_products as $index => $product)
+          <div class="col-xl-3 col-lg-4 col-sm-6 col-6" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
             <div class="product-block">
               <div class="image-box mb-16">
                 <img
@@ -201,8 +211,8 @@
                   class="product-title h6 fw-500 mb-12">{{ $product->name }}</a>
 
                 @php
-                  $capacity = $product->specifications->first(function($spec) {
-                      return strtolower($spec->key) === 'capacity';
+                  $capacity = $product->specifications->first(function ($spec) {
+                    return strtolower($spec->key) === 'capacity';
                   })->value ?? null;
                 @endphp
                 @if($capacity)
@@ -233,68 +243,68 @@
 
   <!-- BLOGS SECTION START -->
   <!-- <section class="blog-section py-40">
-                        <div class="container-fluid">
-                          <div class="d-flex align-items-center justify-content-between flex-sm-row flex-column gap-sm-0 gap-24 mb-48">
-                            <div>
-                              <h2 class="fw-600 black mb-12">{{ $blog_config['title'] }}</h2>
-                              <p>{{ $blog_config['subtitle'] }}</p>
-                            </div>
-                            <a href="{{ $blog_config['button_link'] }}" class="cus-btn-arrow d-none d-sm-block">
-                              {{ $blog_config['button_text'] }}
-                              <div class="icon">
-                                <i class="fa-light fa-chevron-right"></i>
-                              </div>
-                            </a>
-                          </div>
+                                            <div class="container-fluid">
+                                              <div class="d-flex align-items-center justify-content-between flex-sm-row flex-column gap-sm-0 gap-24 mb-48">
+                                                <div>
+                                                  <h2 class="fw-600 black mb-12">{{ $blog_config['title'] }}</h2>
+                                                  <p>{{ $blog_config['subtitle'] }}</p>
+                                                </div>
+                                                <a href="{{ $blog_config['button_link'] }}" class="cus-btn-arrow d-none d-sm-block">
+                                                  {{ $blog_config['button_text'] }}
+                                                  <div class="icon">
+                                                    <i class="fa-light fa-chevron-right"></i>
+                                                  </div>
+                                                </a>
+                                              </div>
 
-                          <div class="row row-gap-4">
-                            <div class="col-xl-6 col-12">
-                              <div class="blog-card main d-flex flex-column gap-16 bg-lightest-gray br-16 h-100">
-                                <a href="{{ url('/blog/' . $featured_blog['slug']) }}" class="card-image">
-                                  <img src="{{ $featured_blog['image'] }}" alt="{{ $featured_blog['title'] }}" loading="lazy"
-                                    class="img-fluid">
-                                </a>
-                                <div class="d-flex flex-column gap-32 p-24">
-                                  <div class="d-flex flex-column gap-16 black">
-                                    <div class="create-by">
-                                      <p class="fw-500">{{ $featured_blog['date'] }}</p>
-                                      <div class="dot"></div>
-                                      <p class="dark-gray">By {{ $featured_blog['author'] }}</p>
-                                    </div>
-                                    <a href="{{ url('/blog/' . $featured_blog['slug']) }}" class="h4">{{ $featured_blog['title'] }}</a>
-                                    <p>{{ $featured_blog['excerpt'] }}</p>
-                                  </div>
-                                  <a href="{{ url('/blog/' . $featured_blog['slug']) }}" class="text-16 medium black card-btn">Read More</a>
-                                </div>
-                              </div>
-                            </div>
+                                              <div class="row row-gap-4">
+                                                <div class="col-xl-6 col-12">
+                                                  <div class="blog-card main d-flex flex-column gap-16 bg-lightest-gray br-16 h-100">
+                                                    <a href="{{ url('/blog/' . $featured_blog['slug']) }}" class="card-image">
+                                                      <img src="{{ $featured_blog['image'] }}" alt="{{ $featured_blog['title'] }}" loading="lazy"
+                                                        class="img-fluid">
+                                                    </a>
+                                                    <div class="d-flex flex-column gap-32 p-24">
+                                                      <div class="d-flex flex-column gap-16 black">
+                                                        <div class="create-by">
+                                                          <p class="fw-500">{{ $featured_blog['date'] }}</p>
+                                                          <div class="dot"></div>
+                                                          <p class="dark-gray">By {{ $featured_blog['author'] }}</p>
+                                                        </div>
+                                                        <a href="{{ url('/blog/' . $featured_blog['slug']) }}" class="h4">{{ $featured_blog['title'] }}</a>
+                                                        <p>{{ $featured_blog['excerpt'] }}</p>
+                                                      </div>
+                                                      <a href="{{ url('/blog/' . $featured_blog['slug']) }}" class="text-16 medium black card-btn">Read More</a>
+                                                    </div>
+                                                  </div>
+                                                </div>
 
-                            <div class="col-xl-6 col-12">
-                              <div class="row row-gap-4">
-                                @foreach($regular_blogs as $blog)
-                                  <div class="col-lg-6 col-6">
-                                    <div class="blog-card main d-flex flex-column gap-16 bg-lightest-gray br-16">
-                                      <a href="{{ url('/blog/' . $blog['slug']) }}" class="card-image">
-                                        <img src="{{ $blog['image'] }}" alt="{{ $blog['title'] }}" loading="lazy" class="img-fluid">
-                                      </a>
-                                      <div class="d-flex flex-column gap-32 p-16">
-                                        <div class="d-flex flex-column gap-16 black">
-                                          <div class="create-by d-none d-sm-block">
-                                            <p class="fw-500">{{ $blog['date'] }}</p>
-                                            <div class="dot"></div>
-                                            <p class="dark-gray">By {{ $blog['author'] }}</p>
-                                          </div>
-                                          <a href="{{ url('/blog/' . $blog['slug']) }}" class="h6">{{ $blog['title'] }}</a>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                @endforeach
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </section> -->
+                                                <div class="col-xl-6 col-12">
+                                                  <div class="row row-gap-4">
+                                                    @foreach($regular_blogs as $blog)
+                                                      <div class="col-lg-6 col-6">
+                                                        <div class="blog-card main d-flex flex-column gap-16 bg-lightest-gray br-16">
+                                                          <a href="{{ url('/blog/' . $blog['slug']) }}" class="card-image">
+                                                            <img src="{{ $blog['image'] }}" alt="{{ $blog['title'] }}" loading="lazy" class="img-fluid">
+                                                          </a>
+                                                          <div class="d-flex flex-column gap-32 p-16">
+                                                            <div class="d-flex flex-column gap-16 black">
+                                                              <div class="create-by d-none d-sm-block">
+                                                                <p class="fw-500">{{ $blog['date'] }}</p>
+                                                                <div class="dot"></div>
+                                                                <p class="dark-gray">By {{ $blog['author'] }}</p>
+                                                              </div>
+                                                              <a href="{{ url('/blog/' . $blog['slug']) }}" class="h6">{{ $blog['title'] }}</a>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    @endforeach
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </section> -->
   <!-- BLOGS SECTION END -->
 
 @endsection
