@@ -109,52 +109,52 @@ STYLE SHEET INDEXING
   --color-warning: #FF7A00;
   --color-success: #028845;
 }
-
 /*-------------------------
     Fonts
 -------------------------*/
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
 
+/* Local fonts as fallback or primary */
 @font-face {
   font-family: "Plus Jakarta Sans";
   font-style: normal;
   font-weight: 400;
-  src: url(fonts/nearing-font-family/PlusJakartaSans-thin.ttf) format("woff2");
+  src: url("webfonts/PlusJakartaSans-Regular.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Plus Jakarta Sans";
   font-style: normal;
   font-weight: 500;
-  src: url(fonts/nearing-font-family/PlusJakartaSans-regular.ttf) format("woff2");
+  src: url("webfonts/PlusJakartaSans-Medium.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Plus Jakarta Sans";
   font-style: normal;
   font-weight: 600;
-  src: url(fonts/nearing-font-family/PlusJakartaSans-medium.ttf) format("woff2");
+  src: url("webfonts/PlusJakartaSans-SemiBold.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Plus Jakarta Sans";
   font-style: normal;
   font-weight: 700;
-  src: url(fonts/nearing-font-family/PlusJakartaSans-bold.ttf) format("woff2");
+  src: url("webfonts/PlusJakartaSans-Bold.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Plus Jakarta Sans";
   font-style: normal;
   font-weight: 800;
-  src: url(fonts/nearing-font-family/PlusJakartaSans-black.ttf) format("woff2");
+  src: url("webfonts/PlusJakartaSans-ExtraBold.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Plus Jakarta Sans";
   font-style: normal;
   font-weight: 900;
-  src: url(fonts/nearing-font-family/PlusJakartaSans-extrabold.ttf) format("woff2");
+  src: url("webfonts/PlusJakartaSans-ExtraBold.ttf") format("truetype");
 }
 
 /*-------------------------
