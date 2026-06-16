@@ -189,7 +189,7 @@
               <div class="image-box mb-16">
                 <img
                   src="{{ $product->images->first() ? asset('storage/' . $product->images->first()->image_url) : asset('images/default.jpg') }}"
-                  alt="{{ $product->name }}" loading="lazy">
+                  alt="{{ $product->name }}" loading="lazy" class="img-fluid">
 
                 @if(!empty($product['badge']))
                   <div class="sale-label subtitle">{{ $product['badge'] }}</div>

@@ -18,6 +18,15 @@ Route::get('/run-storage-link', function () {
   return "Storage link created!";
 });
 
+Route::get('/clear-cache', function () {
+  Artisan::call('cache:clear');
+  Artisan::call('config:clear');
+  Artisan::call('route:clear');
+  Artisan::call('view:clear');
+
+  return "All cache cleared successfully!";
+});
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
