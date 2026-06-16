@@ -200,8 +200,15 @@
                 <a href="{{ route('product-detail', ['slug' => $product['slug']]) }}"
                   class="product-title h6 fw-500 mb-12">{{ $product->name }}</a>
 
-                @if(!empty($product['feature']))
-                  <p class="caption mb-8 dark-gray">{{ $product['feature'] }}</p>
+                @php
+                  $capacity = $product->specifications->first(function($spec) {
+                      return strtolower($spec->key) === 'capacity';
+                  })->value ?? null;
+                @endphp
+                @if($capacity)
+                  <p class="caption mb-8 dark-gray">Capacity: {{ $capacity }}</p>
+                @elseif(!empty($product->feature))
+                  <p class="caption mb-8 dark-gray">{{ $product->feature }}</p>
                 @endif
               </div>
             </div>

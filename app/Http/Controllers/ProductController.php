@@ -16,7 +16,7 @@ class ProductController extends Controller
 
   private function applyFilters(Request $request)
   {
-    $query = Product::query()->with(['category', 'images']);
+    $query = Product::query()->with(['category', 'images', 'specifications']);
 
     if ($request->filled('category')) {
       $categories = (array) $request->input('category');
@@ -272,7 +272,7 @@ class ProductController extends Controller
       ->where('slug', $slug)
       ->firstOrFail();
 
-    $related_products = Product::with(['images', 'category'])
+    $related_products = Product::with(['images', 'category', 'specifications'])
       ->where('category_id', $product->category_id)
       ->where('id', '!=', $product->id)
       ->take(8)

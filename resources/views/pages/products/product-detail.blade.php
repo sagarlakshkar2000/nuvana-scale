@@ -133,18 +133,25 @@
           <div class="col-xl-3 col-lg-4 col-sm-6">
             <div class="product-block">
               <div class="image-box mb-16">
-                <img src="{{ $related['image'] }}" alt="{{ $related['title'] }}">
-                @if(!empty($related['badge']))
-                  <div class="sale-label subtitle">{{ $related['badge'] }}</div>
+                <img src="{{ $related->images->first() ? asset('storage/' . $related->images->first()->image_url) : asset('images/default.jpg') }}" alt="{{ $related->name }}" loading="lazy" class="img-fluid">
+                @if(!empty($related->badge))
+                  <div class="sale-label subtitle">{{ $related->badge }}</div>
                 @endif
               </div>
               <div class="content-box">
-                <p class="eyebrow mb-12">{{ $related['category'] }}</p>
-                <a href="{{ url('/products/' . $related['slug']) }}"
-                  class="product-title h6 fw-500 mb-12">{{ $related['title'] }}</a>
+                <p class="eyebrow mb-12">{{ $related->category->name ?? '' }}</p>
+                <a href="{{ route('product-detail', ['slug' => $related->slug]) }}"
+                  class="product-title h6 fw-500 mb-12">{{ $related->name }}</a>
 
-                @if(!empty($related['feature']))
-                  <p class="caption mb-8 dark-gray">{{ $related['feature'] }}</p>
+                @php
+                  $capacity = $related->specifications->first(function($spec) {
+                      return strtolower($spec->key) === 'capacity';
+                  })->value ?? null;
+                @endphp
+                @if($capacity)
+                  <p class="caption mb-8 dark-gray">Capacity: {{ $capacity }}</p>
+                @elseif(!empty($related->feature))
+                  <p class="caption mb-8 dark-gray">{{ $related->feature }}</p>
                 @endif
               </div>
             </div>
