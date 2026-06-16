@@ -13,6 +13,11 @@ Route::get('/run-migrate', function () {
   return "Migration completed!";
 });
 
+Route::get('/run-storage-link', function () {
+  Artisan::call('storage:link');
+  return "Storage link created!";
+});
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
