@@ -20,9 +20,9 @@
             <a href="index.html"><img src="{{ asset('assets/media/nuvana-logo.jpeg') }}" alt="{{ $companyName }}"
                 class="mb-16 img-fluid rounded-3"></a>
             <p class="white mb-xl-32 mb-lg-0 mb-32">
-              Lorem ipsum dolor sit amet consectetur. Ornare amet enim vel varius purus
-              consequat ultrices. Id mi viverra euismod
-              risus viverra tortor cursus.
+              Gargi Industries provides reliable digital weighing scales designed for precision, durability, and
+              performance. We serve retail, industrial, and commercial sectors with trusted weighing solutions tailored
+              to modern business needs.
             </p>
             <h5 class="fw-500 white mb-16">Follow Us</h5>
             <ul class="list-unstyled social-link">

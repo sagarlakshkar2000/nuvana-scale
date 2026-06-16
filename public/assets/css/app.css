@@ -1,12 +1,7 @@
-/* ---------------------------------------------"
+/* ---------------------------------------------
 // Template Name: Nuvana
 // Description: Nuvana Html Template
 // Version: 1.0.0
-
-/*-------------------------
-    Fonts
--------------------------*/
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
 
 ===============================================
 STYLE SHEET INDEXING
@@ -22,8 +17,12 @@ STYLE SHEET INDEXING
 |___ Headings
 |___ Layout Styles
 |___ END STYLE SHEET INDEXING
-
 --------------------------------------------*/
+
+/*-------------------------
+    Fonts
+-------------------------*/
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
 
 :root {
   /* ----- Primary Brand Colors ----- */
@@ -115,42 +114,6 @@ STYLE SHEET INDEXING
   --color-success: #028845;
 }
 
-/* DELETE THESE - They're empty and useless */
-@font-face {
-  font-family: "Plus Jakarta Sans";
-  font-style: normal;
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: "Plus Jakarta Sans";
-  font-style: normal;
-  font-weight: 500;
-}
-
-@font-face {
-  font-family: "Plus Jakarta Sans";
-  font-style: normal;
-  font-weight: 600;
-}
-
-@font-face {
-  font-family: "Plus Jakarta Sans";
-  font-style: normal;
-  font-weight: 700;
-}
-
-@font-face {
-  font-family: "Plus Jakarta Sans";
-  font-style: normal;
-  font-weight: 800;
-}
-
-@font-face {
-  font-family: "Plus Jakarta Sans";
-  font-style: normal;
-  font-weight: 900;
-}
 
 /*-------------------------
     Variables
@@ -204,11 +167,11 @@ ol.list-style li::marker {
 -------------------------*/
 html {
   scroll-behavior: smooth;
-  font-family: var(--font-family-body);
+  font-family: var(--font-family-body) !important;
 }
 
 body {
-  font-family: var(--font-family-body);
+  font-family: var(--font-family-body) !important;
   color: var(--text-primary);
   background-color: var(--bg-default);
   vertical-align: baseline;
@@ -220,6 +183,10 @@ body {
   line-height: 140%;
   height: 100%;
   overflow-x: hidden;
+}
+
+*:not(i):not([class^="fa-"]):not([class*=" fa-"]) {
+  font-family: var(--font-family-body) !important;
 }
 
 body::-webkit-scrollbar {
