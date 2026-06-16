@@ -21,6 +21,6 @@ class IsAdminMiddleware
     }
 
     // If not authenticated or not an admin, redirect to admin login
-    return redirect()->route('login')->with('error', 'You must be an admin to access this page.');
+    return redirect()->route('admin.login')->with('error', 'You must be an admin to access this page.');
   }
 }

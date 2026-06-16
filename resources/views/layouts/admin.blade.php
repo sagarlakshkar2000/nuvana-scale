@@ -116,56 +116,54 @@
             </form>
           </div>
         </aside>
+
+        <!-- Overlay for mobile -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+          <header class="header">
+            <div class="header-left">
+              <h4 class="welcome-text">
+                Welcome back, <span>{{ auth()->user()->name }}</span>
+              </h4>
+            </div>
+            <div class="header-right">
+              <div class="user-dropdown">
+                <div class="user-avatar small">
+                  {{ substr(auth()->user()->name, 0, 2) }}
+                </div>
+                <div class="user-info">
+                  <strong>{{ auth()->user()->name }}</strong>
+                  <small>{{ auth()->user()->email }}</small>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          <div class="content-wrapper">
+            <div class="container">
+              @if(session('success'))
+                <div class="alert alert-success">
+                  {{ session('success') }}
+                </div>
+              @endif
+
+              @if(session('error'))
+                <div class="alert alert-error">
+                  {{ session('error') }}
+                </div>
+              @endif
+
+              @yield('content')
+            </div>
+          </div>
+        </main>
+
       @else
         @yield('content')
       @endif
-    @else
-      @yield('content')
     @endauth
-
-
-    <!-- Overlay for mobile -->
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-    <!-- Main Content -->
-    <main class="main-content">
-      <header class="header">
-        <div class="header-left">
-          <h4 class="welcome-text">
-            Welcome back, <span>{{ auth()->user()->name }}</span>
-          </h4>
-        </div>
-        <div class="header-right">
-          <div class="user-dropdown">
-            <div class="user-avatar small">
-              {{ substr(auth()->user()->name, 0, 2) }}
-            </div>
-            <div class="user-info">
-              <strong>{{ auth()->user()->name }}</strong>
-              <small>{{ auth()->user()->email }}</small>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <div class="content-wrapper">
-        <div class="container">
-          @if(session('success'))
-            <div class="alert alert-success">
-              {{ session('success') }}
-            </div>
-          @endif
-
-          @if(session('error'))
-            <div class="alert alert-error">
-              {{ session('error') }}
-            </div>
-          @endif
-
-          @yield('content')
-        </div>
-      </div>
-    </main>
   </div>
 
   <!-- Jquery Js -->
