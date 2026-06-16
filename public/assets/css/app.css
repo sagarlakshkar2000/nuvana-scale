@@ -307,7 +307,7 @@ h6,
 
 h1,
 .h1 {
-  font-family: "Plus Jakarta Sans";
+  /* font-family: "Plus Jakarta Sans"; */
   text-transform: uppercase;
   font-size: clamp(73px, 5vw, 220px);
   /* 96px */
@@ -337,7 +337,7 @@ h1,
 
 h2,
 .h2 {
-  font-family: "Plus Jakarta Sans";
+  /* font-family: "Plus Jakarta Sans"; */
   font-weight: 500;
   font-size: clamp(36px, 2.083vw, 160px);
   /*40*/
@@ -364,7 +364,7 @@ h2,
 
 h3,
 .h3 {
-  font-family: "Plus Jakarta Sans";
+  /* font-family: "Plus Jakarta Sans"; */
   font-weight: 700;
   font-size: clamp(29px, 1.719vw, 130px);
   /*33*/
@@ -392,7 +392,7 @@ h3,
 
 h4,
 .h4 {
-  font-family: "Plus Jakarta Sans";
+  /* font-family: "Plus Jakarta Sans"; */
   font-size: clamp(24px, 1.458vw, 105px);
   /* 28px */
   font-style: normal;
@@ -426,7 +426,7 @@ h4,
 
 h5,
 .h5 {
-  font-family: "Plus Jakarta Sans";
+  /* font-family: "Plus Jakarta Sans"; */
   font-size: clamp(19px, 1.198vw, 90px);
   /* 23px */
   font-style: normal;
@@ -461,7 +461,7 @@ h5,
 
 h6,
 .h6 {
-  font-family: "Plus Jakarta Sans";
+  /* font-family: "Plus Jakarta Sans"; */
   font-size: clamp(17px, 0.99vw, 72px);
   /*19*/
   font-weight: 600;
@@ -1822,7 +1822,7 @@ label.error {
   background: transparent;
   color: #FAFAFA;
   border: 0;
-  font-family: "Plus Jakarta Sans";
+  /* font-family: "Plus Jakarta Sans"; */
   font-size: clamp(17px, 0.938vw, 22px);
   font-weight: 400;
   line-height: 140%;
@@ -2247,7 +2247,7 @@ label.error {
 
 .zui-wrapper .product-link {
   color: #0C0C0D;
-  font-family: "Plus Jakarta Sans";
+  /* font-family: "Plus Jakarta Sans"; */
   text-decoration: none;
   font-weight: 600;
 }
@@ -2598,7 +2598,7 @@ header .main-menu .main-menu__nav .stricky-header .main-menu__list>li {
 header .main-menu .main-menu__nav .main-menu__list>li>a,
 header .main-menu .main-menu__nav .stricky-header .main-menu__list>li>a {
   font-size: clamp(17px, 0.99vw, 48px);
-  font-family: "Plus Jakarta Sans";
+  /* font-family: "Plus Jakarta Sans"; */
   text-transform: capitalize;
   font-weight: 500;
   line-height: 150%;
@@ -3100,7 +3100,7 @@ header .header-buttons a:hover {
   line-height: 30px;
   color: #1E1F20;
   font-size: 18px;
-  font-family: "Plus Jakarta Sans";
+  /* font-family: "Plus Jakarta Sans"; */
   text-transform: capitalize;
   font-weight: 500;
   height: 36px;
@@ -3255,7 +3255,7 @@ header .header-buttons a:hover {
 }
 
 .hero-banner .hero-wrapper .title {
-  font-family: "Plus Jakarta Sans";
+  /* font-family: "Plus Jakarta Sans"; */
   font-style: normal;
   font-weight: 700;
   line-height: 120%;
@@ -3409,7 +3409,7 @@ header .header-buttons a:hover {
   color: #FAFAFA;
   padding: 6px 12px;
   border-radius: 24px;
-  font-family: "Plus Jakarta Sans";
+  /* font-family: "Plus Jakarta Sans"; */
 }
 
 .product-block .image-box .shopping-btns {
@@ -3500,7 +3500,7 @@ header .header-buttons a:hover {
   background-color: var(--color-primary);
   border-radius: 24px;
   color: #0C0C0D;
-  font-family: "Plus Jakarta Sans";
+  /* font-family: "Plus Jakarta Sans"; */
   font-size: clamp(15px, 0.833vw, 22px);
   font-weight: 500;
   line-height: 120%;
@@ -3741,7 +3741,7 @@ header .header-buttons a:hover {
   background-color: var(--color-primary);
   border-radius: 24px;
   color: #0C0C0D;
-  font-family: "Plus Jakarta Sans";
+  /* font-family: "Plus Jakarta Sans"; */
   font-size: clamp(15px, 0.833vw, 32px);
   font-weight: 500;
   line-height: 120%;
