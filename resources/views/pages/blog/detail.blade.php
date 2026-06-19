@@ -4,10 +4,8 @@
   <!-- TITLE BANNER START -->
   <section class="title-banner">
     <div class="container">
-      <h2 class="white fw-600 text-center mb-24">Top Vitamins and Minerals for Peak Performance and
-        Strength</h2>
-      <p class="white text-center">20 Nov, 2025 <span class="light-gray">&nbsp; • &nbsp;By Rosalie
-          Jones</span></p>
+      <h2 class="white fw-600 text-center mb-24">{{ $post->post_title }}</h2>
+      <p class="white text-center">{{ \Carbon\Carbon::parse($post->post_date)->format('d M, Y') }} <span class="light-gray">&nbsp; • &nbsp;By {{ $post->author->display_name ?? 'Admin' }}</span></p>
     </div>
   </section>
   <!-- TITLE BANNER END -->
@@ -18,97 +16,12 @@
       <div class="row justify-content-center">
         <div class="col-lg-10">
           <div class="blog-detail-wrapper">
-            <p class="mb-24">Achieving peak performance and building strength isn’t just about
-              exercise—it’s also about fueling your body with the
-              right nutrients. Vitamins and minerals play a crucial role in helping your muscles
-              recover, boosting energy, and
-              ensuring overall health, making them an essential part of any fitness regimen.
-              Here’s a breakdown of some of the
-              best vitamins and minerals you should include in your diet to maximize your
-              performance.</p>
             <div class="main-image mb-24">
-              <img src="{{ asset('assets/media/blogs/blog-detail-1.png') }}" alt="" class="w-100 br-10">
+              <img src="{{ $post->featured_image_url }}" alt="{{ $post->post_title }}" class="w-100 br-10">
             </div>
-            <h6 class="black fw-600 mb-16">1. Vitamin D</h6>
-            <p class="mb-24">Vitamin D is essential for bone health and muscle function. It helps
-              your body absorb calcium, which is
-              vital for strong bones and preventing injuries. Additionally, it supports muscle
-              strength and can improve athletic
-              performance. Spending time outdoors and consuming fortified foods like milk can help
-              maintain healthy Vitamin D
-              levels.</p>
-            <h6 class="black fw-600 mb-16">2. Magnesium</h6>
-            <p class="mb-24">Magnesium plays a key role in muscle recovery and energy production. It
-              helps to regulate muscle
-              contractions and reduce muscle soreness after intense workouts. Foods like nuts,
-              seeds, and leafy greens are great
-              sources of magnesium, and supplementing can help enhance your overall performance.
-            </p>
-
-            <div class="qoutes mb-24">
-              <svg class="mb-24" xmlns="http://www.w3.org/2000/svg" width="26" height="16" viewBox="0 0 26 16"
-                fill="none">
-                <path
-                  d="M5.4135 10.1654C3.76939 10.2055 2.46613 9.72431 1.50372 8.72181C0.501217 7.7193 -3.62396e-05 6.47619 -3.62396e-05 4.99248C-3.62396e-05 3.50877 0.501217 2.30576 1.50372 1.38346C2.46613 0.461153 3.70924 0 5.23305 0C6.83706 0 8.14031 0.461153 9.14282 1.38346C10.1052 2.30576 10.5864 3.50877 10.5864 4.99248C10.5864 6.51629 10.2255 8.1203 9.50372 9.80451C8.78192 11.4887 7.69921 13.5539 6.2556 16H2.58643L5.4135 10.1654ZM20.4511 10.1654C18.807 10.2055 17.5037 9.72431 16.5413 8.72181C15.5388 7.7193 15.0376 6.47619 15.0376 4.99248C15.0376 3.50877 15.5388 2.30576 16.5413 1.38346C17.5037 0.461153 18.7468 0 20.2706 0C21.8747 0 23.1779 0.461153 24.1804 1.38346C25.1428 2.30576 25.624 3.50877 25.624 4.99248C25.624 6.51629 25.2631 8.1203 24.5413 9.80451C23.8195 11.4887 22.7368 13.5539 21.2932 16H17.624L20.4511 10.1654Z"
-                  fill="#0C0C0D" />
-              </svg>
-              <p class="mb-24">"At Tangine, we believe that proper nutrition is the foundation of
-                true strength. By fueling your body
-                with the right vitamins and minerals, you can unlock your peak performance and
-                push beyond limits you never thought
-                possible."</p>
-              <h6 class="black fw-500">Tangine Owner</h6>
+            <div class="post-content">
+                {!! $post->post_content !!}
             </div>
-
-            <h6 class="black fw-600 mb-16">3. Vitamin B Complex</h6>
-            <p class="mb-24">The B vitamins, including B12, B6, and B3, are essential for converting
-              the food you eat into energy.
-              They also play a role in red blood cell production, which helps deliver oxygen to
-              your muscles. This is especially
-              important for endurance athletes or anyone engaging in high-intensity workouts.</p>
-            <h6 class="black fw-600 mb-16">4. Iron</h6>
-            <p class="mb-24">Iron is necessary for the production of hemoglobin, which transports
-              oxygen to your muscles. Low iron
-              levels can lead to fatigue and decreased endurance. Including iron-rich foods like
-              red meat, beans, and spinach in
-              your diet can help maintain optimal performance during your workouts.</p>
-
-            <div class="row row-gap-4 mb-24">
-              <div class="col-sm-6">
-                <img src="assets/media/blogs/blog-detail-2.png" alt="" class="w-100 br-10">
-              </div>
-              <div class="col-sm-6">
-                <img src="assets/media/blogs/blog-detail-3.png" alt="" class="w-100 br-10">
-              </div>
-            </div>
-            <h6 class="black fw-600 mb-16">5. Calcium</h6>
-            <p class="mb-24">Calcium is not just vital for strong bones but also for proper muscle
-              contractions. It ensures your
-              muscles function properly and helps prevent cramps during workouts. Dairy products,
-              leafy greens, and fortified
-              foods are excellent sources of calcium.</p>
-            <h6 class="black fw-600 mb-16">6. Zinc</h6>
-            <p class="mb-24">Zinc plays a significant role in muscle repair and growth, especially
-              after a strenuous workout. It
-              supports the immune system and helps the body recover faster. You can get zinc from
-              foods like meat, shellfish, and
-              legumes.</p>
-            <h6 class="black fw-600 mb-16">7. Potassium</h6>
-            <p class="mb-24">Potassium is an electrolyte that helps maintain fluid balance in the
-              body and aids in muscle function.
-              It also helps prevent muscle cramps and is important for those doing high-intensity
-              workouts. Bananas, sweet
-              potatoes, and avocados are great sources of potassium.</p>
-            <h5 class="black fw-600 mb-24">Conclusion</h5>
-            <p class="mb-64">Incorporating these essential vitamins and minerals into your daily
-              diet will help you optimize your
-              performance, reduce muscle fatigue, and improve recovery times. Whether you’re
-              aiming to boost your strength or
-              enhance your endurance, focusing on proper nutrition is key to unlocking your body’s
-              full potential. Make sure to
-              consult with a healthcare provider or nutritionist to determine the best way to meet
-              your specific vitamin and
-              mineral needs for peak performance.</p>
             <div class="hr-line bg-light-gray mb-24"></div>
             <div class="d-flex align-items-center justify-content-between flex-wrap gap-24 mb-24">
               <div class="blog-tags-wrapper">
@@ -179,11 +92,8 @@
             <!-- <div class="hr-line bg-light-gray mb-64"></div> -->
             <div class="hr-line bg-light-gray mb-16"></div>
             <div class="d-flex align-items-center justify-content-between gap-24 mb-64">
-              <a href="blog-grid.html" class="fw-500 black hover-link">
-                Previous Post
-              </a>
-              <a href="blog-grid.html" class="fw-500 black hover-link">
-                Next Post
+              <a href="{{ route('blog.index') }}" class="fw-500 black hover-link">
+                &larr; Back to Blogs
               </a>
             </div>
           </div>

@@ -4,16 +4,28 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\WpPost;
+
 class BlogController extends Controller
 {
   public function index()
   {
-    return view('pages.blog.index');
+    $posts = WpPost::with('author')
+        ->published()
+        ->orderBy('post_date', 'desc')
+        ->paginate(9);
+
+    return view('pages.blog.index', compact('posts'));
   }
 
-  public function show()
+  public function show($slug)
   {
-    return view('pages.blog.detail');
+    $post = WpPost::with('author')
+        ->published()
+        ->where('post_name', $slug)
+        ->firstOrFail();
+
+    return view('pages.blog.detail', compact('post'));
   }
 
   public function submit(Request $request)
