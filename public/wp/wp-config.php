@@ -19,43 +19,39 @@
  */
 
 $root_dir = dirname(dirname(__DIR__));
-$vendor_autoload = $root_dir . '/vendor/autoload.php';
+$env_file = $root_dir . '/.env';
 
-if (file_exists($vendor_autoload)) {
-    require_once $vendor_autoload;
-    if (class_exists('Dotenv\Dotenv')) {
-        try {
-            $dotenv = Dotenv\Dotenv::createImmutable($root_dir);
-            $dotenv->safeLoad();
-        } catch (\Exception $e) {
-            // Silently ignore dotenv errors
-        }
-    }
-}
+$wp_db_name = 'nuvana_scale_db';
+$wp_db_user = 'root';
+$wp_db_pass = 'root';
+$wp_db_host = 'db';
 
-// Helper to safely get environment variables across different server configurations
-if (!function_exists('get_wp_env_var')) {
-    function get_wp_env_var($key, $default = '') {
-        if (isset($_SERVER[$key])) return $_SERVER[$key];
-        if (isset($_ENV[$key])) return $_ENV[$key];
-        $val = getenv($key);
-        if ($val !== false) return $val;
-        return $default;
-    }
+if (file_exists($env_file)) {
+    $env_contents = file_get_contents($env_file);
+    if (preg_match('/^DB_DATABASE=(.*)$/m', $env_contents, $m)) $wp_db_name = trim($m[1], " \t\n\r\0\x0B\"'");
+    if (preg_match('/^DB_USERNAME=(.*)$/m', $env_contents, $m)) $wp_db_user = trim($m[1], " \t\n\r\0\x0B\"'");
+    if (preg_match('/^DB_PASSWORD=(.*)$/m', $env_contents, $m)) $wp_db_pass = trim($m[1], " \t\n\r\0\x0B\"'");
+    if (preg_match('/^DB_HOST=(.*)$/m', $env_contents, $m))     $wp_db_host = trim($m[1], " \t\n\r\0\x0B\"'");
+} else {
+    // Fallback to server variables if no .env exists
+    if (isset($_SERVER['DB_DATABASE'])) $wp_db_name = $_SERVER['DB_DATABASE'];
+    if (isset($_SERVER['DB_USERNAME'])) $wp_db_user = $_SERVER['DB_USERNAME'];
+    if (isset($_SERVER['DB_PASSWORD'])) $wp_db_pass = $_SERVER['DB_PASSWORD'];
+    if (isset($_SERVER['DB_HOST']))     $wp_db_host = $_SERVER['DB_HOST'];
 }
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', get_wp_env_var('DB_DATABASE', 'nuvana_scale_db') );
+define( 'DB_NAME', $wp_db_name );
 
 /** Database username */
-define( 'DB_USER', get_wp_env_var('DB_USERNAME', 'root') );
+define( 'DB_USER', $wp_db_user );
 
 /** Database password */
-define( 'DB_PASSWORD', get_wp_env_var('DB_PASSWORD', 'root') );
+define( 'DB_PASSWORD', $wp_db_pass );
 
 /** Database hostname */
-define( 'DB_HOST', get_wp_env_var('DB_HOST', 'db') );
+define( 'DB_HOST', $wp_db_host );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8mb4' );
