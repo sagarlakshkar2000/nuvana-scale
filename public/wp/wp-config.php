@@ -18,22 +18,44 @@
  * @package WordPress
  */
 
-require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
-$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__, 2));
-$dotenv->safeLoad();
+$root_dir = dirname(dirname(__DIR__));
+$vendor_autoload = $root_dir . '/vendor/autoload.php';
+
+if (file_exists($vendor_autoload)) {
+    require_once $vendor_autoload;
+    if (class_exists('Dotenv\Dotenv')) {
+        try {
+            $dotenv = Dotenv\Dotenv::createImmutable($root_dir);
+            $dotenv->safeLoad();
+        } catch (\Exception $e) {
+            // Silently ignore dotenv errors
+        }
+    }
+}
+
+// Helper to safely get environment variables across different server configurations
+if (!function_exists('get_wp_env_var')) {
+    function get_wp_env_var($key, $default = '') {
+        if (isset($_SERVER[$key])) return $_SERVER[$key];
+        if (isset($_ENV[$key])) return $_ENV[$key];
+        $val = getenv($key);
+        if ($val !== false) return $val;
+        return $default;
+    }
+}
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', $_ENV['DB_DATABASE'] ?? 'nuvana_scale_db' );
+define( 'DB_NAME', get_wp_env_var('DB_DATABASE', 'nuvana_scale_db') );
 
 /** Database username */
-define( 'DB_USER', $_ENV['DB_USERNAME'] ?? 'root' );
+define( 'DB_USER', get_wp_env_var('DB_USERNAME', 'root') );
 
 /** Database password */
-define( 'DB_PASSWORD', $_ENV['DB_PASSWORD'] ?? 'root' );
+define( 'DB_PASSWORD', get_wp_env_var('DB_PASSWORD', 'root') );
 
 /** Database hostname */
-define( 'DB_HOST', $_ENV['DB_HOST'] ?? 'db' );
+define( 'DB_HOST', get_wp_env_var('DB_HOST', 'db') );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8mb4' );
