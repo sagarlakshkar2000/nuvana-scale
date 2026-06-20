@@ -28,6 +28,15 @@ class BlogController extends Controller
     return view('pages.blog.detail', compact('post'));
   }
 
+  public function preview($id)
+  {
+    $post = WpPost::with('author')
+        ->where('ID', $id)
+        ->firstOrFail();
+
+    return view('pages.blog.detail', compact('post'));
+  }
+
   public function submit(Request $request)
   {
     // Validate and process contact form

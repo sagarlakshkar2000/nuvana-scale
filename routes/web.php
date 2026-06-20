@@ -78,6 +78,9 @@ Route::prefix('blog')->name('blog.')->group(function () {
   // Main blog page
   Route::get('/', [BlogController::class, 'index'])->name('index');
 
+  // Preview route for drafts (must be before {slug} to avoid conflicts)
+  Route::get('/preview/{id}', [BlogController::class, 'preview'])->name('preview');
+
   // 6.1 Blog Detail (with slug)
   Route::get('/{slug}', [BlogController::class, 'show'])->name('detail');
 });
