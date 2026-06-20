@@ -18,18 +18,22 @@
  * @package WordPress
  */
 
+require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__, 2));
+$dotenv->safeLoad();
+
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'nuvana_scale_db' );
+define( 'DB_NAME', $_ENV['DB_DATABASE'] ?? 'nuvana_scale_db' );
 
 /** Database username */
-define( 'DB_USER', 'root' );
+define( 'DB_USER', $_ENV['DB_USERNAME'] ?? 'root' );
 
 /** Database password */
-define( 'DB_PASSWORD', 'root' );
+define( 'DB_PASSWORD', $_ENV['DB_PASSWORD'] ?? 'root' );
 
 /** Database hostname */
-define( 'DB_HOST', 'db' );
+define( 'DB_HOST', $_ENV['DB_HOST'] ?? 'db' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8mb4' );
