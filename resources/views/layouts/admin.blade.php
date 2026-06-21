@@ -16,7 +16,8 @@
   <link rel="stylesheet" href="{{ asset('assets/css/vendor/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/vendor/slick-animation.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}?v={{ filemtime(public_path('assets/css/app.css')) }}">
-  <link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}?v={{ filemtime(public_path('assets/css/admin.css')) }}">
+  <link rel="stylesheet"
+    href="{{ asset('assets/css/admin.css') }}?v={{ filemtime(public_path('assets/css/admin.css')) }}">
 
   <!-- Additional CSS for specific pages -->
   @stack('styles')
@@ -103,7 +104,16 @@
           </nav>
 
           <div class="sidebar-footer">
-            <form method="POST" action="{{ route('admin.logout') }}">
+            <a href="{{ route('home') }}" class="website-btn" target="_blank">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+              <span>View Website</span>
+            </a>
+            <form method="POST" action="{{ route('admin.logout') }}" class="mt-3">
               @csrf
               <button type="submit" class="logout-btn">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -111,7 +121,7 @@
                   <polyline points="16 17 21 12 16 7" />
                   <line x1="21" y1="12" x2="9" y2="12" />
                 </svg>
-                Logout
+                <span>Logout</span>
               </button>
             </form>
           </div>
@@ -123,8 +133,13 @@
         <!-- Main Content -->
         <main class="main-content">
           <header class="header">
-            <div class="header-left">
-              <h4 class="welcome-text">
+            <div class="header-left d-flex align-items-center gap-3">
+              <button class="icon-btn d-none d-md-flex" id="desktopMenuToggle">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 12h18M3 6h18M3 18h18" />
+                </svg>
+              </button>
+              <h4 class="welcome-text mb-0">
                 Welcome back, <span>{{ auth()->user()->name }}</span>
               </h4>
             </div>
@@ -141,8 +156,8 @@
             </div>
           </header>
 
-          <div class="content-wrapper">
-            <div class="container">
+          <div class="content-wrapper ">
+            <div class="container w-100 h-100 mx-0 overflow-auto">
               @if(session('success'))
                 <div class="alert alert-success">
                   {{ session('success') }}
@@ -173,7 +188,7 @@
   <script src="{{ asset('assets/js/vendor/jquery.countdown.min.js') }}"></script>
   <script src="{{ asset('assets/js/vendor/slickAnimation.js') }}"></script>
   <script src="{{ asset('assets/js/app.js') }}"></script>
-  <script src="{{ asset('assets/js/admin.js') }}"></script>
+  <script src="{{ asset('assets/js/admin.js') }}?v={{ filemtime(public_path('assets/js/admin.js')) }}"></script>
 
   @stack('scripts')
 </body>

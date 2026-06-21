@@ -116,9 +116,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
       Route::get('/', [AdminProductController::class, 'index'])->name('index');
       Route::get('/create', [AdminProductController::class, 'create'])->name('create');
       Route::post('/store', [AdminProductController::class, 'store'])->name('store');
-      Route::get('/{id}/edit', [AdminProductController::class, 'edit'])->name('edit');
-      Route::post('/{id}', [AdminProductController::class, 'update'])->name('update');
-      Route::post('/{id}/delete', [AdminProductController::class, 'destroy'])->name('destroy');
+      Route::get('/{product}/edit', [AdminProductController::class, 'edit'])->name('edit');
+      Route::put('/{product}', [AdminProductController::class, 'update'])->name('update');
+      Route::delete('/{product}/delete', [AdminProductController::class, 'destroy'])->name('destroy');
     });
 
     // Resource Controllers for CRUD operations

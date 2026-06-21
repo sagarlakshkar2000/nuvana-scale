@@ -6,17 +6,18 @@
     <div class="d-flex justify-content-between align-items-center mt-2 mb-4 p-2 border-bottom">
       <div>
         <h4 class="h4 mb-1 fw-bold" style="color: #1a1e2b;">
-          <i class="fas fa-plus-circle me-2 text-primary"></i>Create New Product
+          <i class="fas fa-edit me-2 text-primary"></i>Edit Product
         </h4>
-        <p class="text-muted mb-0">Add a new product to your store inventory</p>
+        <p class="text-muted mb-0">Update product details</p>
       </div>
       <a href="{{ route('admin.products.index') }}" class="btn btn-outline-secondary btn-lg px-4">
         <i class="fas fa-arrow-left me-2"></i>Back to Products
       </a>
     </div>
 
-    <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data" id="productForm">
+    <form action="{{ route('admin.products.update', $product->id) }}" method="POST" enctype="multipart/form-data" id="productForm">
       @csrf
+      @method('PUT')
 
       <div class="row">
         <div class="col-12">
@@ -33,7 +34,7 @@
                 <div class="col-md-8">
                   <label class="form-label fw-semibold">Product Name <span class="text-danger">*</span></label>
                   <input type="text" class="form-control form-control-lg @error('name') is-invalid @enderror" name="name"
-                    value="{{ old('name') }}" placeholder="Enter product name" required>
+                    value="{{ old('name', $product->name) }}" placeholder="Enter product name" required>
                   @error('name')
                     <div class="invalid-feedback">{{ $message }}</div>
                   @enderror
@@ -45,7 +46,7 @@
                     required>
                     <option value="">Select Category</option>
                     @foreach($categories as $category)
-                      <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                      <option value="{{ $category->id }}" {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>
                         {{ $category->name }}
                       </option>
                     @endforeach
@@ -58,7 +59,7 @@
                 <div class="col-md-6">
                   <label class="form-label fw-semibold">Slug</label>
                   <input type="text" class="form-control form-control-lg @error('slug') is-invalid @enderror" name="slug"
-                    value="{{ old('slug') }}" placeholder="Auto-generated">
+                    value="{{ old('slug', $product->slug) }}" placeholder="Auto-generated">
                   @error('slug')
                     <div class="invalid-feedback">{{ $message }}</div>
                   @enderror
@@ -67,7 +68,7 @@
                 <div class="col-md-6">
                   <label class="form-label fw-semibold">SKU</label>
                   <input type="text" class="form-control form-control-lg @error('sku') is-invalid @enderror" name="sku"
-                    value="{{ old('sku') }}" placeholder="Auto-generated">
+                    value="{{ old('sku', $product->sku) }}" placeholder="Auto-generated">
                   @error('sku')
                     <div class="invalid-feedback">{{ $message }}</div>
                   @enderror
@@ -76,7 +77,7 @@
                 <div class="col-12">
                   <label class="form-label fw-semibold">Description</label>
                   <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="5"
-                    placeholder="Write a detailed product description...">{{ old('description') }}</textarea>
+                    placeholder="Write a detailed product description...">{{ old('description', $product->description) }}</textarea>
                   @error('description')
                     <div class="invalid-feedback">{{ $message }}</div>
                   @enderror
@@ -105,7 +106,25 @@
                 <div class="alert alert-danger mt-3">{{ $message }}</div>
               @enderror
 
-              <div class="row mt-4" id="imagePreview"></div>
+              <div class="row mt-4" id="existingImagePreview">
+                @if(isset($product) && $product->images)
+                  @foreach($product->images as $img)
+                    <div class="col-md-2 col-4 mb-3 image-preview-item existing-image" data-id="{{ $img->id }}">
+                      <div class="position-relative">
+                        <img src="{{ asset('storage/' . $img->image_url) }}" class="img-fluid rounded-3 border shadow-sm"
+                          style="height: 140px; width: 100%; object-fit: cover;">
+                        <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2 rounded-circle"
+                          onclick="removeExistingImage(this, {{ $img->id }})"
+                          style="width: 32px; height: 32px; padding: 0;" title="Remove image">
+                          <i class="fas fa-times"></i>
+                        </button>
+                        <input type="hidden" name="existing_images[]" value="{{ $img->id }}">
+                      </div>
+                    </div>
+                  @endforeach
+                @endif
+              </div>
+              <div class="row mt-2" id="imagePreview"></div>
             </div>
           </div>
 
@@ -240,8 +259,8 @@
             </div>
             <div class="card-body px-4 pb-4">
               <div id="featuresContainer">
-                @if(old('features'))
-                  @foreach(old('features') as $index => $feature)
+                @if(old('features', $product->features))
+                  @foreach(old('features', $product->features) as $index => $feature)
                     <div class="feature-row row g-2 mb-3">
                       <div class="col-md-11">
                         <input type="text" class="form-control" name="features[]" value="{{ $feature }}" placeholder="e.g. High Accuracy">
@@ -281,8 +300,8 @@
             </div>
             <div class="card-body px-4 pb-4">
               <div id="idealsContainer">
-                @if(old('ideal_for'))
-                  @foreach(old('ideal_for') as $index => $ideal)
+                @if(old('ideal_for', $product->ideal_for))
+                  @foreach(old('ideal_for', $product->ideal_for) as $index => $ideal)
                     <div class="ideal-row row g-2 mb-3">
                       <div class="col-md-11">
                         <input type="text" class="form-control" name="ideal_for[]" value="{{ $ideal }}" placeholder="e.g. Retail Shop & Supermarkets">
@@ -322,8 +341,8 @@
             </div>
             <div class="card-body px-4 pb-4">
               <div id="reasonsContainer">
-                @if(old('why_choose_nuvana'))
-                  @foreach(old('why_choose_nuvana') as $index => $reason)
+                @if(old('why_choose_nuvana', $product->why_choose_nuvana))
+                  @foreach(old('why_choose_nuvana', $product->why_choose_nuvana) as $index => $reason)
                     <div class="reason-row row g-2 mb-3">
                       <div class="col-md-4">
                         <input type="text" class="form-control" name="why_choose_nuvana[{{ $index }}][title]" value="{{ $reason['title'] ?? '' }}" placeholder="Title (e.g. Premium Quality)">
@@ -369,8 +388,8 @@
             </div>
             <div class="card-body px-4 pb-4">
               <div id="faqsContainer">
-                @if(old('faqs'))
-                  @foreach(old('faqs') as $index => $faq)
+                @if(old('faqs', $product->faqs))
+                  @foreach(old('faqs', $product->faqs) as $index => $faq)
                     <div class="faq-row row g-2 mb-3">
                       <div class="col-md-4">
                         <input type="text" class="form-control" name="faqs[{{ $index }}][question]" value="{{ $faq['question'] ?? '' }}" placeholder="Question">
@@ -419,12 +438,12 @@
                   </label>
                   <select class="form-select form-select-lg @error('badge') is-invalid @enderror" name="badge">
                     <option value="">No Badge</option>
-                    <option value="trending" {{ old('badge') == 'trending' ? 'selected' : '' }}>🔥 Trending</option>
-                    <option value="new" {{ old('badge') == 'new' ? 'selected' : '' }}>✨ New</option>
-                    <option value="best_seller" {{ old('badge') == 'best_seller' ? 'selected' : '' }}>🏆 Best Seller
+                    <option value="trending" {{ old('badge', $product->badge) == 'trending' ? 'selected' : '' }}>🔥 Trending</option>
+                    <option value="new" {{ old('badge', $product->badge) == 'new' ? 'selected' : '' }}>✨ New</option>
+                    <option value="best_seller" {{ old('badge', $product->badge) == 'best_seller' ? 'selected' : '' }}>🏆 Best Seller
                     </option>
-                    <option value="sale" {{ old('badge') == 'sale' ? 'selected' : '' }}>💰 Sale</option>
-                    <option value="hot" {{ old('badge') == 'hot' ? 'selected' : '' }}>🔥 Hot</option>
+                    <option value="sale" {{ old('badge', $product->badge) == 'sale' ? 'selected' : '' }}>💰 Sale</option>
+                    <option value="hot" {{ old('badge', $product->badge) == 'hot' ? 'selected' : '' }}>🔥 Hot</option>
                   </select>
                   @error('badge')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -436,8 +455,8 @@
                     <i class="fas fa-toggle-on me-1 text-primary"></i> Product Status
                   </label>
                   <select class="form-select form-select-lg @error('status') is-invalid @enderror" name="status">
-                    <option value="active" {{ old('status', 'active') == 'active' ? 'selected' : '' }}>🟢 Active</option>
-                    <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>🔴 Inactive</option>
+                    <option value="active" {{ old('status', $product->is_active ? 'active' : 'inactive') == 'active' ? 'selected' : '' }}>🟢 Active</option>
+                    <option value="inactive" {{ old('status', $product->is_active ? 'active' : 'inactive') == 'inactive' ? 'selected' : '' }}>🔴 Inactive</option>
                   </select>
                   @error('status')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -454,7 +473,7 @@
             <i class="fas fa-times me-2"></i>Cancel
           </a>
           <button type="submit" class="btn btn-primary btn-lg px-5" id="submitBtn">
-            <i class="fas fa-check-circle me-2"></i>Create Product
+            <i class="fas fa-check-circle me-2"></i>Update Product
           </button>
         </div>
       </div>
@@ -545,6 +564,18 @@
         filesArray.splice(index, 1);
         updatePreview();
         updateFileInput();
+      };
+
+      window.removeExistingImage = function(btn, id) {
+        const container = document.createElement('input');
+        container.type = 'hidden';
+        container.name = 'delete_images[]';
+        container.value = id;
+        document.getElementById('productForm').appendChild(container);
+        
+        const item = btn.closest('.existing-image');
+        item.style.animation = 'fadeOut 0.2s ease-out';
+        setTimeout(() => item.remove(), 200);
       };
 
       function updateFileInput() {

@@ -17,7 +17,17 @@ class Product extends Model
     'price',
     'old_price',
     'stock_status',
-    'is_active',
+    'features',
+    'ideal_for',
+    'why_choose_nuvana',
+    'faqs',
+  ];
+
+  protected $casts = [
+    'features' => 'array',
+    'ideal_for' => 'array',
+    'why_choose_nuvana' => 'array',
+    'faqs' => 'array',
   ];
 
   public function category()

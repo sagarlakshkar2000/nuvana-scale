@@ -29,4 +29,21 @@ document.addEventListener('DOMContentLoaded', function () {
       toggleSidebar();
     }
   });
+
+  // Desktop sidebar collapse functionality
+  const desktopMenuToggle = document.getElementById('desktopMenuToggle');
+  
+  if (desktopMenuToggle) {
+    desktopMenuToggle.addEventListener('click', function () {
+      document.body.classList.toggle('sidebar-collapsed');
+      localStorage.setItem('sidebarCollapsed', document.body.classList.contains('sidebar-collapsed'));
+    });
+  }
+
+  // Restore sidebar state from localStorage
+  if (localStorage.getItem('sidebarCollapsed') === 'true') {
+    if (window.innerWidth > 768) {
+      document.body.classList.add('sidebar-collapsed');
+    }
+  }
 });
