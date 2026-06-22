@@ -85,7 +85,7 @@
 
                     <!-- Background Image -->
                     <img src="{{ asset('storage/' . $slide->image) }}" class="d-block w-100"
-                      style="object-fit: cover; height: 600px;" alt="{{ $slide->title ?? 'Banner' }}">
+                      alt="{{ $slide->title ?? 'Banner' }}">
 
                     <!-- Dark Overlay layer -->
                     <div class="position-absolute top-0 start-0 w-100 h-100" style="background: rgba(0, 0, 0, 0.2);"></div>
@@ -157,7 +157,7 @@
                   stroke-linecap="round" fill="none" opacity="0.5" />
               </svg>
             </div>
-            <p class="mb-0 te style=" letter-spacing: 0.5px;"><?php echo $section_config['subtitle']; ?></p>
+            <p class="mb-0 te style="letter-spacing: 0.5px;"><?php echo $section_config['subtitle']; ?></p>
           </div>
           <a href="<?php echo $section_config['button_link']; ?>"
             class="cus-btn d-inline-flex align-items-center justify-content-center gap-2"
