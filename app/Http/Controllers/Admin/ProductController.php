@@ -55,122 +55,19 @@ class ProductController extends Controller
 
   public function store(Request $request)
   {
+    // dd($request->all());
+
     DB::beginTransaction();
 
     try {
-      // Validate the request
-      $validated = $request->validate([
-        'name' => 'required|string|max:255',
-        'category_id' => 'required|exists:categories,id',
-        'slug' => 'required|string',
-        'sku' => 'nullable|string|unique:products,sku',
-        'description' => 'nullable|string',
-        'badge' => 'nullable|string',
-        'status' => 'required|in:active,inactive',
-        'predefined_specs' => 'nullable|array',
-        'specifications' => 'nullable|array',
-        'images' => 'nullable|array',
-        'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:5120',
-        'features' => 'nullable|array',
-        'ideal_for' => 'nullable|array',
-        'why_choose_nuvana' => 'nullable|array',
-        'faqs' => 'nullable|array',
-      ]);
+      $validated = $this->validateRequest($request);
 
-      // Generate SKU if not provided
-      $sku = $request->sku;
-      if (empty($sku)) {
-        $sku = 'NUV-' . strtoupper(\Illuminate\Support\Str::random(6));
-      }
+      $product = Product::create(
+        $this->prepareProductData($validated, $request)
+      );
 
-      // Merge predefined specs with custom specs
-      $allSpecifications = [];
-
-      // Add predefined specifications (only non-empty values)
-      if ($request->has('predefined_specs')) {
-        foreach ($request->predefined_specs as $key => $value) {
-          if (!empty($value)) {
-            $allSpecifications[$key] = $value;
-          }
-        }
-      }
-
-      // Add custom specifications
-      if ($request->has('specifications')) {
-        foreach ($request->specifications as $spec) {
-          if (!empty($spec['key']) && !empty($spec['value'])) {
-            $key = trim($spec['key']);
-            $value = trim($spec['value']);
-            $allSpecifications[$key] = $value;
-          }
-        }
-      }
-
-      // Format why_choose_nuvana to remove empty entries
-      $whyChooseNuvana = [];
-      if ($request->has('why_choose_nuvana')) {
-        foreach ($request->why_choose_nuvana as $item) {
-          if (!empty($item['title']) && !empty($item['description'])) {
-            $whyChooseNuvana[] = $item;
-          }
-        }
-      }
-
-      // Format faqs to remove empty entries
-      $faqs = [];
-      if ($request->has('faqs')) {
-        foreach ($request->faqs as $faq) {
-          if (!empty($faq['question']) && !empty($faq['answer'])) {
-            $faqs[] = $faq;
-          }
-        }
-      }
-
-      // Clean features and ideal_for
-      $features = array_filter($request->features ?? []);
-      $idealFor = array_filter($request->ideal_for ?? []);
-
-      // ✅ Create Product (matching your form fields)
-      $product = Product::create([
-        'category_id' => $validated['category_id'],
-        'name' => $validated['name'],
-        'slug' => $validated['slug'],
-        'sku' => $sku,
-        'description' => $validated['description'],
-        'badge' => $validated['badge'],
-        'is_active' => $validated['status'] === 'active' ? 1 : 0,
-        'features' => array_values($features),
-        'ideal_for' => array_values($idealFor),
-        'why_choose_nuvana' => $whyChooseNuvana,
-        'faqs' => $faqs,
-      ]);
-
-      if (!empty($allSpecifications)) {
-        foreach ($allSpecifications as $key => $value) {
-          ProductSpecification::create([
-            'product_id' => $product->id,
-            'key' => $key,
-            'value' => $value,
-            'group_name' => 'General', // optional
-            'is_predefined' => 1, // optional logic
-          ]);
-        }
-      }
-
-      // ✅ Handle Images (multiple upload)
-      if ($request->hasFile('images')) {
-        foreach ($request->file('images') as $index => $image) {
-          $path = $image->store('products', 'public');
-
-          // If you have ProductImage model
-          ProductImage::create([
-            'product_id' => $product->id,
-            'image_url' => $path,
-            'sort_order' => $index,
-            'is_primary' => $index === 0,
-          ]);
-        }
-      }
+      $this->storeSpecifications($product, $request);
+      $this->storeImages($product, $request);
 
       DB::commit();
 
@@ -188,6 +85,139 @@ class ProductController extends Controller
     }
   }
 
+  /* =========================
+     VALIDATION
+  ========================= */
+  private function validateRequest($request)
+  {
+    return $request->validate([
+      'name' => 'required|string|max:255',
+      'category_id' => 'required|exists:categories,id',
+      'slug' => 'required|string',
+      'sku' => 'nullable|string|unique:products,sku',
+      'description' => 'nullable|string',
+      'badge' => 'nullable|string',
+      'status' => 'required|in:active,inactive',
+      'predefined_specs' => 'nullable|array',
+      'specifications' => 'nullable|array',
+      'images' => 'nullable|array',
+      'images.*' => 'image|mimes:jpeg,png,jpg,webp|max:5120',
+      'features' => 'nullable|array',
+      'ideal_for' => 'nullable|array',
+      'why_choose_nuvana' => 'nullable|array',
+      'faqs' => 'nullable|array',
+    ]);
+  }
+
+  /* =========================
+     PRODUCT DATA
+  ========================= */
+  private function prepareProductData($validated, $request)
+  {
+    return [
+      'category_id' => $validated['category_id'],
+      'name' => $validated['name'],
+      'slug' => $validated['slug'],
+      'sku' => $validated['sku'] ?? $this->generateSku(),
+      'description' => $validated['description'] ?? null,
+      'badge' => $validated['badge'] ?? null,
+      'is_active' => $validated['status'] === 'active',
+      'features' => $this->cleanArray($request->features),
+      'ideal_for' => $this->cleanArray($request->ideal_for),
+      'why_choose_nuvana' => $this->cleanWhyChoose($request),
+      'faqs' => $this->cleanFaqs($request),
+    ];
+  }
+
+  /* =========================
+     SKU
+  ========================= */
+  private function generateSku()
+  {
+    return 'NUV-' . strtoupper(\Illuminate\Support\Str::random(6));
+  }
+
+  /* =========================
+     SPECIFICATIONS
+  ========================= */
+  private function storeSpecifications($product, $request)
+  {
+    $specs = collect();
+
+    // predefined
+    foreach ($request->predefined_specs ?? [] as $key => $value) {
+      if (!empty($value)) {
+        $specs->push([
+          'key' => trim($key),
+          'value' => trim($value),
+          'group_name' => 'General',
+          'is_predefined' => true,
+        ]);
+      }
+    }
+
+    // custom
+    foreach ($request->specifications ?? [] as $spec) {
+      if (!empty($spec['key']) && !empty($spec['value'])) {
+        $specs->push([
+          'key' => trim($spec['key']),
+          'value' => trim($spec['value']),
+          'group_name' => 'Custom',
+          'is_predefined' => false,
+        ]);
+      }
+    }
+
+    $product->specifications()->createMany($specs->toArray());
+  }
+
+  /* =========================
+     IMAGES
+  ========================= */
+  private function storeImages($product, $request)
+  {
+    if (!$request->hasFile('images')) {
+      $product->images()->create([
+        'image_url' => 'products/product-1.png',
+        'sort_order' => 1,
+      ]);
+      return;
+    }
+
+    foreach ($request->file('images') as $index => $image) {
+      $path = $image->store('products', 'public');
+
+      $product->images()->create([
+        'image_url' => $path,
+        'sort_order' => $index + 1,
+      ]);
+    }
+  }
+
+  /* =========================
+     HELPERS
+  ========================= */
+  private function cleanArray($array)
+  {
+    return array_values(array_filter($array ?? []));
+  }
+
+  private function cleanWhyChoose($request)
+  {
+    return collect($request->why_choose_nuvana ?? [])
+      ->filter(fn($item) => !empty($item['title']) && !empty($item['description']))
+      ->values()
+      ->toArray();
+  }
+
+  private function cleanFaqs($request)
+  {
+    return collect($request->faqs ?? [])
+      ->filter(fn($faq) => !empty($faq['question']) && !empty($faq['answer']))
+      ->values()
+      ->toArray();
+  }
+
   public function edit(Product $product)
   {
     $defaultSpecs = [
@@ -197,7 +227,7 @@ class ProductController extends Controller
     ];
 
     $product->load(['specifications', 'images']);
-    
+
     // Group existing specifications
     $existingSpecs = $product->specifications->pluck('value', 'key')->toArray();
 
@@ -329,7 +359,6 @@ class ProductController extends Controller
             'product_id' => $product->id,
             'image_url' => $path,
             'sort_order' => $maxSort + $index + 1,
-            'is_primary' => false,
           ]);
         }
       }

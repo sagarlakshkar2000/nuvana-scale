@@ -8,23 +8,43 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Artisan;
 
-Route::get('/run-migrate', function () {
-  Artisan::call('migrate', ['--force' => true]);
-  return "Migration completed!";
-});
-
-Route::get('/run-storage-link', function () {
-  Artisan::call('storage:link');
-  return "Storage link created!";
-});
-
-Route::get('/clear-cache', function () {
-  Artisan::call('cache:clear');
-  Artisan::call('config:clear');
-  Artisan::call('route:clear');
-  Artisan::call('view:clear');
-
-  return "All cache cleared successfully!";
+Route::get('/run-task/{task}', function ($task) {
+  try {
+    switch ($task) {
+      case 'migrate':
+        Artisan::call('migrate', ['--force' => true]);
+        return "Migration completed!";
+      case 'storage-link':
+        Artisan::call('storage:link');
+        return "Storage link created!";
+      case 'clear-cache':
+        Artisan::call('cache:clear');
+        Artisan::call('config:clear');
+        Artisan::call('route:clear');
+        Artisan::call('view:clear');
+        return "All cache cleared successfully!";
+      case 'optimize':
+        Artisan::call('optimize');
+        Artisan::call('view:cache');
+        return "App optimized successfully!";
+      case 'seed':
+        Artisan::call('db:seed', ['--force' => true]);
+        return "Database seeded successfully!";
+      case 'all':
+        Artisan::call('migrate', ['--force' => true]);
+        Artisan::call('db:seed', ['--force' => true]);
+        Artisan::call('storage:link');
+        Artisan::call('cache:clear');
+        Artisan::call('config:clear');
+        Artisan::call('route:clear');
+        Artisan::call('view:clear');
+        return "All tasks (migrate, seed, storage link, clear cache) completed!";
+      default:
+        return "Task not found! Available tasks: migrate, storage-link, clear-cache, optimize, seed, all";
+    }
+  } catch (\Exception $e) {
+    return "Error executing task: " . $e->getMessage();
+  }
 });
 
 /*

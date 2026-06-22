@@ -182,70 +182,70 @@
 
     <!-- BLOGS SECTION START -->
     @if(isset($wp_posts) && $wp_posts->count() > 0)
-    <section class="blog-section py-40">
-      <div class="container-fluid">
-        <div class="d-flex align-items-center justify-content-between flex-sm-row flex-column gap-sm-0 gap-24 mb-48">
-          <div>
-            <h2 class="fw-600 black mb-12">{{ $blog_config['title'] }}</h2>
-            <p>{{ $blog_config['subtitle'] }}</p>
-          </div>
-          <a href="{{ $blog_config['button_link'] }}" class="cus-btn-arrow d-none d-sm-block">
-            {{ $blog_config['button_text'] }}
-            <div class="icon">
-              <i class="fa-light fa-chevron-right"></i>
+      <section class="blog-section py-40">
+        <div class="container-fluid">
+          <div class="d-flex align-items-center justify-content-between flex-sm-row flex-column gap-sm-0 gap-24 mb-48">
+            <div>
+              <h2 class="fw-600 black mb-12">{{ $blog_config['title'] }}</h2>
+              <p>{{ $blog_config['subtitle'] }}</p>
             </div>
-          </a>
-        </div>
+             <a href="<?php echo $blog_config['button_link']; ?>"
+              class="cus-btn d-inline-flex align-items-center justify-content-center gap-2"
+              style="padding: 12px 28px !important; font-size: 15px !important; border-radius: 50px; text-decoration: none;">
+              <span class="fw-600"><?php echo $blog_config['button_text']; ?></span>
+              <i class="fa-regular fa-arrow-right"></i>
+            </a>
+          </div>
 
-        <div class="row row-gap-4">
-          @php $featured_blog = $wp_posts->first(); @endphp
-          <div class="col-xl-6 col-12">
-            <div class="blog-card main d-flex flex-column gap-16 bg-lightest-gray br-16 h-100">
-              <a href="{{ url('/blog/' . $featured_blog->post_name) }}" class="card-image">
-                <img src="{{ $featured_blog->featured_image_url }}" alt="{{ $featured_blog->post_title }}" loading="lazy"
-                  class="img-fluid" style="object-fit: cover; height: 300px; width: 100%;">
-              </a>
-              <div class="d-flex flex-column gap-32 p-24">
-                <div class="d-flex flex-column gap-16 black">
-                  <div class="create-by">
-                    <p class="fw-500">{{ \Carbon\Carbon::parse($featured_blog->post_date)->format('d M, Y') }}</p>
-                    <div class="dot"></div>
-                    <p class="dark-gray">By {{ $featured_blog->author->display_name ?? 'Admin' }}</p>
+          <div class="row row-gap-4">
+            @php $featured_blog = $wp_posts->first(); @endphp
+            <div class="col-xl-6 col-12">
+              <div class="blog-card main d-flex flex-column gap-16 bg-lightest-gray br-16 h-100">
+                <a href="{{ url('/blog/' . $featured_blog->post_name) }}" class="card-image">
+                  <img src="{{ $featured_blog->featured_image_url }}" alt="{{ $featured_blog->post_title }}" loading="lazy"
+                    class="img-fluid" style="object-fit: cover; height: 300px; width: 100%;">
+                </a>
+                <div class="d-flex flex-column gap-32 p-24">
+                  <div class="d-flex flex-column gap-16 black">
+                    <div class="create-by">
+                      <p class="fw-500">{{ \Carbon\Carbon::parse($featured_blog->post_date)->format('d M, Y') }}</p>
+                      <div class="dot"></div>
+                      <p class="dark-gray">By {{ $featured_blog->author->display_name ?? 'Admin' }}</p>
+                    </div>
+                    <a href="{{ url('/blog/' . $featured_blog->post_name) }}" class="h4">{{ $featured_blog->post_title }}</a>
+                    <p>{{ \Illuminate\Support\Str::limit(strip_tags($featured_blog->post_excerpt ?: $featured_blog->post_content), 120) }}</p>
                   </div>
-                  <a href="{{ url('/blog/' . $featured_blog->post_name) }}" class="h4">{{ $featured_blog->post_title }}</a>
-                  <p>{{ \Illuminate\Support\Str::limit(strip_tags($featured_blog->post_excerpt ?: $featured_blog->post_content), 120) }}</p>
+                  <a href="{{ url('/blog/' . $featured_blog->post_name) }}" class="text-16 medium black card-btn">Read More</a>
                 </div>
-                <a href="{{ url('/blog/' . $featured_blog->post_name) }}" class="text-16 medium black card-btn">Read More</a>
               </div>
             </div>
-          </div>
 
-          <div class="col-xl-6 col-12">
-            <div class="row row-gap-4">
-              @foreach($wp_posts->skip(1) as $blog)
-                <div class="col-lg-6 col-6">
-                  <div class="blog-card main d-flex flex-column gap-16 bg-lightest-gray br-16 h-100">
-                    <a href="{{ url('/blog/' . $blog->post_name) }}" class="card-image">
-                      <img src="{{ $blog->featured_image_url }}" alt="{{ $blog->post_title }}" loading="lazy" class="img-fluid" style="object-fit: cover; height: 200px; width: 100%;">
-                    </a>
-                    <div class="d-flex flex-column gap-32 p-16">
-                      <div class="d-flex flex-column gap-16 black">
-                        <div class="create-by d-none d-sm-block">
-                          <p class="fw-500">{{ \Carbon\Carbon::parse($blog->post_date)->format('d M, Y') }}</p>
-                          <div class="dot"></div>
-                          <p class="dark-gray">By {{ $blog->author->display_name ?? 'Admin' }}</p>
+            <div class="col-xl-6 col-12">
+              <div class="row row-gap-4">
+                @foreach($wp_posts->skip(1) as $blog)
+                  <div class="col-lg-6 col-6">
+                    <div class="blog-card main d-flex flex-column gap-16 bg-lightest-gray br-16 h-100">
+                      <a href="{{ url('/blog/' . $blog->post_name) }}" class="card-image">
+                        <img src="{{ $blog->featured_image_url }}" alt="{{ $blog->post_title }}" loading="lazy" class="img-fluid" style="object-fit: cover; height: 200px; width: 100%;">
+                      </a>
+                      <div class="d-flex flex-column gap-32 p-16">
+                        <div class="d-flex flex-column gap-16 black">
+                          <div class="create-by d-none d-sm-block">
+                            <p class="fw-500">{{ \Carbon\Carbon::parse($blog->post_date)->format('d M, Y') }}</p>
+                            <div class="dot"></div>
+                            <p class="dark-gray">By {{ $blog->author->display_name ?? 'Admin' }}</p>
+                          </div>
+                          <a href="{{ url('/blog/' . $blog->post_name) }}" class="h6">{{ \Illuminate\Support\Str::limit($blog->post_title, 50) }}</a>
                         </div>
-                        <a href="{{ url('/blog/' . $blog->post_name) }}" class="h6">{{ \Illuminate\Support\Str::limit($blog->post_title, 50) }}</a>
                       </div>
                     </div>
                   </div>
-                </div>
-              @endforeach
+                @endforeach
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
     @endif
     <!-- BLOGS SECTION END -->
 
