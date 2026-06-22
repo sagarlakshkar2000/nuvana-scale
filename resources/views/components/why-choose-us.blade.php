@@ -35,7 +35,7 @@
 @endphp
 
 <!-- WHY CHOOSE US START -->
-<section class="benefit-section py-40 bg-light-gray" data-aos="fade-up">
+<section class="benefit-section py-40 bg-white" data-aos="fade-up">
   <div class="container-fluid">
     <div class="row row-gap-3">
       @foreach($benefits as $index => $benefit)
