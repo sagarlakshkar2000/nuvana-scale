@@ -93,6 +93,75 @@
                 </div>
               </div>
 
+              <!-- Availability Filter -->
+              <div class="category-block box-1 mb-32">
+                <div class="title">
+                  <h6 class="fw-600 black">Availability</h6>
+                  <span><i class="fa-light fa-chevron-up"></i></span>
+                </div>
+                <div class="content-block mt-24 mb-32">
+                  <div class="d-flex align-items-center justify-content-between mb-12">
+                    <div class="cus-checkBox">
+                      <input type="checkbox" id="in_stock" class="inp-cbx filter-checkbox" name="in_stock" value="1" {{ request('in_stock') ? 'checked' : '' }}>
+                      <label for="in_stock" class="cbx black">In Stock</label>
+                    </div>
+                    <p>({{ $in_stock_count }})</p>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between mb-12">
+                    <div class="cus-checkBox">
+                      <input type="checkbox" id="out_of_stock" class="inp-cbx filter-checkbox" name="out_of_stock"
+                        value="1" {{ request('out_of_stock') ? 'checked' : '' }}>
+                      <label for="out_of_stock" class="cbx black">Out of Stock</label>
+                    </div>
+                    <p>({{ $out_of_stock_count }})</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Price Filter -->
+              <div class="category-block box-1 mb-32">
+                <div class="title">
+                  <h6 class="fw-600 black">Price Range</h6>
+                  <span><i class="fa-light fa-chevron-up"></i></span>
+                </div>
+                <div class="content-block mt-24 mb-32">
+                  <div class="price-range-slider">
+                    <div class="price-input d-flex align-items-center justify-content-between mb-3">
+                      <div class="field w-100 me-2">
+                        <div class="input-group input-group-sm">
+                          <span class="input-group-text bg-white">₹</span>
+                          <input type="number" class="price-input-min form-control" name="min_price"
+                            value="{{ request('min_price', $min_price_range) }}">
+                        </div>
+                      </div>
+                      <div class="separator text-muted">-</div>
+                      <div class="field w-100 ms-2">
+                        <div class="input-group input-group-sm">
+                          <span class="input-group-text bg-white">₹</span>
+                          <input type="number" class="price-input-max form-control" name="max_price"
+                            value="{{ request('max_price', $max_price_range) }}">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="slider position-relative mt-4"
+                      style="height: 5px; background: #e9ecef; border-radius: 5px;">
+                      <div class="progress-range position-absolute h-100"
+                        style="background-color: #141516; border-radius: 5px;"></div>
+                    </div>
+                    <div class="range-input position-relative" style="margin-top: -10px;">
+                      <input type="range" class="range-min w-100 position-absolute"
+                        style="top: -5px; height: 5px; background: transparent; pointer-events: none; -webkit-appearance: none;"
+                        min="{{ $min_price_range }}" max="{{ $max_price_range }}"
+                        value="{{ request('min_price', $min_price_range) }}" step="100">
+                      <input type="range" class="range-max w-100 position-absolute"
+                        style="top: -5px; height: 5px; background: transparent; pointer-events: none; -webkit-appearance: none;"
+                        min="{{ $min_price_range }}" max="{{ $max_price_range }}"
+                        value="{{ request('max_price', $max_price_range) }}" step="100">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <input type="hidden" name="sort_by" id="sort_by_input" value="{{ $sort_by ?? 'featured' }}">
               <input type="hidden" name="page" id="page_input" value="1">
             </form>
@@ -113,6 +182,29 @@
           <div class="row row-gap-3 justify-content-between align-items-center mb-16">
             <div class="col-xl-4 col-lg-5 col-md-5 col-8">
               <p class="black fw-500">Showing {{ $start_count }} - {{ $end_count }} of {{ $total_products }} Results</p>
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-4 col-4 d-flex justify-content-end">
+              <div class="wrapper-dropdown w-100" id="sortDropdown"
+                style="background: #fff; border: 1px solid #eaeaec; border-radius: 8px; padding: 10px 16px; position: relative; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                @php
+                  $current_sort_label = collect($sort_options)->firstWhere('value', $sort_by)['label'] ?? 'Featured';
+                @endphp
+                <span class="selected-display black fw-500" id="destination8">{{ $current_sort_label }}</span>
+                <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
+                  fill="none" style="transition: all 0.3s;">
+                  <path d="M10 13L5 8H15L10 13Z" fill="#141516" />
+                </svg>
+                <ul class="dropdown-list"
+                  style="position: absolute; top: 110%; left: 0; width: 100%; background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 8px; list-style: none; padding: 10px 0; margin: 0; z-index: 99; opacity: 0; visibility: hidden; transition: all 0.3s; transform: translateY(10px);">
+                  @foreach($sort_options as $option)
+                    <li class="sort-option" data-sort="{{ $option['value'] }}"
+                      style="padding: 8px 16px; cursor: pointer; transition: all 0.2s;"
+                      onmouseover="this.style.background='#f8f9fa'" onmouseout="this.style.background='transparent'">
+                      {{ $option['label'] }}
+                    </li>
+                  @endforeach
+                </ul>
+              </div>
             </div>
           </div>
 

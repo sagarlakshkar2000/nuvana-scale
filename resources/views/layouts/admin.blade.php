@@ -156,7 +156,7 @@
             </div>
           </header>
 
-          <div class="content-wrapper ">
+          <div class="content-wrapper px-1">
             <div class="container w-100 h-100 mx-0 overflow-auto">
               @if(session('success'))
                 <div class="alert alert-success">
