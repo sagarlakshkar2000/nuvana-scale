@@ -49,13 +49,13 @@ return [
         ],
       ],
     ],
-    // [
-    //   'name' => 'Blog',
-    //   'route' => 'blog.index',
-    //   'route_pattern' => 'blog.*',
-    //   'icon' => '',
-    //   'class' => '',
-    // ],
+    [
+      'name' => 'Blog',
+      'route' => 'blog.index',
+      'route_pattern' => 'blog.*',
+      'icon' => '',
+      'class' => '',
+    ],
     [
       'name' => 'Contact Us',
       'route' => 'contact',

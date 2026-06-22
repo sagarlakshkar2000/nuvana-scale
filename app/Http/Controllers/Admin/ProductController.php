@@ -71,6 +71,8 @@ class ProductController extends Controller
 
       DB::commit();
 
+      \Illuminate\Support\Facades\Cache::forget('home_trending_products');
+
       return redirect()
         ->route('admin.products.index')
         ->with('success', 'Product created successfully!');
@@ -365,6 +367,8 @@ class ProductController extends Controller
 
       DB::commit();
 
+      \Illuminate\Support\Facades\Cache::forget('home_trending_products');
+
       return redirect()
         ->route('admin.products.index')
         ->with('success', 'Product updated successfully!');
@@ -382,6 +386,7 @@ class ProductController extends Controller
   public function destroy(Product $product)
   {
     $product->delete();
+    \Illuminate\Support\Facades\Cache::forget('home_trending_products');
     return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully!');
   }
 }

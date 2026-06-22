@@ -10,6 +10,7 @@ class HomeController extends Controller
   {
     return \Illuminate\Support\Facades\Cache::remember('home_trending_products', 3600, function () {
       return Product::with(['category', 'images', 'specifications'])
+        ->where('is_active', 1)
         ->latest()
         ->take(8)
         ->get();
