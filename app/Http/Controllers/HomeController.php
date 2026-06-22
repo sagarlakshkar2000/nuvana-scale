@@ -24,7 +24,14 @@ class HomeController extends Controller
         ->orderBy('created_at', 'desc')
         ->get();
 
-    return view('pages.home', compact(['trending_products', 'hero_slides']));
+    // Fetch the latest 5 published WordPress posts
+    $wp_posts = \App\Models\WpPost::with('author')
+        ->published()
+        ->orderBy('post_date', 'desc')
+        ->take(5)
+        ->get();
+
+    return view('pages.home', compact(['trending_products', 'hero_slides', 'wp_posts']));
   }
 
   public function about()

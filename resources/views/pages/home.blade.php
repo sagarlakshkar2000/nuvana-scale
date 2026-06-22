@@ -52,79 +52,14 @@
 
     <!-- BLOGS SECTION START -->
     @php
-  // Blog posts data array - This can be moved to Controller and passed as variable
-  $featured_blog = [
-    'id' => 1,
-    'image' => 'https://cdn.shopaccino.com/equalscale/images/esblog-banners-10-162937.jpg',
-    'date' => '15 Mar, 2026',
-    'author' => 'Rajesh Kumar',
-    'author_role' => 'Technical Director',
-    'title' => 'How to Choose the Right Weighing Scale for Your Business',
-    'excerpt' => 'Selecting the perfect weighing scale for your industrial needs can be challenging. Learn about accuracy classes, capacity requirements, and environmental factors that impact your decision.',
-    'slug' => 'how-to-choose-right-weighing-scale',
-    'category' => 'Buying Guide',
-    'read_time' => 8
-  ];
-
-  $regular_blogs = [
-    [
-      'id' => 2,
-      'image' => 'https://cdn.shopaccino.com/equalscale/articles/weighing-scale-103726148074981_l.png?v=717',
-      'date' => '10 Mar, 2026',
-      'author' => 'Priya Sharma',
-      'author_role' => 'Quality Manager',
-      'title' => 'Essential Maintenance Tips for Your Weighbridge',
-      'excerpt' => 'Regular maintenance ensures accuracy and longevity of your weighbridge. Discover key maintenance practices to prevent downtime.',
-      'slug' => 'weighbridge-maintenance-tips',
-      'category' => 'Maintenance',
-      'read_time' => 5
-    ],
-    [
-      'id' => 3,
-      'image' => 'https://cdn.shopaccino.com/equalscale/articles/here-you-find-all-products-108738261342594_s.png?v=717',
-      'date' => '5 Mar, 2026',
-      'author' => 'Amit Verma',
-      'author_role' => 'R&D Head',
-      'title' => 'Understanding Load Cell Technology: A Complete Guide',
-      'excerpt' => 'From strain gauges to digital load cells, understand how different load cell technologies work and which suits your application.',
-      'slug' => 'load-cell-technology-guide',
-      'category' => 'Technology',
-      'read_time' => 7
-    ],
-    [
-      'id' => 4,
-      'image' => 'https://cdn.shopaccino.com/equalscale/articles/weighing-scale-isnt-telling-you-92553477978759_l.png?v=717',
-      'date' => '28 Feb, 2026',
-      'author' => 'Sanjay Mehta',
-      'author_role' => 'Product Specialist',
-      'title' => 'Digital vs Analog Weighing Scales: Which One Should You Choose?',
-      'excerpt' => 'Compare digital and analog weighing scales to make an informed decision for your specific weighing requirements.',
-      'slug' => 'digital-vs-analog-weighing-scales',
-      'category' => 'Comparison',
-      'read_time' => 6
-    ],
-    [
-      'id' => 5,
-      'image' => 'https://cdn.shopaccino.com/equalscale/articles/untitled-design-3-508585_s.png?v=717',
-      'date' => '20 Feb, 2026',
-      'author' => 'Neha Gupta',
-      'author_role' => 'Calibration Expert',
-      'title' => 'The Importance of Regular Calibration for Weighing Equipment',
-      'excerpt' => 'Learn why regular calibration is crucial for accuracy, compliance, and quality control in your weighing processes.',
-      'slug' => 'importance-of-calibration',
-      'category' => 'Best Practices',
-      'read_time' => 6
-    ]
-  ];
-
-  // Section configuration
-  $blog_config = [
-    'title' => 'Our Recent Blogs',
-    'subtitle' => 'Catch up on the latest insights, tips, and trends from our weighing industry experts.',
-    'button_text' => 'See More Blogs',
-    'button_link' => '/blog',
-    'show_featured' => true
-  ];
+      // Section configuration
+      $blog_config = [
+        'title' => 'Our Recent Blogs',
+        'subtitle' => 'Catch up on the latest insights, tips, and trends from our weighing industry experts.',
+        'button_text' => 'See More Blogs',
+        'button_link' => '/blog',
+        'show_featured' => true
+      ];
     @endphp
 
     <!-- HERO BANNER START -->
@@ -282,69 +217,72 @@
     <!-- TRENDING PRODUCTS END -->
 
     <!-- BLOGS SECTION START -->
-    <!-- <section class="blog-section py-40">
-                                                                                                    <div class="container-fluid">
-                                                                                                      <div class="d-flex align-items-center justify-content-between flex-sm-row flex-column gap-sm-0 gap-24 mb-48">
-                                                                                                        <div>
-                                                                                                          <h2 class="fw-600 black mb-12">{{ $blog_config['title'] }}</h2>
-                                                                                                          <p>{{ $blog_config['subtitle'] }}</p>
-                                                                                                        </div>
-                                                                                                        <a href="{{ $blog_config['button_link'] }}" class="cus-btn-arrow d-none d-sm-block">
-                                                                                                          {{ $blog_config['button_text'] }}
-                                                                                                          <div class="icon">
-                                                                                                            <i class="fa-light fa-chevron-right"></i>
-                                                                                                          </div>
-                                                                                                        </a>
-                                                                                                      </div>
+    @if(isset($wp_posts) && $wp_posts->count() > 0)
+    <section class="blog-section py-40">
+      <div class="container-fluid">
+        <div class="d-flex align-items-center justify-content-between flex-sm-row flex-column gap-sm-0 gap-24 mb-48">
+          <div>
+            <h2 class="fw-600 black mb-12">{{ $blog_config['title'] }}</h2>
+            <p>{{ $blog_config['subtitle'] }}</p>
+          </div>
+          <a href="{{ $blog_config['button_link'] }}" class="cus-btn-arrow d-none d-sm-block">
+            {{ $blog_config['button_text'] }}
+            <div class="icon">
+              <i class="fa-light fa-chevron-right"></i>
+            </div>
+          </a>
+        </div>
 
-                                                                                                      <div class="row row-gap-4">
-                                                                                                        <div class="col-xl-6 col-12">
-                                                                                                          <div class="blog-card main d-flex flex-column gap-16 bg-lightest-gray br-16 h-100">
-                                                                                                            <a href="{{ url('/blog/' . $featured_blog['slug']) }}" class="card-image">
-                                                                                                              <img src="{{ $featured_blog['image'] }}" alt="{{ $featured_blog['title'] }}" loading="lazy"
-                                                                                                                class="img-fluid">
-                                                                                                            </a>
-                                                                                                            <div class="d-flex flex-column gap-32 p-24">
-                                                                                                              <div class="d-flex flex-column gap-16 black">
-                                                                                                                <div class="create-by">
-                                                                                                                  <p class="fw-500">{{ $featured_blog['date'] }}</p>
-                                                                                                                  <div class="dot"></div>
-                                                                                                                  <p class="dark-gray">By {{ $featured_blog['author'] }}</p>
-                                                                                                                </div>
-                                                                                                                <a href="{{ url('/blog/' . $featured_blog['slug']) }}" class="h4">{{ $featured_blog['title'] }}</a>
-                                                                                                                <p>{{ $featured_blog['excerpt'] }}</p>
-                                                                                                              </div>
-                                                                                                              <a href="{{ url('/blog/' . $featured_blog['slug']) }}" class="text-16 medium black card-btn">Read More</a>
-                                                                                                            </div>
-                                                                                                          </div>
-                                                                                                        </div>
+        <div class="row row-gap-4">
+          @php $featured_blog = $wp_posts->first(); @endphp
+          <div class="col-xl-6 col-12">
+            <div class="blog-card main d-flex flex-column gap-16 bg-lightest-gray br-16 h-100">
+              <a href="{{ url('/blog/' . $featured_blog->post_name) }}" class="card-image">
+                <img src="{{ $featured_blog->featured_image_url }}" alt="{{ $featured_blog->post_title }}" loading="lazy"
+                  class="img-fluid" style="object-fit: cover; height: 300px; width: 100%;">
+              </a>
+              <div class="d-flex flex-column gap-32 p-24">
+                <div class="d-flex flex-column gap-16 black">
+                  <div class="create-by">
+                    <p class="fw-500">{{ \Carbon\Carbon::parse($featured_blog->post_date)->format('d M, Y') }}</p>
+                    <div class="dot"></div>
+                    <p class="dark-gray">By {{ $featured_blog->author->display_name ?? 'Admin' }}</p>
+                  </div>
+                  <a href="{{ url('/blog/' . $featured_blog->post_name) }}" class="h4">{{ $featured_blog->post_title }}</a>
+                  <p>{{ \Illuminate\Support\Str::limit(strip_tags($featured_blog->post_excerpt ?: $featured_blog->post_content), 120) }}</p>
+                </div>
+                <a href="{{ url('/blog/' . $featured_blog->post_name) }}" class="text-16 medium black card-btn">Read More</a>
+              </div>
+            </div>
+          </div>
 
-                                                                                                        <div class="col-xl-6 col-12">
-                                                                                                          <div class="row row-gap-4">
-                                                                                                            @foreach($regular_blogs as $blog)
-                                                                                                              <div class="col-lg-6 col-6">
-                                                                                                                <div class="blog-card main d-flex flex-column gap-16 bg-lightest-gray br-16">
-                                                                                                                  <a href="{{ url('/blog/' . $blog['slug']) }}" class="card-image">
-                                                                                                                    <img src="{{ $blog['image'] }}" alt="{{ $blog['title'] }}" loading="lazy" class="img-fluid">
-                                                                                                                  </a>
-                                                                                                                  <div class="d-flex flex-column gap-32 p-16">
-                                                                                                                    <div class="d-flex flex-column gap-16 black">
-                                                                                                                      <div class="create-by d-none d-sm-block">
-                                                                                                                        <p class="fw-500">{{ $blog['date'] }}</p>
-                                                                                                                        <div class="dot"></div>
-                                                                                                                        <p class="dark-gray">By {{ $blog['author'] }}</p>
-                                                                                                                      </div>
-                                                                                                                      <a href="{{ url('/blog/' . $blog['slug']) }}" class="h6">{{ $blog['title'] }}</a>
-                                                                                                                    </div>
-                                                                                                                  </div>
-                                                                                                                </div>
-                                                                                                              </div>
-                                                                                                            @endforeach
-                                                                                                          </div>
-                                                                                                        </div>
-                                                                                                      </div>
-                                                                                                    </div>
-                                                                                                  </section> -->
+          <div class="col-xl-6 col-12">
+            <div class="row row-gap-4">
+              @foreach($wp_posts->skip(1) as $blog)
+                <div class="col-lg-6 col-6">
+                  <div class="blog-card main d-flex flex-column gap-16 bg-lightest-gray br-16 h-100">
+                    <a href="{{ url('/blog/' . $blog->post_name) }}" class="card-image">
+                      <img src="{{ $blog->featured_image_url }}" alt="{{ $blog->post_title }}" loading="lazy" class="img-fluid" style="object-fit: cover; height: 200px; width: 100%;">
+                    </a>
+                    <div class="d-flex flex-column gap-32 p-16">
+                      <div class="d-flex flex-column gap-16 black">
+                        <div class="create-by d-none d-sm-block">
+                          <p class="fw-500">{{ \Carbon\Carbon::parse($blog->post_date)->format('d M, Y') }}</p>
+                          <div class="dot"></div>
+                          <p class="dark-gray">By {{ $blog->author->display_name ?? 'Admin' }}</p>
+                        </div>
+                        <a href="{{ url('/blog/' . $blog->post_name) }}" class="h6">{{ \Illuminate\Support\Str::limit($blog->post_title, 50) }}</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              @endforeach
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    @endif
     <!-- BLOGS SECTION END -->
 
 @endsection
