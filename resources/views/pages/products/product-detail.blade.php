@@ -1042,321 +1042,321 @@
 
 @section('content')
 
-  {{-- ============================================================
-  HERO / TITLE BANNER
-  ============================================================ --}}
-  <section class="pd-hero">
-    <div class="pd-container">
-      <h1>
-        {{ $product['name'] }}
-        <span class="pd-gold">✦</span>
-      </h1>
-      <div class="pd-breadcrumb">
-        <a href="{{ url('/') }}">Home</a>
-        <span class="pd-sep">/</span>
-        <a href="{{ route('products.index') }}">Products</a>
-        <span class="pd-sep">/</span>
-        <span class="pd-current">{{ $product['name'] }}</span>
+    {{-- ============================================================
+    HERO / TITLE BANNER
+    ============================================================ --}}
+    <section class="pd-hero">
+      <div class="pd-container">
+        <h1>
+          {{ $product['name'] }}
+          <span class="pd-gold">✦</span>
+        </h1>
+        <div class="pd-breadcrumb">
+          <a href="{{ url('/') }}">Home</a>
+          <span class="pd-sep">/</span>
+          <a href="{{ route('products.index') }}">Products</a>
+          <span class="pd-sep">/</span>
+          <span class="pd-current">{{ $product['name'] }}</span>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  {{-- ============================================================
-  MAIN CONTENT
-  ============================================================ --}}
-  <section class="pd-main">
-    <div class="pd-container">
+    {{-- ============================================================
+    MAIN CONTENT
+    ============================================================ --}}
+    <section class="pd-main">
+      <div class="pd-container">
 
-      {{-- PRODUCT DETAIL CARD --}}
-      <div class="pd-card pd-animate pd-animate-1">
-        <div class="pd-card-inner">
-          <div class="row gx-5 gy-4 align-items-center">
+        {{-- PRODUCT DETAIL CARD --}}
+        <div class="pd-card pd-animate pd-animate-1">
+          <div class="pd-card-inner">
+            <div class="row gx-5 gy-4 align-items-center">
 
-            {{-- LEFT: Gallery --}}
-            <div class="col-xl-6 col-lg-6 col-md-12">
-              <div class="pd-gallery">
-                <div class="pd-main-slider">
-                  @foreach($product->images as $img)
-                    <div>
-                      <img src="{{ asset('storage/' . $img->image_url) }}" alt="{{ $product->name }}" loading="lazy">
-                    </div>
-                  @endforeach
-                </div>
-                <div class="pd-thumb-slider">
-                  @foreach($product->images as $img)
-                    <div>
-                      <img src="{{ asset('storage/' . $img->image_url) }}" alt="Thumbnail" loading="lazy">
-                    </div>
-                  @endforeach
+              {{-- LEFT: Gallery --}}
+              <div class="col-xl-6 col-lg-6 col-md-12">
+                <div class="pd-gallery">
+                  <div class="pd-main-slider">
+                    @foreach($product->images as $img)
+                      <div>
+                        <img src="{{ asset('storage/' . $img->image_url) }}" alt="{{ $product->name }}" loading="lazy">
+                      </div>
+                    @endforeach
+                  </div>
+                  <div class="pd-thumb-slider">
+                    @foreach($product->images as $img)
+                      <div>
+                        <img src="{{ asset('storage/' . $img->image_url) }}" alt="Thumbnail" loading="lazy">
+                      </div>
+                    @endforeach
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {{-- RIGHT: Info --}}
-            <div class="col-xl-6 col-lg-6 col-md-12">
-              <div class="pd-info">
+              {{-- RIGHT: Info --}}
+              <div class="col-xl-6 col-lg-6 col-md-12">
+                <div class="pd-info">
 
-                {{-- Badges --}}
-                <div class="pd-badges">
-                  <span class="pd-badge pd-badge-cat">
-                    <i class="fa-solid fa-tag"></i> {{ $product->category->name ?? 'Product' }}
-                  </span>
-                  @if(!empty($product->badge))
-                    <span class="pd-badge pd-badge-feat">
-                      <i class="fa-solid fa-star"></i> {{ $product->badge }}
+                  {{-- Badges --}}
+                  <div class="pd-badges">
+                    <span class="pd-badge pd-badge-cat">
+                      <i class="fa-solid fa-tag"></i> {{ $product->category->name ?? 'Product' }}
                     </span>
-                  @endif
-                </div>
-
-                {{-- Name --}}
-                <h1 class="pd-name">{{ $product['name'] }}</h1>
-
-                {{-- SKU --}}
-                <div class="pd-sku">
-                  <span class="pd-sku-label">SKU:</span>
-                  <span>{{ $product['sku'] }}</span>
-                </div>
-
-                {{-- Description --}}
-                <div class="pd-desc">
-                  <i class="fa-solid fa-quote-left"></i>
-                  {{ $product['description'] ?? 'Premium quality product designed for professionals who demand excellence.' }}
-                </div>
-
-
-                {{-- WhatsApp Button --}}
-                @php
-                  $whatsapp_message = urlencode("Hello, I'm interested in " . $product['name'] . " (SKU: " . $product['sku'] . "). Could you please provide more information?");
-                  $whatsapp_number = "919829797963";
-                  $whatsapp_url = "https://wa.me/" . $whatsapp_number . "?text=" . $whatsapp_message;
-                @endphp
-                <a href="{{ $whatsapp_url }}" target="_blank" class="pd-whatsapp">
-                  <i class="fa-brands fa-whatsapp"></i>
-                  Enquiry on WhatsApp
-                </a>
-
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      {{-- ============================================================
-      BEST FEATURES
-      ============================================================ --}}
-      @php
-        $features = is_string($product->features) ? json_decode($product->features, true) : $product->features;
-      @endphp
-      @if(!empty($features) && count((array) $features) > 0)
-        <div class="pd-card pd-mt-32 pd-animate pd-animate-2">
-          <div class="pd-card-inner">
-            <div class="pd-section-head">
-              <i class="fa-solid fa-star"></i> Best Features
-              <span class="pd-underline"></span>
-            </div>
-            <div class="pd-features-grid">
-              @foreach((array) $features as $feature)
-                @php
-                  $isString = is_string($feature);
-                  $fIcon = $isString ? 'fa-solid fa-check-circle' : (!empty($feature['icon']) ? $feature['icon'] : 'fa-solid fa-check-circle');
-                  $fTitle = $isString ? $feature : ($feature['title'] ?? '');
-                  $fDesc = $isString ? '' : ($feature['description'] ?? '');
-                @endphp
-                <div class="pd-feature">
-                  <div class="pd-f-icon">
-                    @if(str_starts_with($fIcon, 'fa-'))
-                      <i class="{{ $fIcon }}"></i>
-                    @else
-                      <span style="font-size: 1.4rem; line-height: 1;">{{ $fIcon }}</span>
+                    @if(!empty($product->badge))
+                      <span class="pd-badge pd-badge-feat">
+                        <i class="fa-solid fa-star"></i> {{ $product->badge }}
+                      </span>
                     @endif
                   </div>
-                  <span>{{ $fTitle }}</span>
-                  @if($fDesc)
-                    <p class="text-muted small mt-2 mb-0" style="font-weight: 400; line-height: 1.4;">{{ $fDesc }}</p>
-                  @endif
-                </div>
-              @endforeach
-            </div>
-          </div>
-        </div>
-      @endif
 
-      {{-- ============================================================
-      PRODUCT SPECIFICATIONS (Full List)
-      ============================================================ --}}
-      @if($product->specifications->count() > 0)
-        <div class="pd-card pd-mt-32 pd-animate pd-animate-3">
-          <div class="pd-card-inner">
-            <div class="pd-section-head">
-              <i class="fa-solid fa-clipboard-list"></i> Product Specifications
-              <span class="pd-underline"></span>
-            </div>
-            <ul class="pd-spec-list">
-              @foreach($product->specifications as $spec)
-                <li>
-                  <span class="pd-spec-key">{{ $spec->key }}</span>
-                  <span class="pd-spec-val">{{ $spec->value }}</span>
-                </li>
-              @endforeach
-            </ul>
-          </div>
-        </div>
-      @endif
+                  {{-- Name --}}
+                  <h1 class="pd-name">{{ $product['name'] }}</h1>
 
-      {{-- ============================================================
-      IDEAL PRODUCT FOR
-      ============================================================ --}}
-      @php
-        $ideal_for = is_string($product->ideal_for) ? json_decode($product->ideal_for, true) : $product->ideal_for;
-      @endphp
-      @if(!empty($ideal_for) && count((array) $ideal_for) > 0)
-        <div class="pd-card pd-mt-32 pd-animate pd-animate-4">
-          <div class="pd-card-inner">
-            <div class="pd-section-head">
-              <i class="fa-solid fa-bullseye"></i> Ideal Product For
-              <span class="pd-underline"></span>
-            </div>
-            <div class="pd-ideal-grid">
-              @foreach((array) $ideal_for as $ideal)
-                @php
-                  $isString = is_string($ideal);
-                  $iIcon = $isString ? 'fa-solid fa-check-circle' : (!empty($ideal['icon']) ? $ideal['icon'] : 'fa-solid fa-check-circle');
-                  $iTitle = $isString ? $ideal : ($ideal['title'] ?? '');
-                  $iDesc = $isString ? '' : ($ideal['description'] ?? '');
-                @endphp
-                <div class="pd-ideal">
-                  <div class="pd-i-icon-wrapper" style="font-size: 1.6rem; color: var(--pd-primary); margin-bottom: 6px; display: block;">
-                    @if(str_starts_with($iIcon, 'fa-'))
-                      <i class="{{ $iIcon }}"></i>
-                    @else
-                      <span style="line-height: 1;">{{ $iIcon }}</span>
-                    @endif
+                  {{-- SKU --}}
+                  <div class="pd-sku">
+                    <span class="pd-sku-label">SKU:</span>
+                    <span>{{ $product['sku'] }}</span>
                   </div>
-                  <span>{{ $iTitle }}</span>
-                  @if($iDesc)
-                    <p class="text-muted small mt-2 mb-0" style="font-weight: 400; line-height: 1.4;">{{ $iDesc }}</p>
-                  @endif
-                </div>
-              @endforeach
-            </div>
-          </div>
-        </div>
-      @endif
 
-      {{-- ============================================================
-      WHY CHOOSE
-      ============================================================ --}}
-      @php
-        $why_choose = is_string($product->why_choose_nuvana) ? json_decode($product->why_choose_nuvana, true) : $product->why_choose_nuvana;
-      @endphp
-      @if(!empty($why_choose) && count((array) $why_choose) > 0)
-        <div class="pd-why pd-mt-32 pd-animate pd-animate-5">
-          <div class="pd-why-title">
-            <i class="fa-solid fa-gem"></i> Why Choose Us?
-          </div>
-          <div class="pd-why-grid">
-            @foreach((array) $why_choose as $reason)
-              <div class="pd-why-item">
-                <div class="pd-w-icon">
-                  <i class="fa-solid fa-check"></i>
-                </div>
-                <div class="pd-w-text">
-                  <strong>{{ $reason['title'] ?? '' }}</strong>
-                  {{ $reason['description'] ?? '' }}
+                  {{-- Description --}}
+                  <div class="pd-desc">
+                    <i class="fa-solid fa-quote-left"></i>
+                    {{ $product['description'] ?? 'Premium quality product designed for professionals who demand excellence.' }}
+                  </div>
+
+
+                  {{-- WhatsApp Button --}}
+                  @php
+                    $whatsapp_message = urlencode("Hello, I'm interested in " . $product['name'] . " (SKU: " . $product['sku'] . "). Could you please provide more information?");
+                    $whatsapp_number = $general_setting->whatsapps[0]['value'];
+                    $whatsapp_url = "https://wa.me/" . $whatsapp_number . "?text=" . $whatsapp_message;
+                  @endphp
+                  <a href="{{ $whatsapp_url }}" target="_blank" class="pd-whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    Enquiry on WhatsApp
+                  </a>
+
                 </div>
               </div>
-            @endforeach
-          </div>
-        </div>
-      @endif
 
-      {{-- ============================================================
-      FAQ
-      ============================================================ --}}
-      @php
-        $faqs = is_string($product->faqs) ? json_decode($product->faqs, true) : $product->faqs;
-      @endphp
-      @if(!empty($faqs) && count((array) $faqs) > 0)
-        <div class="pd-card pd-mt-32 pd-animate pd-animate-5">
-          <div class="pd-card-inner">
-            <div class="pd-section-head">
-              <i class="fa-solid fa-circle-question"></i> Frequently Asked Questions
-              <span class="pd-underline"></span>
-            </div>
-            <div class="pd-faq accordion" id="pdFaqAccordion">
-              @foreach((array) $faqs as $index => $faq)
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="pdFaq{{ $index }}">
-                    <button class="accordion-button {{ $index === 0 ? '' : 'collapsed' }}" type="button"
-                      data-bs-toggle="collapse" data-bs-target="#pdCollapse{{ $index }}"
-                      aria-expanded="{{ $index === 0 ? 'true' : 'false' }}" aria-controls="pdCollapse{{ $index }}">
-                      {{ $faq['question'] ?? '' }}
-                    </button>
-                  </h2>
-                  <div id="pdCollapse{{ $index }}" class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}"
-                    aria-labelledby="pdFaq{{ $index }}" data-bs-parent="#pdFaqAccordion">
-                    <div class="accordion-body">
-                      {{ $faq['answer'] ?? '' }}
-                    </div>
-                  </div>
-                </div>
-              @endforeach
             </div>
           </div>
         </div>
-      @endif
 
-      {{-- ============================================================
-      RELATED PRODUCTS
-      ============================================================ --}}
-      @if($related_products->count() > 0)
-        <div class="pd-related pd-mt-32">
-          <div class="pd-card">
+        {{-- ============================================================
+        BEST FEATURES
+        ============================================================ --}}
+        @php
+  $features = is_string($product->features) ? json_decode($product->features, true) : $product->features;
+        @endphp
+        @if(!empty($features) && count((array) $features) > 0)
+          <div class="pd-card pd-mt-32 pd-animate pd-animate-2">
             <div class="pd-card-inner">
-              <div class="pd-related-head">
-                <h3 class="pd-r-title">
-                  <i class="fa-solid fa-arrow-right"></i> You May Also Like
-                </h3>
-                <a href="{{ route('products.index') }}" class="pd-r-link">
-                  View All <i class="fa-solid fa-arrow-right"></i>
-                </a>
+              <div class="pd-section-head">
+                <i class="fa-solid fa-star"></i> Best Features
+                <span class="pd-underline"></span>
               </div>
-              <div class="pd-related-grid">
-                @foreach($related_products as $related)
-                  <div class="pd-related-card">
-                    <div class="pd-r-img">
-                      <img
-                        src="{{ $related->images->first() ? asset('storage/' . $related->images->first()->image_url) : asset('images/default.jpg') }}"
-                        alt="{{ $related->name }}" loading="lazy">
-                      @if(!empty($related->badge))
-                        <span class="pd-r-badge">{{ $related->badge }}</span>
+              <div class="pd-features-grid">
+                @foreach((array) $features as $feature)
+                  @php
+      $isString = is_string($feature);
+      $fIcon = $isString ? 'fa-solid fa-check-circle' : (!empty($feature['icon']) ? $feature['icon'] : 'fa-solid fa-check-circle');
+      $fTitle = $isString ? $feature : ($feature['title'] ?? '');
+      $fDesc = $isString ? '' : ($feature['description'] ?? '');
+                  @endphp
+                  <div class="pd-feature">
+                    <div class="pd-f-icon">
+                      @if(str_starts_with($fIcon, 'fa-'))
+                        <i class="{{ $fIcon }}"></i>
+                      @else
+                        <span style="font-size: 1.4rem; line-height: 1;">{{ $fIcon }}</span>
                       @endif
                     </div>
-                    <span class="pd-r-cat">{{ $related->category->name ?? '' }}</span>
-                    <a href="{{ route('product-detail', ['slug' => $related->slug]) }}" class="pd-r-name">
-                      {{ $related->name }}
-                    </a>
-                    @php
-                      $capacity = $related->specifications->first(function ($spec) {
-                        return strtolower($spec->key) === 'capacity';
-                      })->value ?? null;
-                    @endphp
-                    @if($capacity)
-                      <div class="pd-r-meta">
-                        <i class="fa-solid fa-weight-scale"></i> Capacity: {{ $capacity }}
-                      </div>
+                    <span>{{ $fTitle }}</span>
+                    @if($fDesc)
+                      <p class="text-muted small mt-2 mb-0" style="font-weight: 400; line-height: 1.4;">{{ $fDesc }}</p>
                     @endif
                   </div>
                 @endforeach
               </div>
             </div>
           </div>
-        </div>
-      @endif
+        @endif
 
-    </div>
-  </section>
+        {{-- ============================================================
+        PRODUCT SPECIFICATIONS (Full List)
+        ============================================================ --}}
+        @if($product->specifications->count() > 0)
+          <div class="pd-card pd-mt-32 pd-animate pd-animate-3">
+            <div class="pd-card-inner">
+              <div class="pd-section-head">
+                <i class="fa-solid fa-clipboard-list"></i> Product Specifications
+                <span class="pd-underline"></span>
+              </div>
+              <ul class="pd-spec-list">
+                @foreach($product->specifications as $spec)
+                  <li>
+                    <span class="pd-spec-key">{{ $spec->key }}</span>
+                    <span class="pd-spec-val">{{ $spec->value }}</span>
+                  </li>
+                @endforeach
+              </ul>
+            </div>
+          </div>
+        @endif
+
+        {{-- ============================================================
+        IDEAL PRODUCT FOR
+        ============================================================ --}}
+        @php
+  $ideal_for = is_string($product->ideal_for) ? json_decode($product->ideal_for, true) : $product->ideal_for;
+        @endphp
+        @if(!empty($ideal_for) && count((array) $ideal_for) > 0)
+          <div class="pd-card pd-mt-32 pd-animate pd-animate-4">
+            <div class="pd-card-inner">
+              <div class="pd-section-head">
+                <i class="fa-solid fa-bullseye"></i> Ideal Product For
+                <span class="pd-underline"></span>
+              </div>
+              <div class="pd-ideal-grid">
+                @foreach((array) $ideal_for as $ideal)
+                  @php
+      $isString = is_string($ideal);
+      $iIcon = $isString ? 'fa-solid fa-check-circle' : (!empty($ideal['icon']) ? $ideal['icon'] : 'fa-solid fa-check-circle');
+      $iTitle = $isString ? $ideal : ($ideal['title'] ?? '');
+      $iDesc = $isString ? '' : ($ideal['description'] ?? '');
+                  @endphp
+                  <div class="pd-ideal">
+                    <div class="pd-i-icon-wrapper" style="font-size: 1.6rem; color: var(--pd-primary); margin-bottom: 6px; display: block;">
+                      @if(str_starts_with($iIcon, 'fa-'))
+                        <i class="{{ $iIcon }}"></i>
+                      @else
+                        <span style="line-height: 1;">{{ $iIcon }}</span>
+                      @endif
+                    </div>
+                    <span>{{ $iTitle }}</span>
+                    @if($iDesc)
+                      <p class="text-muted small mt-2 mb-0" style="font-weight: 400; line-height: 1.4;">{{ $iDesc }}</p>
+                    @endif
+                  </div>
+                @endforeach
+              </div>
+            </div>
+          </div>
+        @endif
+
+        {{-- ============================================================
+        WHY CHOOSE
+        ============================================================ --}}
+        @php
+  $why_choose = is_string($product->why_choose_nuvana) ? json_decode($product->why_choose_nuvana, true) : $product->why_choose_nuvana;
+        @endphp
+        @if(!empty($why_choose) && count((array) $why_choose) > 0)
+          <div class="pd-why pd-mt-32 pd-animate pd-animate-5">
+            <div class="pd-why-title">
+              <i class="fa-solid fa-gem"></i> Why Choose Us?
+            </div>
+            <div class="pd-why-grid">
+              @foreach((array) $why_choose as $reason)
+                <div class="pd-why-item">
+                  <div class="pd-w-icon">
+                    <i class="fa-solid fa-check"></i>
+                  </div>
+                  <div class="pd-w-text">
+                    <strong>{{ $reason['title'] ?? '' }}</strong>
+                    {{ $reason['description'] ?? '' }}
+                  </div>
+                </div>
+              @endforeach
+            </div>
+          </div>
+        @endif
+
+        {{-- ============================================================
+        FAQ
+        ============================================================ --}}
+        @php
+  $faqs = is_string($product->faqs) ? json_decode($product->faqs, true) : $product->faqs;
+        @endphp
+        @if(!empty($faqs) && count((array) $faqs) > 0)
+          <div class="pd-card pd-mt-32 pd-animate pd-animate-5">
+            <div class="pd-card-inner">
+              <div class="pd-section-head">
+                <i class="fa-solid fa-circle-question"></i> Frequently Asked Questions
+                <span class="pd-underline"></span>
+              </div>
+              <div class="pd-faq accordion" id="pdFaqAccordion">
+                @foreach((array) $faqs as $index => $faq)
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="pdFaq{{ $index }}">
+                      <button class="accordion-button {{ $index === 0 ? '' : 'collapsed' }}" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#pdCollapse{{ $index }}"
+                        aria-expanded="{{ $index === 0 ? 'true' : 'false' }}" aria-controls="pdCollapse{{ $index }}">
+                        {{ $faq['question'] ?? '' }}
+                      </button>
+                    </h2>
+                    <div id="pdCollapse{{ $index }}" class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}"
+                      aria-labelledby="pdFaq{{ $index }}" data-bs-parent="#pdFaqAccordion">
+                      <div class="accordion-body">
+                        {{ $faq['answer'] ?? '' }}
+                      </div>
+                    </div>
+                  </div>
+                @endforeach
+              </div>
+            </div>
+          </div>
+        @endif
+
+        {{-- ============================================================
+        RELATED PRODUCTS
+        ============================================================ --}}
+        @if($related_products->count() > 0)
+          <div class="pd-related pd-mt-32">
+            <div class="pd-card">
+              <div class="pd-card-inner">
+                <div class="pd-related-head">
+                  <h3 class="pd-r-title">
+                    <i class="fa-solid fa-arrow-right"></i> You May Also Like
+                  </h3>
+                  <a href="{{ route('products.index') }}" class="pd-r-link">
+                    View All <i class="fa-solid fa-arrow-right"></i>
+                  </a>
+                </div>
+                <div class="pd-related-grid">
+                  @foreach($related_products as $related)
+                    <div class="pd-related-card">
+                      <div class="pd-r-img">
+                        <img
+                          src="{{ $related->images->first() ? asset('storage/' . $related->images->first()->image_url) : asset('images/default.jpg') }}"
+                          alt="{{ $related->name }}" loading="lazy">
+                        @if(!empty($related->badge))
+                          <span class="pd-r-badge">{{ $related->badge }}</span>
+                        @endif
+                      </div>
+                      <span class="pd-r-cat">{{ $related->category->name ?? '' }}</span>
+                      <a href="{{ route('product-detail', ['slug' => $related->slug]) }}" class="pd-r-name">
+                        {{ $related->name }}
+                      </a>
+                      @php
+      $capacity = $related->specifications->first(function ($spec) {
+        return strtolower($spec->key) === 'capacity';
+      })->value ?? null;
+                      @endphp
+                      @if($capacity)
+                        <div class="pd-r-meta">
+                          <i class="fa-solid fa-weight-scale"></i> Capacity: {{ $capacity }}
+                        </div>
+                      @endif
+                    </div>
+                  @endforeach
+                </div>
+              </div>
+            </div>
+          </div>
+        @endif
+
+      </div>
+    </section>
 
 @endsection
 

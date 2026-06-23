@@ -3,9 +3,10 @@
   // Get values from general settings with fallbacks
   $phone = !empty($general_setting->phones[0]['value']) ? $general_setting->phones[0]['value'] : '+918058710932';
   $email = !empty($general_setting->emails[0]['value']) ? $general_setting->emails[0]['value'] : 'Info@gargiindustries.com';
-  
-  $officeAddress = 'E-43, Garden City Beelwa, Sanganer, Jaipur - 302022';
-  $companyName = 'Gargi Industries';
+
+  $officeAddress = !empty($general_setting->office_address) ? $general_setting->office_address : 'E-43, Garden City Beelwa, Sanganer, Jaipur - 302022';
+  $companyName = !empty($general_setting->company_name) ? $general_setting->company_name : 'Gargi Industries';
+  $shortDesc = !empty($general_setting->short_description) ? $general_setting->short_description : 'Gargi Industries provides reliable digital weighing scales designed for precision, durability, and performance. We serve retail, industrial, and commercial sectors with trusted weighing solutions tailored to modern business needs.';
 
   $fb = $general_setting->social_media['facebook'] ?? '#';
   $insta = $general_setting->social_media['instagram'] ?? '#';
@@ -22,9 +23,7 @@
             <a href="index.html"><img src="{{ asset('assets/media/nuvana-logo.jpeg') }}" alt="{{ $companyName }}"
                 class="mb-16 img-fluid rounded-3"></a>
             <p class="white mb-xl-32 mb-lg-0 mb-32">
-              Gargi Industries provides reliable digital weighing scales designed for precision, durability, and
-              performance. We serve retail, industrial, and commercial sectors with trusted weighing solutions tailored
-              to modern business needs.
+              {{ $shortDesc }}
             </p>
           </div>
         </div>
@@ -35,9 +34,9 @@
               $quickLinks = [
                 ['name' => 'Home', 'url' => route('home')],
                 ['name' => 'About us', 'url' => route('about.index')],
-                // ['name' => 'Blogs', 'url' => route('blog.index')],
                 ['name' => 'Products', 'url' => route('products.index')],
                 ['name' => 'Contact', 'url' => route('contact')],
+                ['name' => 'Blogs', 'url' => route('blog.index')],
               ];
             @endphp
             <ul class="list-unstyled m-0">

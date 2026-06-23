@@ -39,8 +39,12 @@
                 </div>
                 <div>
                   <h5 class="fw-600 mb-2" style="color: #212529;">Office Address</h5>
-                  <p class="mb-0 text-muted">Gargi Industries</p>
-                  <p class="mb-0 text-muted">Address: E-43, Garden City Beelwa, Sanganer, Jaipur - 302022</p>
+                  @php
+                    $companyName = !empty($general_setting->company_name) ? $general_setting->company_name : 'Gargi Industries';
+                    $officeAddress = !empty($general_setting->office_address) ? $general_setting->office_address : 'E-43, Garden City Beelwa, Sanganer, Jaipur - 302022';
+                  @endphp
+                  <p class="mb-0 text-muted">{{ $companyName }}</p>
+                  <p class="mb-0 text-muted">Address: {{ $officeAddress }}</p>
                 </div>
               </div>
             </div>

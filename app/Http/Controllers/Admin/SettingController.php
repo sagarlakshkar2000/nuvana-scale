@@ -19,6 +19,10 @@ class SettingController extends Controller
   public function update(Request $request)
   {
     $validated = $request->validate([
+      'company_name' => 'nullable|string|max:255',
+      'office_address' => 'nullable|string|max:500',
+      'short_description' => 'nullable|string',
+
       'phones' => 'nullable|array|max:3',
       'phones.*.value' => 'required_with:phones|string',
 
@@ -47,6 +51,10 @@ class SettingController extends Controller
       }));
     };
 
+    $setting->company_name = $request->input('company_name');
+    $setting->office_address = $request->input('office_address');
+    $setting->short_description = $request->input('short_description');
+    
     $setting->phones = $cleanArray($request->input('phones', []));
     $setting->emails = $cleanArray($request->input('emails', []));
 

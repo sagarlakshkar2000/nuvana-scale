@@ -33,6 +33,40 @@
     @csrf
     <div class="row ">
 
+      <!-- Company Information Section -->
+      <div class="col-12">
+        <div class="settings-card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <i class="fas fa-building card-icon"></i>
+              <div>
+                <h3 class="card-title">Company Information</h3>
+                <p class="card-description">Basic details about your business used in the footer and contact pages</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="field-label">Company Name</label>
+                <input type="text" name="company_name" value="{{ old('company_name', $setting->company_name ?? '') }}"
+                  placeholder="e.g. Gargi Industries" class="form-control">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="field-label">Office Address</label>
+                <input type="text" name="office_address" value="{{ old('office_address', $setting->office_address ?? '') }}"
+                  placeholder="e.g. E-43, Garden City Beelwa..." class="form-control">
+              </div>
+              <div class="col-12">
+                <label class="field-label">Short Description (Footer Bio)</label>
+                <textarea name="short_description" rows="3" class="form-control" placeholder="Brief description of your company...">{{ old('short_description', $setting->short_description ?? '') }}</textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Phone Numbers Section -->
       <div class="col-12 col-md-6">
         <div class="settings-card">
