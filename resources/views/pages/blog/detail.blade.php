@@ -5,7 +5,8 @@
   <section class="title-banner">
     <div class="container">
       <h2 class="white fw-600 text-center mb-24">{{ $post->post_title }}</h2>
-      <p class="white text-center">{{ \Carbon\Carbon::parse($post->post_date)->format('d M, Y') }} <span class="light-gray">&nbsp; • &nbsp;By {{ $post->author->display_name ?? 'Admin' }}</span></p>
+      <p class="white text-center">{{ \Carbon\Carbon::parse($post->post_date)->format('d M, Y') }} <span
+          class="light-gray">&nbsp; • &nbsp;By {{ $post->author->display_name ?? 'Admin' }}</span></p>
     </div>
   </section>
   <!-- TITLE BANNER END -->
@@ -16,25 +17,27 @@
       <div class="row justify-content-center">
         <div class="col-lg-10">
           <div class="blog-detail-wrapper">
+            @if($post->featured_image_url)
             <div class="main-image mb-24">
               <img src="{{ $post->featured_image_url }}" alt="{{ $post->post_title }}" class="w-100 br-10">
             </div>
+            @endif
             <div class="post-content">
-                {!! $post->post_content !!}
+              {!! $post->post_content !!}
             </div>
             <div class="hr-line bg-light-gray mb-24"></div>
             <div class="d-flex align-items-center justify-content-between flex-wrap gap-24 mb-24">
               <div class="blog-tags-wrapper">
                 <h6 class="black fw-600">Tags:</h6>
-                <a href="#" class="blog-tags black">
-                  Protein Power
-                </a>
-                <a href="#" class="blog-tags black">
-                  Pre-Workout
-                </a>
-                <a href="#" class="blog-tags black">
-                  Energy Boost
-                </a>
+                @if(isset($post->tags) && $post->tags->count() > 0)
+                  @foreach($post->tags as $tag)
+                    <a href="#" class="blog-tags black">
+                      {{ $tag }}
+                    </a>
+                  @endforeach
+                @else
+                  <span class="text-muted">No tags</span>
+                @endif
               </div>
               <ul class="list-unstyled social-link mb-0">
                 <li class="d-flex align-items-center gap-8">
@@ -103,3 +106,60 @@
   </div>
   <!-- Blog Detail Section End -->
 @endsection
+
+@push('styles')
+  <style>
+    .post-content {
+      line-height: 1.8;
+      color: #333;
+      font-size: 1.05rem;
+    }
+
+    .post-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+
+    .post-content p {
+      margin-bottom: 1.5rem;
+    }
+
+    .post-content h1,
+    .post-content h2,
+    .post-content h3,
+    .post-content h4,
+    .post-content h5 {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+
+    .post-content ul,
+    .post-content ol {
+      margin-bottom: 1.5rem;
+      padding-left: 2rem;
+    }
+
+    .post-content li {
+      margin-bottom: 0.5rem;
+    }
+
+    .post-content blockquote {
+      border-left: 4px solid var(--color-primary, #0056b3);
+      padding: 1rem 1.5rem;
+      font-style: italic;
+      color: #555;
+      margin: 1.5rem 0;
+      background: #f8f9fa;
+      border-radius: 0 10px 10px 0;
+    }
+
+    .post-content a {
+      color: var(--color-primary, #0056b3);
+      text-decoration: underline;
+    }
+  </style>
+@endpush

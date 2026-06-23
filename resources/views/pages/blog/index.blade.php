@@ -31,9 +31,11 @@
         @foreach($posts as $post)
         <div class="col-xl-3 col-lg-4 col-sm-6">
           <div class="blog-card main d-flex flex-column gap-16 bg-lightest-gray br-16">
+            @if($post->featured_image_url)
             <a href="{{ route('blog.detail', $post->post_name) }}" class="card-image">
               <img src="{{ $post->featured_image_url }}" alt="{{ $post->post_title }}">
             </a>
+            @endif
             <div class="d-flex flex-column gap-32">
               <div class="d-flex flex-column gap-16 black">
                 <div class="create-by">

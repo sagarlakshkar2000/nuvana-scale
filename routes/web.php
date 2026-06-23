@@ -150,6 +150,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('banners', BannerController::class);
     Route::resource('trending-products', TrendingProductController::class);
     Route::resource('seo', SeoController::class);
+
+    // General Settings
+    Route::get('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
+    Route::post('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
   });
 });
 

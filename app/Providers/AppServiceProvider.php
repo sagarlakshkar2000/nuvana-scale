@@ -19,6 +19,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        \Illuminate\Support\Facades\View::composer('*', function ($view) {
+            $settings = \Illuminate\Support\Facades\Cache::rememberForever('general_settings', function () {
+                return \App\Models\GeneralSetting::first() ?? new \App\Models\GeneralSetting();
+            });
+            $view->with('general_setting', $settings);
+        });
     }
 }
