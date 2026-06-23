@@ -24,7 +24,7 @@ return [
           'route' => 'about.story',
         ],
         [
-          'name' => 'Vision & Mission & Values',
+          'name' => 'Vision, Mission & Values',
           'route' => 'about.vision-mission',
         ]
       ]
