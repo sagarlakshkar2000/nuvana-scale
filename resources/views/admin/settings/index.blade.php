@@ -33,40 +33,6 @@
     @csrf
     <div class="row ">
 
-      <!-- Company Information Section -->
-      <div class="col-12">
-        <div class="settings-card">
-          <div class="card-header">
-            <div class="card-header-left">
-              <i class="fas fa-building card-icon"></i>
-              <div>
-                <h3 class="card-title">Company Information</h3>
-                <p class="card-description">Basic details about your business used in the footer and contact pages</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label class="field-label">Company Name</label>
-                <input type="text" name="company_name" value="{{ old('company_name', $setting->company_name ?? '') }}"
-                  placeholder="e.g. Gargi Industries" class="form-control">
-              </div>
-              <div class="col-md-6 mb-3">
-                <label class="field-label">Office Address</label>
-                <input type="text" name="office_address" value="{{ old('office_address', $setting->office_address ?? '') }}"
-                  placeholder="e.g. E-43, Garden City Beelwa..." class="form-control">
-              </div>
-              <div class="col-12">
-                <label class="field-label">Short Description (Footer Bio)</label>
-                <textarea name="short_description" rows="3" class="form-control" placeholder="Brief description of your company...">{{ old('short_description', $setting->short_description ?? '') }}</textarea>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- Phone Numbers Section -->
       <div class="col-12 col-md-6">
         <div class="settings-card">
@@ -122,8 +88,8 @@
               <div class="field-group field-value">
                 <label class="field-label">WhatsApp Number</label>
                 @php $whatsappValue = old('whatsapp', $setting->whatsapps[0]['value'] ?? ''); @endphp
-                <input type="text" name="whatsapp" value="{{ $whatsappValue }}"
-                  placeholder="+91 98765 43210" class="form-control">
+                <input type="text" name="whatsapp" value="{{ $whatsappValue }}" placeholder="+91 98765 43210"
+                  class="form-control">
               </div>
             </div>
           </div>
@@ -182,7 +148,7 @@
 
           <div class="card-body">
             @php $socials = old('social_media', $setting->social_media ?? []); @endphp
-            
+
             <div class="fields-container">
               <!-- Facebook -->
               <div class="field-row">
@@ -215,8 +181,8 @@
                 </div>
                 <div class="field-group field-value">
                   <label class="field-label">X (Twitter) URL</label>
-                  <input type="url" name="x" value="{{ $socials['x'] ?? '' }}"
-                    placeholder="https://x.com/..." class="form-control">
+                  <input type="url" name="x" value="{{ $socials['x'] ?? '' }}" placeholder="https://x.com/..."
+                    class="form-control">
                 </div>
               </div>
 
@@ -255,7 +221,7 @@
       const container = document.getElementById(containerId);
       const rows = container.querySelectorAll('.field-row');
       const addButton = container.nextElementSibling; // The Add button right after container
-      
+
       if (rows.length >= 3) {
         if (addButton && addButton.classList.contains('btn-add')) {
           addButton.style.display = 'none';
@@ -270,12 +236,12 @@
     function addRow(containerId, fieldName, defaultIcon, placeholder, inputType = 'text') {
       const container = document.getElementById(containerId);
       const rows = container.querySelectorAll('.field-row');
-      
+
       if (rows.length >= 3) {
-          alert('Maximum limit of 3 reached.');
-          return;
+        alert('Maximum limit of 3 reached.');
+        return;
       }
-      
+
       const index = container.children.length;
 
       const row = document.createElement('div');
@@ -285,14 +251,14 @@
       row.style.animation = 'slideIn 0.3s ease forwards';
 
       row.innerHTML = `
-        <div class="field-group field-value">
-          <label class="field-label">${placeholder}</label>
-          <input type="${inputType}" name="${fieldName}[${index}][value]" value="" placeholder="${placeholder}" required class="form-control">
-        </div>
-        <button type="button" class="btn-remove" title="Remove">
-          <i class="fas fa-times"></i>
-        </button>
-      `;
+                                    <div class="field-group field-value">
+                                      <label class="field-label">${placeholder}</label>
+                                      <input type="${inputType}" name="${fieldName}[${index}][value]" value="" placeholder="${placeholder}" required class="form-control">
+                                    </div>
+                                    <button type="button" class="btn-remove" title="Remove">
+                                      <i class="fas fa-times"></i>
+                                    </button>
+                                  `;
 
       container.appendChild(row);
 
@@ -317,8 +283,8 @@
 
     // Initial limit check
     document.addEventListener('DOMContentLoaded', () => {
-        checkMaxLimit('phones-container');
-        checkMaxLimit('emails-container');
+      checkMaxLimit('phones-container');
+      checkMaxLimit('emails-container');
     });
 
     // Handle row removal with animation
@@ -347,20 +313,20 @@
     // Add animation styles
     const style = document.createElement('style');
     style.textContent = `
-                                                                                                            @keyframes slideIn {
-                                                                                                                to {
-                                                                                                                    opacity: 1;
-                                                                                                                    transform: translateY(0);
-                                                                                                                }
-                                                                                                            }
-                                                                                                        `;
+                                                                                                                                        @keyframes slideIn {
+                                                                                                                                            to {
+                                                                                                                                                opacity: 1;
+                                                                                                                                                transform: translateY(0);
+                                                                                                                                            }
+                                                                                                                                        }
+                                                                                                                                    `;
     document.head.appendChild(style);
   </script>
 
   <style>
     /* Settings Header */
     .settings-header {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #000000ff 80%, #c7cad8ff 0%);
       border-radius: 12px;
       padding: 30px 35px;
       margin-bottom: 30px;
@@ -373,7 +339,7 @@
 
     .settings-title {
       font-size: 28px;
-      font-weight: 700;
+      font-weight: 600;
       margin: 0 0 8px 0;
       display: flex;
       align-items: center;
@@ -386,9 +352,9 @@
 
     .settings-subtitle {
       font-size: 16px;
-      opacity: 0.9;
+      opacity: 1;
       margin: 0;
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
     /* Alerts */

@@ -51,9 +51,9 @@ class HomeController extends Controller
     return view('pages.about');
   }
 
-  public function story()
+  public function founderAndCeo()
   {
-    return view('pages.about.story');
+    return view('pages.about.founderandceo');
   }
 
   public function visionMission()

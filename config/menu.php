@@ -21,7 +21,7 @@ return [
         ],
         [
           'name' => 'Founder & CEO',
-          'route' => 'about.story',
+          'route' => 'about.founderandceo',
         ],
         [
           'name' => 'Vision, Mission & Values',
