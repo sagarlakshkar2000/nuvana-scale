@@ -50,4 +50,14 @@ class HomeController extends Controller
   {
     return view('pages.about');
   }
+
+  public function story()
+  {
+    return view('pages.about.story');
+  }
+
+  public function visionMission()
+  {
+    return view('pages.about.vision-mission');
+  }
 }

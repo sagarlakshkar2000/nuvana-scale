@@ -10,16 +10,25 @@ return [
     ],
     [
       'name' => 'About',
-      'route' => 'about',
-      'icon' => '',
-      'class' => '',
+      'route' => 'about.index',
+      'route_pattern' => 'about.*',
+      'icon' => 'fa-light fa-chevron-down',
+      'class' => 'dropdown',
+      'submenu' => [
+        [
+          'name' => 'About Us',
+          'route' => 'about.index',
+        ],
+        [
+          'name' => 'Founder Story',
+          'route' => 'about.story',
+        ],
+        [
+          'name' => 'Vision & Mission',
+          'route' => 'about.vision-mission',
+        ]
+      ]
     ],
-    // [
-    //   'name' => 'Company',
-    //   'route' => 'company',
-    //   'icon' => '',
-    //   'class' => '',
-    // ],
     [
       'name' => 'Products',
       'route' => 'products.index',

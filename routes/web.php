@@ -55,10 +55,15 @@ Route::get('/run-task/{task}', function ($task) {
 
 // 1. Home Route
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/about', [HomeController::class, 'about'])->name('about');
+
+Route::prefix('about')->name('about.')->group(function () {
+  Route::get('/', [HomeController::class, 'about'])->name('index');
+  Route::get('/story', [HomeController::class, 'story'])->name('story');
+  Route::get('/vision-mission', [HomeController::class, 'visionMission'])->name('vision-mission');
+  Route::get('/company', [CompanyController::class, 'index'])->name('company');
+});
 
 // 2. Company Route
-Route::get('/company', [CompanyController::class, 'index'])->name('company');
 
 // 3. Products Routes
 Route::prefix('products')->name('products.')->group(function () {

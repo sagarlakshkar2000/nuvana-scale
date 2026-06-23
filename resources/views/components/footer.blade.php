@@ -32,7 +32,7 @@
             @php
               $quickLinks = [
                 ['name' => 'Home', 'url' => route('home')],
-                ['name' => 'About us', 'url' => route('about')],
+                ['name' => 'About us', 'url' => route('about.index')],
                 // ['name' => 'Blogs', 'url' => route('blog.index')],
                 ['name' => 'Products', 'url' => route('products.index')],
                 ['name' => 'Contact', 'url' => route('contact')],
