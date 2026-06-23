@@ -20,11 +20,11 @@ return [
           'route' => 'about.index',
         ],
         [
-          'name' => 'Founder Story',
+          'name' => 'Founder & CEO',
           'route' => 'about.story',
         ],
         [
-          'name' => 'Vision & Mission',
+          'name' => 'Vision & Mission & Values',
           'route' => 'about.vision-mission',
         ]
       ]
