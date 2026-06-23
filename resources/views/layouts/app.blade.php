@@ -56,12 +56,15 @@
   </div>
   <!-- Main Wrapper End -->
 
-  <!-- Back To Top Start -->
-  <a href="#whatsapp-wrapper" id="whatsapp-wrapper" class="whatsapp-wrapper"><i class="fa-brands fa-whatsapp"></i></a>
+  <!-- WhatsApp Start -->
+  @if(!empty($general_setting->whatsapps[0]['value']))
+  <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $general_setting->whatsapps[0]['value']) }}" target="_blank" id="whatsapp-wrapper" class="whatsapp-wrapper">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+  @endif
 
   <!-- Back To Top Start -->
   <a href="#main-wrapper" id="backto-top" class="back-to-top"><i class="fa-light fa-chevron-up"></i></a>
-
 
   <!-- Mobile Menu Start -->
   <div class="mobile-nav__wrapper">
@@ -74,19 +77,32 @@
       </div>
       <div class="mobile-nav__container"></div>
       <ul class="mobile-nav__contact list-unstyled">
+        @if(!empty($general_setting->emails[0]['value']))
         <li>
           <i class="fas fa-envelope"></i>
-          <a href="mailto:example@company.com">example@company.com</a>
+          <a href="mailto:{{ $general_setting->emails[0]['value'] }}">{{ $general_setting->emails[0]['value'] }}</a>
         </li>
+        @endif
+        @if(!empty($general_setting->phones[0]['value']))
         <li>
           <i class="fa fa-phone-alt"></i>
-          <a href="tel:+12345678">+123 (4567) -890</a>
+          <a href="tel:{{ preg_replace('/[^0-9+]/', '', $general_setting->phones[0]['value']) }}">{{ $general_setting->phones[0]['value'] }}</a>
         </li>
+        @endif
       </ul>
       <div class="mobile-nav__social">
-        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
+        @if(!empty($general_setting->social_media['facebook']))
+          <a href="{{ $general_setting->social_media['facebook'] }}" target="_blank"><i class="fab fa-facebook"></i></a>
+        @endif
+        @if(!empty($general_setting->social_media['instagram']))
+          <a href="{{ $general_setting->social_media['instagram'] }}" target="_blank"><i class="fab fa-instagram"></i></a>
+        @endif
+        @if(!empty($general_setting->social_media['x']))
+          <a href="{{ $general_setting->social_media['x'] }}" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+        @endif
+        @if(!empty($general_setting->social_media['linkedin']))
+          <a href="{{ $general_setting->social_media['linkedin'] }}" target="_blank"><i class="fab fa-linkedin"></i></a>
+        @endif
       </div>
     </div>
   </div>

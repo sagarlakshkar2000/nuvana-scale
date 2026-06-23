@@ -1,14 +1,16 @@
 <!-- FOOTER Start -->
 @php
-  $phone = '+918058710932';
-  $email = 'Info@gargiindustries.com';
+  // Get values from general settings with fallbacks
+  $phone = !empty($general_setting->phones[0]['value']) ? $general_setting->phones[0]['value'] : '+918058710932';
+  $email = !empty($general_setting->emails[0]['value']) ? $general_setting->emails[0]['value'] : 'Info@gargiindustries.com';
+  
   $officeAddress = 'E-43, Garden City Beelwa, Sanganer, Jaipur - 302022';
   $companyName = 'Gargi Industries';
 
-  $fb = '';
-  $insta = '';
-  $x = '';
-  $linkin = '';
+  $fb = $general_setting->social_media['facebook'] ?? '#';
+  $insta = $general_setting->social_media['instagram'] ?? '#';
+  $x = $general_setting->social_media['x'] ?? '#';
+  $linkin = $general_setting->social_media['linkedin'] ?? '#';
 @endphp
 
 <footer>

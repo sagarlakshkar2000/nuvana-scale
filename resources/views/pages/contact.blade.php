@@ -57,8 +57,9 @@
                 </div>
                 <div>
                   <h5 class="fw-600 mb-2" style="color: #212529;">Email & Hours</h5>
-                  <p class="mb-1 text-muted">Email: <a href="mailto:Info@gargiindustries.com"
-                      class="text-decoration-none">Info@gargiindustries.com</a></p>
+                  @php $emailValue = !empty($general_setting->emails[0]['value']) ? $general_setting->emails[0]['value'] : 'Info@gargiindustries.com'; @endphp
+                  <p class="mb-1 text-muted">Email: <a href="mailto:{{ $emailValue }}"
+                      class="text-decoration-none">{{ $emailValue }}</a></p>
                   <p class="mb-0 text-muted">Hours: 9:00 AM To 6:00 PM</p>
                 </div>
               </div>
@@ -97,8 +98,12 @@
                 </div>
                 <div>
                   <h5 class="fw-600 mb-2" style="color: #212529;">Mobile Number</h5>
+                  @php 
+                    $phoneValue = !empty($general_setting->phones[0]['value']) ? $general_setting->phones[0]['value'] : '+91 8058710932'; 
+                    $phoneLink = preg_replace('/[^0-9+]/', '', $phoneValue);
+                  @endphp
                   <p class="mb-0 text-muted">
-                    <a href="tel:+918058710932" class="text-decoration-none">+91 8058710932</a>
+                    <a href="tel:{{ $phoneLink }}" class="text-decoration-none">{{ $phoneValue }}</a>
                   </p>
                 </div>
               </div>

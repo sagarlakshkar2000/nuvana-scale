@@ -19,21 +19,18 @@ class SettingController extends Controller
   public function update(Request $request)
   {
     $validated = $request->validate([
-      'phones' => 'nullable|array',
-      'phones.*.icon' => 'nullable|string',
+      'phones' => 'nullable|array|max:3',
       'phones.*.value' => 'required_with:phones|string',
 
-      'whatsapps' => 'nullable|array',
-      'whatsapps.*.icon' => 'nullable|string',
-      'whatsapps.*.value' => 'required_with:whatsapps|string',
+      'whatsapp' => 'nullable|string',
 
-      'emails' => 'nullable|array',
-      'emails.*.icon' => 'nullable|string',
+      'emails' => 'nullable|array|max:3',
       'emails.*.value' => 'required_with:emails|email',
 
-      'social_media' => 'nullable|array',
-      'social_media.*.icon' => 'nullable|string',
-      'social_media.*.value' => 'required_with:social_media|url',
+      'facebook' => 'nullable|url',
+      'instagram' => 'nullable|url',
+      'x' => 'nullable|url',
+      'linkedin' => 'nullable|url',
     ]);
 
     $setting = GeneralSetting::first();
@@ -51,9 +48,16 @@ class SettingController extends Controller
     };
 
     $setting->phones = $cleanArray($request->input('phones', []));
-    $setting->whatsapps = $cleanArray($request->input('whatsapps', []));
     $setting->emails = $cleanArray($request->input('emails', []));
-    $setting->social_media = $cleanArray($request->input('social_media', []));
+
+    $setting->whatsapps = $request->filled('whatsapp') ? [['value' => $request->input('whatsapp')]] : [];
+
+    $setting->social_media = [
+      'facebook' => $request->input('facebook'),
+      'instagram' => $request->input('instagram'),
+      'x' => $request->input('x'),
+      'linkedin' => $request->input('linkedin'),
+    ];
 
     $setting->save();
 

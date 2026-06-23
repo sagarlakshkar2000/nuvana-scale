@@ -77,32 +77,21 @@
             <div class="card-header-left">
               <i class="fab fa-whatsapp card-icon whatsapp-icon"></i>
               <div>
-                <h3 class="card-title">WhatsApp Numbers</h3>
-                <p class="card-description">Add multiple WhatsApp numbers with custom icons</p>
+                <h3 class="card-title">WhatsApp Number</h3>
+                <p class="card-description">Add your primary WhatsApp number</p>
               </div>
             </div>
           </div>
 
           <div class="card-body">
-            <div id="whatsapps-container" class="fields-container">
-              @php $whatsapps = old('whatsapps', $setting->whatsapps ?? []); @endphp
-              @foreach($whatsapps as $index => $whatsapp)
-                <div class="field-row">
-                  <div class="field-group field-value">
-                    <label class="field-label">WhatsApp Number</label>
-                    <input type="text" name="whatsapps[{{ $index }}][value]" value="{{ $whatsapp['value'] ?? '' }}"
-                      placeholder="+91 98765 43210" required class="form-control">
-                  </div>
-                  <button type="button" class="btn-remove" title="Remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              @endforeach
+            <div class="field-row" style="margin-bottom: 0;">
+              <div class="field-group field-value">
+                <label class="field-label">WhatsApp Number</label>
+                @php $whatsappValue = old('whatsapp', $setting->whatsapps[0]['value'] ?? ''); @endphp
+                <input type="text" name="whatsapp" value="{{ $whatsappValue }}"
+                  placeholder="+91 98765 43210" class="form-control">
+              </div>
             </div>
-            <button type="button" class="btn-add"
-              onclick="addRow('whatsapps-container', 'whatsapps', 'fa-brands fa-whatsapp', 'WhatsApp Number')">
-              <i class="fas fa-plus"></i> Add WhatsApp Number
-            </button>
           </div>
         </div>
       </div>
@@ -152,31 +141,63 @@
               <i class="fas fa-share-alt card-icon social-icon"></i>
               <div>
                 <h3 class="card-title">Social Media Links</h3>
-                <p class="card-description">Add multiple social media URLs with custom icons</p>
+                <p class="card-description">Add URLs for your specific social media profiles</p>
               </div>
             </div>
           </div>
 
           <div class="card-body">
-            <div id="social_media-container" class="fields-container">
-              @php $socials = old('social_media', $setting->social_media ?? []); @endphp
-              @foreach($socials as $index => $social)
-                <div class="field-row">
-                  <div class="field-group field-value">
-                    <label class="field-label">Profile URL</label>
-                    <input type="url" name="social_media[{{ $index }}][value]" value="{{ $social['value'] ?? '' }}"
-                      placeholder="https://facebook.com/username" required class="form-control">
-                  </div>
-                  <button type="button" class="btn-remove" title="Remove">
-                    <i class="fas fa-times"></i>
-                  </button>
+            @php $socials = old('social_media', $setting->social_media ?? []); @endphp
+            
+            <div class="fields-container">
+              <!-- Facebook -->
+              <div class="field-row">
+                <div class="field-group" style="flex: 0 0 40px; text-align: center; font-size: 24px; color: #1877F2;">
+                  <i class="fa-brands fa-facebook"></i>
                 </div>
-              @endforeach
+                <div class="field-group field-value">
+                  <label class="field-label">Facebook URL</label>
+                  <input type="url" name="facebook" value="{{ $socials['facebook'] ?? '' }}"
+                    placeholder="https://facebook.com/..." class="form-control">
+                </div>
+              </div>
+
+              <!-- Instagram -->
+              <div class="field-row">
+                <div class="field-group" style="flex: 0 0 40px; text-align: center; font-size: 24px; color: #E4405F;">
+                  <i class="fa-brands fa-instagram"></i>
+                </div>
+                <div class="field-group field-value">
+                  <label class="field-label">Instagram URL</label>
+                  <input type="url" name="instagram" value="{{ $socials['instagram'] ?? '' }}"
+                    placeholder="https://instagram.com/..." class="form-control">
+                </div>
+              </div>
+
+              <!-- X (Twitter) -->
+              <div class="field-row">
+                <div class="field-group" style="flex: 0 0 40px; text-align: center; font-size: 24px; color: #000000;">
+                  <i class="fa-brands fa-x-twitter"></i>
+                </div>
+                <div class="field-group field-value">
+                  <label class="field-label">X (Twitter) URL</label>
+                  <input type="url" name="x" value="{{ $socials['x'] ?? '' }}"
+                    placeholder="https://x.com/..." class="form-control">
+                </div>
+              </div>
+
+              <!-- LinkedIn -->
+              <div class="field-row">
+                <div class="field-group" style="flex: 0 0 40px; text-align: center; font-size: 24px; color: #0A66C2;">
+                  <i class="fa-brands fa-linkedin"></i>
+                </div>
+                <div class="field-group field-value">
+                  <label class="field-label">LinkedIn URL</label>
+                  <input type="url" name="linkedin" value="{{ $socials['linkedin'] ?? '' }}"
+                    placeholder="https://linkedin.com/..." class="form-control">
+                </div>
+              </div>
             </div>
-            <button type="button" class="btn-add"
-              onclick="addRow('social_media-container', 'social_media', 'fa-brands fa-facebook', 'Profile URL', 'url')">
-              <i class="fas fa-plus"></i> Add Social Link
-            </button>
           </div>
         </div>
       </div>
@@ -196,8 +217,31 @@
   </form>
 
   <script>
+    function checkMaxLimit(containerId) {
+      const container = document.getElementById(containerId);
+      const rows = container.querySelectorAll('.field-row');
+      const addButton = container.nextElementSibling; // The Add button right after container
+      
+      if (rows.length >= 3) {
+        if (addButton && addButton.classList.contains('btn-add')) {
+          addButton.style.display = 'none';
+        }
+      } else {
+        if (addButton && addButton.classList.contains('btn-add')) {
+          addButton.style.display = 'flex';
+        }
+      }
+    }
+
     function addRow(containerId, fieldName, defaultIcon, placeholder, inputType = 'text') {
       const container = document.getElementById(containerId);
+      const rows = container.querySelectorAll('.field-row');
+      
+      if (rows.length >= 3) {
+          alert('Maximum limit of 3 reached.');
+          return;
+      }
+      
       const index = container.children.length;
 
       const row = document.createElement('div');
@@ -207,19 +251,20 @@
       row.style.animation = 'slideIn 0.3s ease forwards';
 
       row.innerHTML = `
-                                                                                                                <div class="field-group field-value">
-                                                                                                                    <label class="field-label">${placeholder}</label>
-                                                                                                                    <input type="${inputType}" name="${fieldName}[${index}][value]" value="" placeholder="${placeholder}" required class="form-control">
-                                                                                                                </div>
-                                                                                                                <button type="button" class="btn-remove" title="Remove">
-                                                                                                                    <i class="fas fa-times"></i>
-                                                                                                                </button>
-                                                                                                            `;
+        <div class="field-group field-value">
+          <label class="field-label">${placeholder}</label>
+          <input type="${inputType}" name="${fieldName}[${index}][value]" value="" placeholder="${placeholder}" required class="form-control">
+        </div>
+        <button type="button" class="btn-remove" title="Remove">
+          <i class="fas fa-times"></i>
+        </button>
+      `;
 
       container.appendChild(row);
 
-      // Re-index all rows to maintain correct order
+      // Re-index all rows to maintain correct order and check limits
       reindexRows(containerId, fieldName);
+      checkMaxLimit(containerId);
     }
 
     function reindexRows(containerId, fieldName) {
@@ -227,13 +272,7 @@
       const rows = container.querySelectorAll('.field-row');
 
       rows.forEach((row, index) => {
-        const iconInput = row.querySelector('input[name*="[icon]"]');
         const valueInput = row.querySelector('input[name*="[value]"]');
-
-        if (iconInput) {
-          const name = iconInput.getAttribute('name').replace(/\[\d+\]/, `[${index}]`);
-          iconInput.setAttribute('name', name);
-        }
 
         if (valueInput) {
           const name = valueInput.getAttribute('name').replace(/\[\d+\]/, `[${index}]`);
@@ -241,6 +280,12 @@
         }
       });
     }
+
+    // Initial limit check
+    document.addEventListener('DOMContentLoaded', () => {
+        checkMaxLimit('phones-container');
+        checkMaxLimit('emails-container');
+    });
 
     // Handle row removal with animation
     document.addEventListener('click', function (e) {
@@ -259,6 +304,7 @@
             const containerId = container.id;
             const fieldName = containerId.replace('-container', '');
             reindexRows(containerId, fieldName);
+            checkMaxLimit(containerId);
           }
         }, 300);
       }
