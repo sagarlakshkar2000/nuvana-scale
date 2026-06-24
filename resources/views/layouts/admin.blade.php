@@ -5,9 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ $title ?? 'Nuvana' }}</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
 
   <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="assets/media/favicon.png">
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
 
   <!-- All CSS files -->
   <link rel="stylesheet" href="{{ asset('assets/css/vendor/font-awesome.css') }}">
@@ -55,13 +59,13 @@
 
           <nav class="sidebar-nav">
             <!-- <a href="{{ route('admin.dashboard') }}"
-                          class="nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                          <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                            <polyline points="9 22 9 12 15 12 15 22" />
-                          </svg>
-                          <span>Dashboard</span>
-                        </a> -->
+                                          class="nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                                          <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                            <polyline points="9 22 9 12 15 12 15 22" />
+                                          </svg>
+                                          <span>Dashboard</span>
+                                        </a> -->
 
             <a href="{{ route('admin.banners.index') }}"
               class="nav-item {{ request()->routeIs('admin.banners.*') ? 'active' : '' }}">
@@ -84,23 +88,23 @@
             </a>
 
             <!-- <a href="{{ route('admin.trending-products.index') }}"
-                      class="nav-item {{ request()->routeIs('admin.trending-products.*') ? 'active' : '' }}">
-                      <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <path d="M2 20L22 20" />
-                        <path d="M4 16L7 9L12 13L17 7L20 11" />
-                      </svg>
-                      <span>Trending Products</span>
-                    </a> -->
+                                      class="nav-item {{ request()->routeIs('admin.trending-products.*') ? 'active' : '' }}">
+                                      <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M2 20L22 20" />
+                                        <path d="M4 16L7 9L12 13L17 7L20 11" />
+                                      </svg>
+                                      <span>Trending Products</span>
+                                    </a> -->
 
             <!-- <a href="{{ route('admin.seo.index') }}"
-                      class="nav-item {{ request()->routeIs('admin.seo.*') ? 'active' : '' }}">
-                      <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <circle cx="12" cy="12" r="3" />
-                        <path
-                          d="M19.4 15a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H5.78a1.65 1.65 0 0 0-1.51 1 1.65 1.65 0 0 0 .33 1.82l.03.03A10 10 0 0 0 12 17.66a10 10 0 0 0 6.37-2.63z" />
-                      </svg>
-                      <span>SEO Management</span>
-                    </a> -->
+                                      class="nav-item {{ request()->routeIs('admin.seo.*') ? 'active' : '' }}">
+                                      <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <circle cx="12" cy="12" r="3" />
+                                        <path
+                                          d="M19.4 15a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H5.78a1.65 1.65 0 0 0-1.51 1 1.65 1.65 0 0 0 .33 1.82l.03.03A10 10 0 0 0 12 17.66a10 10 0 0 0 6.37-2.63z" />
+                                      </svg>
+                                      <span>SEO Management</span>
+                                    </a> -->
 
             <a href="{{ route('admin.settings.index') }}"
               class="nav-item {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">

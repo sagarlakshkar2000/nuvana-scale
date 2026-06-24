@@ -885,6 +885,84 @@
           .nav-pills .nav-link:hover:not(.active) {
               background-color: #f3f4f6;
           }
+
+          /* Mobile Responsiveness Improvements */
+          @media (max-width: 768px) {
+              /* Header Section */
+              .d-flex.justify-content-between.align-items-center.mt-2.mb-4 {
+                  flex-direction: column;
+                  align-items: flex-start !important;
+                  gap: 15px;
+              }
+              .d-flex.justify-content-between.align-items-center.mt-2.mb-4 > a {
+                  width: 100%;
+                  text-align: center;
+              }
+              
+              /* Scrollable Tabs */
+              .nav-pills {
+                  flex-wrap: nowrap;
+                  overflow-x: auto;
+                  white-space: nowrap;
+                  padding-bottom: 5px;
+                  -webkit-overflow-scrolling: touch;
+              }
+              .nav-pills::-webkit-scrollbar {
+                  height: 4px;
+              }
+              .nav-pills::-webkit-scrollbar-thumb {
+                  background: #cdd3d8;
+                  border-radius: 4px;
+              }
+              .nav-pills .nav-item {
+                  flex: 0 0 auto;
+              }
+              
+              /* Card Adjustments */
+              .card-header, .card-body {
+                  padding-left: 1rem !important;
+                  padding-right: 1rem !important;
+              }
+              .card-header.d-flex {
+                  flex-direction: column;
+                  align-items: flex-start !important;
+                  gap: 15px;
+              }
+              .card-header.d-flex .btn {
+                  width: 100%;
+              }
+
+              /* Dynamic Form Rows Overlap Fix */
+              .dynamic-item {
+                  padding-top: 45px !important;
+              }
+              .dynamic-item .removeRowBtn {
+                  width: 36px;
+                  height: 36px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+              }
+              
+              /* Custom Spec Row Buttons */
+              .removeSpecBtn {
+                  margin-top: 10px;
+              }
+
+              /* Predefined Specs Input Fix */
+              .input-group-text.bg-light {
+                  min-width: 100px !important;
+                  font-size: 0.85rem;
+              }
+              
+              /* Bottom Action Buttons */
+              .d-flex.justify-content-end.gap-3.mb-5 {
+                  flex-direction: column-reverse;
+              }
+              .d-flex.justify-content-end.gap-3.mb-5 .btn {
+                  width: 100%;
+              }
+          }
         `;
       document.head.appendChild(style);
     });

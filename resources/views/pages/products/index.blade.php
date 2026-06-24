@@ -37,6 +37,83 @@
         transform: rotate(360deg);
       }
     }
+
+    /* Mobile Responsive Improvements */
+    @media (max-width: 991px) {
+      .shop-sidebar {
+        margin-bottom: 2rem;
+        padding: 1.5rem !important;
+      }
+
+      .category-block .content-block {
+        max-height: 250px;
+        overflow-y: auto;
+        padding-right: 10px;
+      }
+
+      .category-block .content-block::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      .category-block .content-block::-webkit-scrollbar-thumb {
+        background: #141516;
+        border-radius: 4px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .feature-products.py-40 {
+        padding-top: 20px !important;
+        padding-bottom: 20px !important;
+      }
+
+      #border-pagination {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      #border-pagination li {
+        margin: 0 !important;
+      }
+
+      .title-banner h2 {
+        font-size: 28px !important;
+      }
+    }
+
+    @media (max-width: 575px) {
+      .product-block {
+        padding: 10px !important;
+        height: 100%;
+      }
+
+      .product-title {
+        font-size: 13px !important;
+        margin-bottom: 8px !important;
+        line-height: 1.4;
+      }
+
+      .eyebrow {
+        font-size: 11px !important;
+        margin-bottom: 6px !important;
+      }
+
+      .caption {
+        font-size: 11px !important;
+        margin-bottom: 4px !important;
+      }
+
+      .image-box img {
+        border-radius: 8px;
+      }
+
+      .product-block .sale-label {
+        font-size: 10px !important;
+        padding: 2px 6px !important;
+      }
+    }
   </style>
 @endpush
 
@@ -95,72 +172,72 @@
 
               <!-- Availability Filter -->
               <!-- <div class="category-block box-1 mb-32">
-                                                                    <div class="title">
-                                                                      <h6 class="fw-600 black">Availability</h6>
-                                                                      <span><i class="fa-light fa-chevron-up"></i></span>
-                                                                    </div>
-                                                                    <div class="content-block mt-24 mb-32">
-                                                                      <div class="d-flex align-items-center justify-content-between mb-12">
-                                                                        <div class="cus-checkBox">
-                                                                          <input type="checkbox" id="in_stock" class="inp-cbx filter-checkbox" name="in_stock" value="1" {{ request('in_stock') ? 'checked' : '' }}>
-                                                                          <label for="in_stock" class="cbx black">In Stock</label>
+                                                                        <div class="title">
+                                                                          <h6 class="fw-600 black">Availability</h6>
+                                                                          <span><i class="fa-light fa-chevron-up"></i></span>
                                                                         </div>
-                                                                        <p>({{ $in_stock_count }})</p>
-                                                                      </div>
-                                                                      <div class="d-flex align-items-center justify-content-between mb-12">
-                                                                        <div class="cus-checkBox">
-                                                                          <input type="checkbox" id="out_of_stock" class="inp-cbx filter-checkbox" name="out_of_stock"
-                                                                            value="1" {{ request('out_of_stock') ? 'checked' : '' }}>
-                                                                          <label for="out_of_stock" class="cbx black">Out of Stock</label>
+                                                                        <div class="content-block mt-24 mb-32">
+                                                                          <div class="d-flex align-items-center justify-content-between mb-12">
+                                                                            <div class="cus-checkBox">
+                                                                              <input type="checkbox" id="in_stock" class="inp-cbx filter-checkbox" name="in_stock" value="1" {{ request('in_stock') ? 'checked' : '' }}>
+                                                                              <label for="in_stock" class="cbx black">In Stock</label>
+                                                                            </div>
+                                                                            <p>({{ $in_stock_count }})</p>
+                                                                          </div>
+                                                                          <div class="d-flex align-items-center justify-content-between mb-12">
+                                                                            <div class="cus-checkBox">
+                                                                              <input type="checkbox" id="out_of_stock" class="inp-cbx filter-checkbox" name="out_of_stock"
+                                                                                value="1" {{ request('out_of_stock') ? 'checked' : '' }}>
+                                                                              <label for="out_of_stock" class="cbx black">Out of Stock</label>
+                                                                            </div>
+                                                                            <p>({{ $out_of_stock_count }})</p>
+                                                                          </div>
                                                                         </div>
-                                                                        <p>({{ $out_of_stock_count }})</p>
-                                                                      </div>
-                                                                    </div>
-                                                                  </div> -->
+                                                                      </div> -->
 
               <!-- Price Filter -->
               <!-- <div class="category-block box-1 mb-32">
-                                                                  <div class="title">
-                                                                    <h6 class="fw-600 black">Price Range</h6>
-                                                                    <span><i class="fa-light fa-chevron-up"></i></span>
-                                                                  </div>
-                                                                  <div class="content-block mt-24 mb-32">
-                                                                    <div class="price-range-slider">
-                                                                      <div class="price-input d-flex align-items-center justify-content-between mb-3">
-                                                                        <div class="field w-100 me-2">
-                                                                          <div class="input-group input-group-sm">
-                                                                            <span class="input-group-text bg-white">₹</span>
-                                                                            <input type="number" class="price-input-min form-control" name="min_price"
-                                                                              value="{{ request('min_price', $min_price_range) }}">
+                                                                      <div class="title">
+                                                                        <h6 class="fw-600 black">Price Range</h6>
+                                                                        <span><i class="fa-light fa-chevron-up"></i></span>
+                                                                      </div>
+                                                                      <div class="content-block mt-24 mb-32">
+                                                                        <div class="price-range-slider">
+                                                                          <div class="price-input d-flex align-items-center justify-content-between mb-3">
+                                                                            <div class="field w-100 me-2">
+                                                                              <div class="input-group input-group-sm">
+                                                                                <span class="input-group-text bg-white">₹</span>
+                                                                                <input type="number" class="price-input-min form-control" name="min_price"
+                                                                                  value="{{ request('min_price', $min_price_range) }}">
+                                                                              </div>
+                                                                            </div>
+                                                                            <div class="separator text-muted">-</div>
+                                                                            <div class="field w-100 ms-2">
+                                                                              <div class="input-group input-group-sm">
+                                                                                <span class="input-group-text bg-white">₹</span>
+                                                                                <input type="number" class="price-input-max form-control" name="max_price"
+                                                                                  value="{{ request('max_price', $max_price_range) }}">
+                                                                              </div>
+                                                                            </div>
+                                                                          </div>
+                                                                          <div class="slider position-relative mt-4"
+                                                                            style="height: 5px; background: #e9ecef; border-radius: 5px;">
+                                                                            <div class="progress-range position-absolute h-100"
+                                                                              style="background-color: #141516; border-radius: 5px;"></div>
+                                                                          </div>
+                                                                          <div class="range-input position-relative" style="margin-top: -10px;">
+                                                                            <input type="range" class="range-min w-100 position-absolute"
+                                                                              style="top: -5px; height: 5px; background: transparent; pointer-events: none; -webkit-appearance: none;"
+                                                                              min="{{ $min_price_range }}" max="{{ $max_price_range }}"
+                                                                              value="{{ request('min_price', $min_price_range) }}" step="100">
+                                                                            <input type="range" class="range-max w-100 position-absolute"
+                                                                              style="top: -5px; height: 5px; background: transparent; pointer-events: none; -webkit-appearance: none;"
+                                                                              min="{{ $min_price_range }}" max="{{ $max_price_range }}"
+                                                                              value="{{ request('max_price', $max_price_range) }}" step="100">
                                                                           </div>
                                                                         </div>
-                                                                        <div class="separator text-muted">-</div>
-                                                                        <div class="field w-100 ms-2">
-                                                                          <div class="input-group input-group-sm">
-                                                                            <span class="input-group-text bg-white">₹</span>
-                                                                            <input type="number" class="price-input-max form-control" name="max_price"
-                                                                              value="{{ request('max_price', $max_price_range) }}">
-                                                                          </div>
-                                                                        </div>
                                                                       </div>
-                                                                      <div class="slider position-relative mt-4"
-                                                                        style="height: 5px; background: #e9ecef; border-radius: 5px;">
-                                                                        <div class="progress-range position-absolute h-100"
-                                                                          style="background-color: #141516; border-radius: 5px;"></div>
-                                                                      </div>
-                                                                      <div class="range-input position-relative" style="margin-top: -10px;">
-                                                                        <input type="range" class="range-min w-100 position-absolute"
-                                                                          style="top: -5px; height: 5px; background: transparent; pointer-events: none; -webkit-appearance: none;"
-                                                                          min="{{ $min_price_range }}" max="{{ $max_price_range }}"
-                                                                          value="{{ request('min_price', $min_price_range) }}" step="100">
-                                                                        <input type="range" class="range-max w-100 position-absolute"
-                                                                          style="top: -5px; height: 5px; background: transparent; pointer-events: none; -webkit-appearance: none;"
-                                                                          min="{{ $min_price_range }}" max="{{ $max_price_range }}"
-                                                                          value="{{ request('max_price', $max_price_range) }}" step="100">
-                                                                      </div>
-                                                                    </div>
-                                                                  </div>
-                                                                </div> -->
+                                                                    </div> -->
 
               <input type="hidden" name="sort_by" id="sort_by_input" value="{{ $sort_by ?? 'featured' }}">
               <input type="hidden" name="page" id="page_input" value="1">
@@ -186,10 +263,10 @@
           </div>
 
           <!-- Products List -->
-          <div class="row row-gap-4">
+          <div class="row row-gap-3 row-gap-md-4">
             @forelse($current_products as $product)
-              <div class="col-xl-4 col-lg-6 col-sm-6">
-                <div class="product-block">
+              <div class="col-xl-4 col-lg-6 col-sm-6 col-6 mb-3 mb-md-0">
+                <div class="product-block h-100">
                   <div class="image-box mb-16">
                     <img
                       src="{{ $product->images->first() ? asset('storage/' . $product->images->first()->image_url) : asset('images/default.jpg') }}"

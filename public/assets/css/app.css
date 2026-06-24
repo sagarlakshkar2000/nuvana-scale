@@ -1761,7 +1761,7 @@ label.error {
   outline: 0;
   border: 0;
   background: transparent;
-  color: #FAFAFA;
+  color: #000000;
   border: 0;
   font-size: clamp(17px, 0.938vw, 22px);
   font-weight: 400;
@@ -3118,12 +3118,13 @@ header .header-buttons a:hover {
 }
 
 .mobile-nav__contact li a {
-  color: #1E1F20;
+  color: #FAFAFA;
   transition: 500ms;
 }
 
 .mobile-nav__contact li a:hover {
-  color: var(--color-primary);
+  color: var(--text-white);
+  text-decoration: underline;
 }
 
 .mobile-nav__contact li i {
