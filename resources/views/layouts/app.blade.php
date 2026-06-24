@@ -12,8 +12,34 @@
   <link rel="manifest" href="/site.webmanifest">
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
 
-  <title>{{ $title ?? 'Nuvana' }}</title>
-
+  @php
+      $currentPath = request()->path() === '/' ? '/' : '/' . request()->path();
+      $seo = null;
+      if (class_exists(\App\Models\Seo::class)) {
+          $seo = \App\Models\Seo::where('url', request()->path())
+                                ->orWhere('url', $currentPath)
+                                ->first();
+      }
+  @endphp
+  
+  <title>{{ $seo->meta_title ?? $title ?? 'Nuvana' }}</title>
+  <meta name="description" content="{{ $seo->meta_description ?? 'Nuvana' }}">
+  <meta name="keywords" content="{{ $seo->meta_keywords ?? '' }}">
+  
+  @if($seo)
+    @if($seo->canonical_url)<link rel="canonical" href="{{ $seo->canonical_url }}">@endif
+    @if($seo->robots_meta)<meta name="robots" content="{{ $seo->robots_meta }}">@endif
+    
+    <!-- Open Graph -->
+    @if($seo->og_title)<meta property="og:title" content="{{ $seo->og_title }}">@endif
+    @if($seo->og_description)<meta property="og:description" content="{{ $seo->og_description }}">@endif
+    @if($seo->og_image)<meta property="og:image" content="{{ asset('storage/' . $seo->og_image) }}">@endif
+    
+    <!-- Twitter -->
+    @if($seo->twitter_title)<meta name="twitter:title" content="{{ $seo->twitter_title }}">@endif
+    @if($seo->twitter_description)<meta name="twitter:description" content="{{ $seo->twitter_description }}">@endif
+    @if($seo->twitter_image)<meta name="twitter:image" content="{{ asset('storage/' . $seo->twitter_image) }}">@endif
+  @endif
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="assets/media/favicon.png">
 
