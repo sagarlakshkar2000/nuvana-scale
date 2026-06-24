@@ -46,8 +46,7 @@
                   </form>
                 </div>
                 <a href="#" class="main-menu__toggler mobile-nav__toggler d-xl-none">
-                  Menu
-                  <img src="{{ asset('assets/media/icons/menu-2.png') }}" alt="Menu Icon">
+                  <span class="fa-light fa-bars text-black"></span>
                 </a>
               </div>
 

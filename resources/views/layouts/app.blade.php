@@ -58,9 +58,10 @@
 
   <!-- WhatsApp Start -->
   @if(!empty($general_setting->whatsapps[0]['value']))
-  <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $general_setting->whatsapps[0]['value']) }}" target="_blank" id="whatsapp-wrapper" class="whatsapp-wrapper">
-    <i class="fa-brands fa-whatsapp"></i>
-  </a>
+    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $general_setting->whatsapps[0]['value']) }}" target="_blank"
+      id="whatsapp-wrapper" class="whatsapp-wrapper">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
   @endif
 
   <!-- Back To Top Start -->
@@ -70,7 +71,8 @@
   <div class="mobile-nav__wrapper">
     <div class="mobile-nav__overlay mobile-nav__toggler"></div>
     <div class="mobile-nav__content">
-      <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
+      <span class="mobile-nav__close mobile-nav__toggler">
+        <i class="fa fa-times text-white"></i></span>
       <div class="logo-box">
         <a href="index.html" aria-label="logo image"><img src="{{ asset('assets/media/logo/nuvana-logo.jpeg') }}"
             alt=""></a>
@@ -78,16 +80,17 @@
       <div class="mobile-nav__container"></div>
       <ul class="mobile-nav__contact list-unstyled">
         @if(!empty($general_setting->emails[0]['value']))
-        <li>
-          <i class="fas fa-envelope"></i>
-          <a href="mailto:{{ $general_setting->emails[0]['value'] }}">{{ $general_setting->emails[0]['value'] }}</a>
-        </li>
+          <li>
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:{{ $general_setting->emails[0]['value'] }}">{{ $general_setting->emails[0]['value'] }}</a>
+          </li>
         @endif
         @if(!empty($general_setting->phones[0]['value']))
-        <li>
-          <i class="fa fa-phone-alt"></i>
-          <a href="tel:{{ preg_replace('/[^0-9+]/', '', $general_setting->phones[0]['value']) }}">{{ $general_setting->phones[0]['value'] }}</a>
-        </li>
+          <li>
+            <i class="fa fa-phone-alt"></i>
+            <a
+              href="tel:{{ preg_replace('/[^0-9+]/', '', $general_setting->phones[0]['value']) }}">{{ $general_setting->phones[0]['value'] }}</a>
+          </li>
         @endif
       </ul>
       <div class="mobile-nav__social">

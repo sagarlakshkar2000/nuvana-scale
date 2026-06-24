@@ -504,8 +504,7 @@ span {
 }
 
 b,
-strong {
-}
+strong {}
 
 .hr-line {
   height: 1px;
@@ -650,11 +649,9 @@ Helpers
   font-weight: 800;
 }
 
-.font-primary {
-}
+.font-primary {}
 
-.font-sec {
-}
+.font-sec {}
 
 .br-5 {
   border-radius: clamp(5px, 0.26vw, 12px);
@@ -3038,7 +3035,7 @@ header .header-buttons a:hover {
   display: flex;
   justify-content: space-between;
   line-height: 30px;
-  color: #1E1F20;
+  color: #FFFFFF;
   font-size: 18px;
   text-transform: capitalize;
   font-weight: 500;
