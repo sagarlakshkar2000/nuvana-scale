@@ -126,7 +126,9 @@
                 contact form or connect with us directly via phone or email. Our team will get back to you as soon as
                 possible.</p>
 
-              <form method="post" class="contact-form" action="{{ route('contact.submit') }}">
+              <div id="form-alert" class="alert d-none" role="alert"></div>
+
+              <form method="post" id="contactForm" class="contact-form" action="{{ route('contact.submit') }}">
                 @csrf
                 <div class="row g-3">
                   <div class="col-md-6">
@@ -155,9 +157,10 @@
                     </div>
                   </div>
                   <div class="col-12 text-center">
-                    <button type="submit" class="btn px-5 py-2 mt-3"
+                    <button type="submit" id="submitBtn" class="btn px-5 py-2 mt-3"
                       style="background: #212529; color: white; border-radius: 50px;">
-                      Send Message <i class="fas fa-paper-plane ms-2"></i>
+                      <span id="btnText">Send Message <i class="fas fa-paper-plane ms-2"></i></span>
+                      <span id="btnLoader" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                     </button>
                   </div>
                 </div>
@@ -194,6 +197,65 @@
   </section>
   <!-- CONTACT SECTION END -->
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('contactForm');
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+      const btnLoader = document.getElementById('btnLoader');
+      const formAlert = document.getElementById('form-alert');
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Show loading state
+        submitBtn.disabled = true;
+        btnText.classList.add('d-none');
+        btnLoader.classList.remove('d-none');
+        formAlert.classList.add('d-none');
+        formAlert.classList.remove('alert-success', 'alert-danger');
+
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Hide loading state
+          submitBtn.disabled = false;
+          btnText.classList.remove('d-none');
+          btnLoader.classList.add('d-none');
+
+          if (data.success || data.message === 'Message sent successfully!') {
+            formAlert.classList.add('alert-success');
+            formAlert.classList.remove('d-none');
+            formAlert.textContent = data.message || 'Message sent successfully!';
+            form.reset();
+          } else {
+            // Handle validation errors or other failures
+            formAlert.classList.add('alert-danger');
+            formAlert.classList.remove('d-none');
+            formAlert.textContent = data.message || 'Validation failed. Please check your inputs.';
+          }
+        })
+        .catch(error => {
+          // Hide loading state
+          submitBtn.disabled = false;
+          btnText.classList.remove('d-none');
+          btnLoader.classList.add('d-none');
+          
+          formAlert.classList.add('alert-danger');
+          formAlert.classList.remove('d-none');
+          formAlert.textContent = 'An error occurred while sending the message. Please try again later.';
+        });
+      });
+    });
+  </script>
 @endsection
 
 @push('styles')

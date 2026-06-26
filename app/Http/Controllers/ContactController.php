@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactUsMail;
+use App\Models\ContactQuery;
 
 class ContactController extends Controller
 {
@@ -17,12 +20,28 @@ class ContactController extends Controller
     $validated = $request->validate([
       'name' => 'required|string|max:255',
       'email' => 'required|email',
+      'phone' => 'nullable|string|max:20',
       'message' => 'required|string',
     ]);
 
-    // Process the message (send email, save to database, etc.)
-    // ...
+    try {
+      // Save to database
+      ContactQuery::create($validated);
 
-    return redirect()->route('contact')->with('success', 'Message sent successfully!');
+      // Process the message (send email, save to database, etc.)
+      Mail::to('Info@gargiindustries.com')->send(new ContactUsMail($validated));
+
+      if ($request->ajax() || $request->wantsJson()) {
+        return response()->json(['success' => true, 'message' => 'Message sent successfully!']);
+      }
+
+      return redirect()->route('contact')->with('success', 'Message sent successfully!');
+    } catch (\Exception $e) {
+      if ($request->ajax() || $request->wantsJson()) {
+        return response()->json(['success' => false, 'message' => 'Failed to send message. Please try again later.']);
+      }
+
+      return back()->with('error', 'Failed to send message. Please try again later.');
+    }
   }
 }
