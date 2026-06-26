@@ -37,11 +37,13 @@ class ContactController extends Controller
 
       return redirect()->route('contact')->with('success', 'Message sent successfully!');
     } catch (\Exception $e) {
+      \Illuminate\Support\Facades\Log::error('Mail sending failed: ' . $e->getMessage());
+      
       if ($request->ajax() || $request->wantsJson()) {
-        return response()->json(['success' => false, 'message' => 'Failed to send message. Please try again later.']);
+        return response()->json(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
       }
 
-      return back()->with('error', 'Failed to send message. Please try again later.');
+      return back()->with('error', 'Error: ' . $e->getMessage());
     }
   }
 }
