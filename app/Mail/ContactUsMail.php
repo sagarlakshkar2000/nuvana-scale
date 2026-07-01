@@ -30,6 +30,9 @@ class ContactUsMail extends Mailable
     {
         return new Envelope(
             subject: 'New Contact Us Query',
+            replyTo: [
+                new \Illuminate\Mail\Mailables\Address($this->data['email'], $this->data['name']),
+            ],
         );
     }
 

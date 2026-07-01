@@ -29,7 +29,7 @@ class ContactController extends Controller
       ContactQuery::create($validated);
 
       // Process the message (send email, save to database, etc.)
-      Mail::to('Info@gargiindustries.com')->send(new ContactUsMail($validated));
+      Mail::to('info@gargiindustries.com')->send(new ContactUsMail($validated));
 
       if ($request->ajax() || $request->wantsJson()) {
         return response()->json(['success' => true, 'message' => 'Message sent successfully!']);
