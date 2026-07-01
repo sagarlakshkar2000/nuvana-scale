@@ -13,32 +13,40 @@
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
 
   @php
-      $currentPath = request()->path() === '/' ? '/' : '/' . request()->path();
-      $seo = null;
-      if (class_exists(\App\Models\Seo::class)) {
-          $seo = \App\Models\Seo::where('url', request()->path())
-                                ->orWhere('url', $currentPath)
-                                ->first();
-      }
+    $currentPath = request()->path() === '/' ? '/' : '/' . request()->path();
+    $seo = null;
+    if (class_exists(\App\Models\Seo::class)) {
+      $seo = \App\Models\Seo::where('url', request()->path())
+        ->orWhere('url', $currentPath)
+        ->first();
+    }
   @endphp
-  
+
   <title>{{ $seo->meta_title ?? $title ?? 'Nuvana' }}</title>
   <meta name="description" content="{{ $seo->meta_description ?? 'Nuvana' }}">
   <meta name="keywords" content="{{ $seo->meta_keywords ?? '' }}">
-  
+
   @if($seo)
-    @if($seo->canonical_url)<link rel="canonical" href="{{ $seo->canonical_url }}">@endif
-    @if($seo->robots_meta)<meta name="robots" content="{{ $seo->robots_meta }}">@endif
-    
+    @if($seo->canonical_url)
+    <link rel="canonical" href="{{ $seo->canonical_url }}">@endif
+    @if($seo->robots_meta)
+    <meta name="robots" content="{{ $seo->robots_meta }}">@endif
+
     <!-- Open Graph -->
-    @if($seo->og_title)<meta property="og:title" content="{{ $seo->og_title }}">@endif
-    @if($seo->og_description)<meta property="og:description" content="{{ $seo->og_description }}">@endif
-    @if($seo->og_image)<meta property="og:image" content="{{ asset('storage/' . $seo->og_image) }}">@endif
-    
+    @if($seo->og_title)
+    <meta property="og:title" content="{{ $seo->og_title }}">@endif
+    @if($seo->og_description)
+    <meta property="og:description" content="{{ $seo->og_description }}">@endif
+    @if($seo->og_image)
+    <meta property="og:image" content="{{ asset('storage/' . $seo->og_image) }}">@endif
+
     <!-- Twitter -->
-    @if($seo->twitter_title)<meta name="twitter:title" content="{{ $seo->twitter_title }}">@endif
-    @if($seo->twitter_description)<meta name="twitter:description" content="{{ $seo->twitter_description }}">@endif
-    @if($seo->twitter_image)<meta name="twitter:image" content="{{ asset('storage/' . $seo->twitter_image) }}">@endif
+    @if($seo->twitter_title)
+    <meta name="twitter:title" content="{{ $seo->twitter_title }}">@endif
+    @if($seo->twitter_description)
+    <meta name="twitter:description" content="{{ $seo->twitter_description }}">@endif
+    @if($seo->twitter_image)
+    <meta name="twitter:image" content="{{ asset('storage/' . $seo->twitter_image) }}">@endif
   @endif
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="assets/media/favicon.png">
@@ -59,28 +67,15 @@
 <body class="tt-smooth-scroll">
 
   <!-- Preloader -->
-  <div id="preloader" style="transition: opacity 0.5s ease, visibility 0.5s ease !important; display: flex; justify-content: center; align-items: center;">
-    <div class="simple-spinner"></div>
-    <style>
-      .simple-spinner {
-        width: 50px;
-        height: 50px;
-        border: 4px solid rgba(0, 0, 0, 0.1);
-        border-left-color: var(--color-primary, #333);
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-        position: fixed !important; /* Forces it to stay center of the screen, not the container */
-        top: 50% !important;
-        left: 50% !important;
-        margin-top: -25px;
-        margin-left: -25px;
-        z-index: 99999999;
-      }
-      @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-    </style>
+  <div id="preloader">
+    <div class="loading loading07">
+      <span data-text="N">N</span>
+      <span data-text="U">U</span>
+      <span data-text="V">V</span>
+      <span data-text="A">A</span>
+      <span data-text="N">N</span>
+      <span data-text="A">A</span>
+    </div>
   </div>
   <!-- Preloader -->
 
@@ -121,24 +116,27 @@
       font-size: 15px;
       letter-spacing: 1px;
       border-radius: 8px 0 0 8px;
-      box-shadow: -3px 0 10px rgba(0,0,0,0.15);
+      box-shadow: -3px 0 10px rgba(0, 0, 0, 0.15);
       z-index: 9999;
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
       display: flex;
       align-items: center;
     }
+
     .enquiry-sticky-tab:hover {
       padding-right: 15px;
       background-color: #333;
       color: #fff;
-      box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
     }
+
     @media (max-width: 768px) {
       .enquiry-sticky-tab {
         font-size: 13px;
         padding: 12px 4px;
         border-radius: 6px 0 0 6px;
       }
+
       .enquiry-sticky-tab:hover {
         padding-right: 10px;
       }

@@ -2395,6 +2395,94 @@ label.error {
   align-content: center;
   -webkit-transition: all 500ms linear;
   transition: all 500ms linear;
+  /* common */
+}
+
+#preloader .loading {
+  font-size: 84px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  text-align: center;
+}
+
+@media (max-width: 490px) {
+  #preloader .loading {
+    letter-spacing: -8px;
+  }
+}
+
+#preloader .loading span {
+  display: inline-block;
+  margin: 0 -0.05em;
+  font-size: clamp(64px, 5vw, 180px);
+}
+
+#preloader .loading07 span {
+  position: relative;
+  color: rgba(146, 148, 159, 0.2);
+}
+
+#preloader .loading07 span::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: attr(data-text);
+  color: #0C0C0D;
+  opacity: 0;
+  transform: scale(1.5);
+  animation: loading07 3s infinite;
+}
+
+#preloader .loading07 span:nth-child(2)::after {
+  animation-delay: 0.1s;
+}
+
+#preloader .loading07 span:nth-child(3)::after {
+  animation-delay: 0.2s;
+}
+
+#preloader .loading07 span:nth-child(4)::after {
+  animation-delay: 0.3s;
+}
+
+#preloader .loading07 span:nth-child(5)::after {
+  animation-delay: 0.4s;
+}
+
+#preloader .loading07 span:nth-child(6)::after {
+  animation-delay: 0.5s;
+}
+
+#preloader .loading07 span:nth-child(7)::after {
+  animation-delay: 0.6s;
+}
+
+#preloader .loading07 span:nth-child(8)::after {
+  animation-delay: 0.7s;
+}
+
+#preloader .loading07 span:nth-child(9)::after {
+  animation-delay: 0.8s;
+}
+
+#preloader .loading07 span:nth-child(10)::after {
+  animation-delay: 0.9s;
+}
+
+@keyframes loading07 {
+
+  0%,
+  75%,
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+
+  25%,
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 /*-------------------------
