@@ -37,6 +37,7 @@
                 ['name' => 'Products', 'url' => route('products.index')],
                 ['name' => 'Contact', 'url' => route('contact')],
                 ['name' => 'Blogs', 'url' => route('blog.index')],
+                ['name' => 'Career', 'url' => route('career')],
               ];
             @endphp
             <ul class="list-unstyled m-0">
