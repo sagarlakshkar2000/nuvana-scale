@@ -100,6 +100,51 @@
   </div>
   <!-- Main Wrapper End -->
 
+  <!-- Enquiry Sticky Tab -->
+  <a href="{{ route('contact') }}" class="enquiry-sticky-tab">
+    Enquiry Now
+  </a>
+  <style>
+    .enquiry-sticky-tab {
+      position: fixed;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      background-color: var(--color-primary, #0C0C0D);
+      color: #fff;
+      padding: 15px 6px;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 1px;
+      border-radius: 8px 0 0 8px;
+      box-shadow: -3px 0 10px rgba(0,0,0,0.15);
+      z-index: 9999;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      display: flex;
+      align-items: center;
+    }
+    .enquiry-sticky-tab:hover {
+      padding-right: 15px;
+      background-color: #333;
+      color: #fff;
+      box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+    }
+    @media (max-width: 768px) {
+      .enquiry-sticky-tab {
+        font-size: 13px;
+        padding: 12px 4px;
+        border-radius: 6px 0 0 6px;
+      }
+      .enquiry-sticky-tab:hover {
+        padding-right: 10px;
+      }
+    }
+  </style>
+
   <!-- WhatsApp Start -->
   @if(!empty($general_setting->whatsapps[0]['value']))
     <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $general_setting->whatsapps[0]['value']) }}" target="_blank"
