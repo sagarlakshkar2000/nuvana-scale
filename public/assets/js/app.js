@@ -88,7 +88,7 @@ var MyScroll = "";
 
     preloader: function () {
       setTimeout(function () {
-        $("#preloader").hide("slow");
+        $("#preloader").fadeOut("slow");
       }, 1800);
     },
 

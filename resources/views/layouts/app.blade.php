@@ -59,15 +59,28 @@
 <body class="tt-smooth-scroll">
 
   <!-- Preloader -->
-  <div id="preloader">
-    <div class="loading loading07">
-      <span data-text="N">N</span>
-      <span data-text="U">U</span>
-      <span data-text="V">V</span>
-      <span data-text="A">A</span>
-      <span data-text="N">N</span>
-      <span data-text="A">A</span>
-    </div>
+  <div id="preloader" style="transition: opacity 0.5s ease, visibility 0.5s ease !important; display: flex; justify-content: center; align-items: center;">
+    <div class="simple-spinner"></div>
+    <style>
+      .simple-spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        border-left-color: var(--color-primary, #333);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        position: fixed !important; /* Forces it to stay center of the screen, not the container */
+        top: 50% !important;
+        left: 50% !important;
+        margin-top: -25px;
+        margin-left: -25px;
+        z-index: 99999999;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
   </div>
   <!-- Preloader -->
 
