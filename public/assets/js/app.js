@@ -89,7 +89,7 @@ var MyScroll = "";
     preloader: function () {
       setTimeout(function () {
         $("#preloader").fadeOut("slow");
-      }, 1800);
+      }, 500);
     },
 
     // Header
