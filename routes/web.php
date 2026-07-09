@@ -93,6 +93,7 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 
 // Career Route
+
 Route::get('/career', [\App\Http\Controllers\CareerController::class, 'index'])->name('career');
 
 // 5. 404 Route (for testing - usually handled by exception handler)
