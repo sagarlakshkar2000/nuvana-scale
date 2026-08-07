@@ -219,6 +219,11 @@ class ProductController extends Controller
     return $this->byCategory($request, 'Heavy Duty Scale');
   }
 
+  public function loadcellAccessories(Request $request)
+  {
+    return $this->byCategory($request, 'Loadcell & Accessories');
+  }
+
   public function weighbridgeSolution(Request $request)
   {
     return $this->byCategory($request, 'Weighbridge Solution');

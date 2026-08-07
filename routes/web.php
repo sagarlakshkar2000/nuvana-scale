@@ -83,6 +83,9 @@ Route::prefix('products')->name('products.')->group(function () {
 
   // 3.5 Heavy Duty Scale
   Route::get('/heavy-duty-scale', [ProductController::class, 'heavyDutyScale'])->name('heavy-duty-scale');
+
+  // 3.6 Loadcell & Accessories
+  Route::get('/loadcell-accessories', [ProductController::class, 'loadcellAccessories'])->name('loadcell-accessories');
 });
 
 Route::get('/product-detail/{slug}', [ProductController::class, 'productDetail'])->name('product-detail');
