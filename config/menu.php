@@ -56,6 +56,10 @@ return [
           'name' => 'Heavy Duty Scale',
           'route' => 'products.heavy-duty-scale',
         ],
+        [
+          'name' => 'Loadcell & Accessories',
+          'route' => 'products.loadcell-accessories',
+        ],
       ],
     ],
     [
